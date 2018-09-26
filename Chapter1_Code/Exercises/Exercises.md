@@ -21,16 +21,16 @@
     d. if (a > b) c = 0 **;** else b = 0;
 
 1.1.5 Write a code fragment that prints true if the double variables x and y are both strictly between 0 and 1 and false otherwise.
-(```)
 
+(```)
     if ((x > 0.0 && x < 1.0) && (y > 0.0 && y < 1.0))
         StdOut.println("true");
     else
         StdOut.println("false");
-        
 (```)
 
 1.1.6 What does the following program print?
+
 (```)
     int f = 0;
     int g = 1;
@@ -41,6 +41,7 @@
         g = f - g;
     }
 (```)
+
 answer: 
 0, 1, 1, 2, 3, ...
 
