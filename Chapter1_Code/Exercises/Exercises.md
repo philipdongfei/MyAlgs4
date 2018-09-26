@@ -46,9 +46,7 @@
         g = f - g;
     }
 ```
-
-answer: 
-0, 1, 1, 2, 3, ...
+    **answer:0, 1, 1, 2, 3**
 
 1.1.7 Give the value printed by each of the following code fragments:
 
@@ -56,10 +54,10 @@ answer: fordemo.java
 
 1.1.8 What do each of the following print?
 
-a. System.out.println('b'); -> b
-b. System.out.println('b'+'c'); -> bc
-c. System.out.println((char)('a'+4)); -> e
-Explain each outcome.
+    a. System.out.println('b'); -> b
+    b. System.out.println('b'+'c'); -> bc
+    c. System.out.println((char)('a'+4)); -> e
+    Explain each outcome.
 
 1.1.9 Write a code fragment that puts the binary representation of a positive integer N into a String s.
 
