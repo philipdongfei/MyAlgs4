@@ -19,3 +19,37 @@
     b. if **(** a > b **)** { c = 0; }
     c. if (a > b) c = 0;
     d. if (a > b) c = 0 **;** else b = 0;
+
+1.1.5 Write a code fragment that prints true if the double variables x and y are both strictly between 0 and 1 and false otherwise.
+(```)
+    if ((x > 0.0 && x < 1.0) && (y > 0.0 && y < 1.0))
+        StdOut.println("true");
+    else
+        StdOut.println("false");
+(```)
+
+1.1.6 What does the following program print?
+(```)
+    int f = 0;
+    int g = 1;
+    for (int i = 0; i <= 15; i++)
+    {
+        StdOut.println(f);
+        f = f + g;
+        g = f - g;
+    }
+(```)
+answer: 
+0, 1, 1, 2, 3, ...
+
+1.1.7 Give the value printed by each of the following code fragments:
+answer: fordemo.java
+
+1.1.8 What do each of the following print?
+a. System.out.println('b'); -> b
+b. System.out.println('b'+'c'); -> bc
+c. System.out.println((char)('a'+4)); -> e
+Explain each outcome.
+
+1.1.9 Write a code fragment that puts the binary representation of a positive integer N into a String s.
+
