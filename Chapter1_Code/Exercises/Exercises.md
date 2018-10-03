@@ -222,5 +222,80 @@ what are the values of **mystery(2,25)** and **mystery(3,11)**? Given positive i
 
 1.1.20 Write a recursive static method that computes the value of ln(N!)
 
+1.1.21 Write a program that reads in lines from standard input with each line containing a name and two integers and then uses prrintf() to print a table with a column of the names, the integers, and the result of dividing the first by the second, accurate to three decimal places. You could use a program like this to tabulate batting averages for baseball players or grades for students.
+
+
+
+1.1.22 Write a version of BinarySearch that uses the recursive **rank()** given on page 25 and *traces* the method calls, Each time the recursive method is called, print the argument values lo and hi, indented by the depth of the recursion. *Hint*: Add an argument to the recursive method that keeps track of the depth.
+
+1.1.23 Add to the BinarySearch test client the ability to respond to a second argument: + to print numbers from standard input that *are not* in the whitelist, - to print numbers that *are* in the whitelist.
+
+
+1.1.24 Give the sequence of values of *p* and *q* that are computed when Euclid's algorithm is used to compute the greatest common divisor of 105 and 24. Extend the code given on page 4 to develop a program *Euclid* that takes two integers from the command line and computes their greatest common divisor, printing out the two arguments for each call on the recursive method. Use your program to compute the greastest common divisor or 1111111 and 1234567.
+
+1.1.25 Use mathematical induction to prove that Euclid's algorithm computes the greatest common divisor of any pair of nonnegative integers p and q.
+
+http://www.math.fsu.edu/~pkirby/mad2104/SlideShow/s5_2.pdf
+http://www.cut-the-knot.org/blue/Euclid.shtml
+
+1.1.26 *Sorting three numbers*. Suppose that the variables a, b, c and t are all of the same numeric primitive type. Show that the following code puts a, b, and c in ascending order:
+    if (a > b) { t = a; a = b; b = t; }
+    if (a > c) { t = a; a = c; c = t; }
+    if (b > c) { t = b; b = c; c = t; }
+```
+
+1. a > b -> a < b
+2. a > c -> a < c
+3. b > c -> b < c
+4. a < b < c
+
+```
+
+1.1.27 *Binomial distribution*. Estimate the number of recursive calls that would be used by the code
+
+```
+
+    public static double binomial(int N, int k, double p)
+    {
+        if ((N == 0) || (k < 0)) return 1.0;
+        return (1.0 - p)*binomial(N-1, k) + p*binomial(N-1, k-1);
+    }
+
+```
+to compute *binomial(100, 50,**.25**)*. Develop a better implementation that is based on saving computed values in an array.
+
+1.1.28 *Remove duplicates*. Modify the test client in *BinarySearch* to remove any duplicate keys in the whitelist after the sort.
+
+1.1.29 *Equal keys*. Add to *BinarySearch* a static method rank() that takes a key and a sorted array of *int* values (some of which may be equal) as arguments and returns the number of elements that are smaller than the key and a similar method count() that returns the number of elements equal to the key. *Note*: If i and j are the values returned by *rank(key, a)* and *count(key,a)* respectively, then a[i..i+j-1] are the values in the array that are equal to key.
+
+1.1.30 *Array exercise*. Write a code fragment that creates an N-by-N boolean array a[][] such that a[i][j] is *true* if i and j are relatively prime(have no common factors), and *false* otherwise.
+
+
+1.1.31 *Random connections*. Write a program that takes as command-line arguments an integer N and a *double* value p(between 0 and 1), plots N equally spaced dots of size .05 on the circumference of a circle, and then, with probability p for each pair of points, draws a gray line connecting them.
+
+1.1.32 *Histogram*. Suppose that the standard input stream is a sequence of *double* values. Write a program that takes an integer N and two double values l and r from the command line and uses StdDraw to plot a histogram of the count of the numbers in the standard input stream that fall in each of the N intervals defined by dividing(l,r) into N equal-sized intervals.
+
+
+1.1.33 *Matrix library*. Write a library *Matrix* that implements the following API:
+
+public class Matrix
+
+----------
+static double dot(double[] x, double[] y)   **vector dot product**
+static double[][] mult(double[][] a, double[][] b)  **matrix-matrix product**
+static double[][] transpose(double[][] a)   **transpose**
+static double[] mult(double[][] a, double[] x)    **matrix-vector product**
+static double[] mult(double[] y, double[][] a)  **vector-matrix product**
+
+Develop a test client that reads values from standard input and tests all the methods.
+
+Answer: **TO DO!!!!!**
+
+
+
+
+
+
+
 
 
