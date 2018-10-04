@@ -292,6 +292,52 @@ Develop a test client that reads values from standard input and tests all the me
 Answer: **TO DO!!!!!**
 
 
+1.1.34 *Filtering*. Which of the following *require* saving all the values from standard input(in an array, say), and which could be implemented as a filter using only a fixed number of variables an arrays of fixed size (not dependent on N)? For each, the input comes from standard input and consists of N real numbers between 0 and 1.
+
+- Print the maximum and minmum numbers.
+- Print the median of the numbers.
+- Print the *k*th smallest value, for *k* less than 100.
+- Print the sum of the squares of the numbers.
+- Print the average of the N numbers.
+- Print the percentage of numbers greater than the average.
+- Print the N numbers in increasing order.
+- Print the N numbers in random order.
+
+
+1.1.35 *Dice simulation*. The following code computes the exact probability distribution for the sum of two dice:
+
+```
+
+    int SIDES = 6;
+    double[] dist = new double[2*SIDES+1];
+    for (int i = 1; i <= SIDES; i++)
+        for (int j = 1; j <= SIDES; j++)
+            dist[i+j] += 1.0;
+
+    for (int k = 2; k <= 2*SIDES; k++)
+        dis[k] /= 36.0;
+
+```
+
+The value dist[i] is the probability that the dice sum to k. Run experiments to validate this calculation simulating N dice throws, keeping track of thee frequencies of occurrence of each value when you compute the sum of two random integers between 1 and 6. How large does N have to be before your empirical results match theexact results to three decimal places?
+
+
+1.1.36 *Empirical shuffle check*. Run computational experiments to check that our shuffling code on page 32 works as advertised. Write a program **ShuffleTest** that takes command-line arguments M and N, does N shuffles of an array of size M that is initialized with a[i] = i before each shuffle, and prints an M-by-M table such that row i gives the number of times i wound up in position j for all j. All entries in the array should be close to N/M.
+
+1.1.37 *Bad shuffling*. Suppose that you choose a random integer between 0 and N-1 in our shuffling code instead of one between i and N-1. Show that the resulting order is *not* equally likely to be one of the N! possibilities. Run the test of the previous exercise for this version.
+
+1.1.38 *Binary search versus brute-force search*. Write a program *BruteForceSearch* that uses the brute-force search method given on page 48 and compare its running time on your computer with that of **BinarySearch** for **largeW.txt** and **largeT.txt**.
+
+1.1.39 *Random matches*. Write a *BinarySearch* client that takes an **int** value T as command-line argument and runs T trials of the following experiment for N = 10^3, 10^4, 10^5, 10^6: generate two arrays of N randomly generated positive six-digit int values, and find the number of values that appear in both arrays. Print a table giving the average value of this quantity over the T trials for each value of N.
+
+
+
+
+
+
+
+
+
 
 
 
