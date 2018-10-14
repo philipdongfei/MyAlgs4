@@ -57,6 +57,76 @@ public staitc String mystery(String s)
 1.2.9 Instrument *BinarySearch*(page 47) to use a Counter to count the total number of keys examined during all searches and then print the total after all searches are complete. *Hint*: Create a Counter in main() and pass it as an argument to rank().
 
 
+1.2.10 Develop a class VisualCounter that allows both increment and decrement operations. Take two arguments N and max in the constructor, where N specifies the maximum number of operations and max specifies the maximum absolute value for the counter. As a side effect, create a plot showing the value of the counter each time its tally changes.
+
+
+1.2.11 Develop an implementation SmartDate of our Date API that raises an exception if the date is not legal.
+
+1.2.12 Add a method *dayOfTheWeek()* to *SmartDate* that returns a String value Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday, giving the appropriate day of the week for the date. You may assume that the date is in the 21st century.
+
+
+1.2.12 Add a method *dayOfTheWeek()* to *SmartDate* that returns a String value Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday, giving the appropriate day of the week for the date. You may assume that the date is in the 21st century.
+
+
+1.2.13 Using our implementation of *Date* as model(page 91), develop an implementation of Transaction.
+
+1.2.14 Using our implementation of *equals() in Date as a model (page 103), develop implementations of equals() for Transaction.
+
+1.2.15 *File input*. Develop a possible implementation of the static *readInts()* mehtod from In(which we use for various test clients, such as binary search on page 47) that is based on the split() method in String.
+
+*Solution*:
+```
+
+public static int[] readInts(String name)
+{
+    In in = new In(name);
+    String input = StdIn.readAll();
+    String[] words = input.split("\\s+");
+    int[] ints = new int[words.length];
+    for (int i=0; i< word.length; i++)
+        ints[i] = Integer.parseInt(words[i]);
+    return ints;
+}
+
+```
+
+We will consider a different implementation in **SECTION 1.3**(see page 126).
+
+1.2.16 *Rational numbers*. Implement an immutable data type Rational for rational numbers that supports addition, subtraction, multiplication, and division.
+
+public class Rational
+
+________
+
+Rational(int numerator, int denominator)
+Rational plus(Rational b)    **sum of this number and b**
+Rational minus(Rational b)   **difference of this number and b**
+Rational times(Rational b)   **product of this number and b**
+Rational divides(Rational b) **quotient of this number and b**
+boolean equals(Rational that) **is this number equal to that?**
+String toString()           **string representation**
+
+You do not have to worry about testing for overflow (see EXERCISE 1.2.17), but use as instance variables two long values that represent the numerator and denominator to limit the possibility of overflow. Use Euclid's algorithm(see page 4) to ensure that the numerator and denominator never have any common factors. Include a test client that Exercises all of your methods.
+
+1.2.17 *Robust implementation of rational numbers.* Use assertions to develop an implementation of *Rational* (see EXERCISE 1.2.16) that is immune to overflow.
+
+1.2.18 *Variance for accumulator.* Validate that the following code, which adds the methods var() and stddev() to Accumulator, computes both the mean and variance of the numbers presented as arguments to addDataValue():
+
+```
+{code}
+
+```
+This implementation is less susceptible to roundoff error than the straightforward implementation based on saving the sum of the squares of the numbers.
+
+1.2.19 *Parsing*. Develop the parse constructors for your Date and Transaction implementations of EXERCISE 1.2.13 that take a single String argument to specify the initialization values, using the formats given in the table below.
+
+
+
+
+
+
+
+
 
 
 
