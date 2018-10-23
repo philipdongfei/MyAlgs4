@@ -1,5 +1,7 @@
-import edu.princeton.cs.algs4.*;
-import java.util.*;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.Queue;
+import java.util.Arrays;
 
 public class Transaction
 {
@@ -17,7 +19,7 @@ public class Transaction
     {
         String[] fields = trans.split(" ");
         who = fields[0];
-        when = new Date(fields[1]);
+        when = new SmartDate(fields[1]);
         amount = Double.parseDouble(fields[2]);
     }
 
@@ -41,27 +43,59 @@ public class Transaction
     public boolean equals(Object x)
     {
         if (this == x) 
-            {StdOut.println("1"); return true;}
+            { return true;}
         if (x == null) 
-            {StdOut.println("2"); return false;}
+            { return false;}
         if (this.getClass() != x.getClass())
-            {StdOut.println("3"); return false;}
+            { return false;}
         Transaction that = (Transaction) x;
         if (!this.who.equals(that.who))    
-            {StdOut.println("4"); return false;}
+            { return false;}
         if (!this.when.equals(that.when)) 
-            {StdOut.println("5"); return false;}
+            { return false;}
         if (this.amount != that.amount) 
-            {StdOut.println("6"); return false;}
+            { return false;}
         return true;
     }
 
+    public static int[] readDates() {
+        Queue<Character> q = new Queue<Character>();
+
+        while (!StdIn.isEmpty()){
+            q.enqueue(StdIn.readChar());
+        }
+
+        int N = q.size();
+        int[] a = new int[3];
+        String temp = "";
+        int k = 0;
+
+        for (int i = 0; i < N; i++) {
+            char c = q.dequeue();
+            if (c == '/') {
+                a[k] = Integer.parseInt(temp);
+                k += 1;
+                temp = "";
+            } else {
+                temp += c;
+            }
+        }
+        a[k] = Integer.parseInt(temp);
+
+        return a;
+    }
+
+    
     public static void main(String[] args) {
+
+        int[] d = readDates();
+        Transaction t1 = new Transaction("Tom", new SmartDate(d[0], d[1], d[2]), 3000);
+        
         Transaction t = new Transaction("Tom", new SmartDate(5,11,2018),
                 2000);
         StdOut.println(t);
-        Transaction t1 = new Transaction("Tom", new SmartDate(8,11,2018),
-                3000);
+        //Transaction t1 = new Transaction("Tom", new SmartDate(8,11,2018),
+        //        3000);
         Transaction t2 = new Transaction("Tom", new SmartDate(8,12,2018),
                 3000);
         StdOut.println(t1);

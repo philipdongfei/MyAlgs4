@@ -33,6 +33,14 @@ public class Stack<Item> implements Iterable<Item>
         N--;
         return item;
     }
+    
+    public Item peek()
+    { // return item from top of stack.
+        Item item = first.item;
+
+        return item;
+
+    }
 
     public Iterator<Item> iterator()
     { return new ListIterator(); }
