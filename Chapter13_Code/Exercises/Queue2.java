@@ -102,6 +102,74 @@ public class Queue2<Item> implements Iterable<Item>
         }
     }
 
+    public void removeAfter(Node node) 
+    {
+        if (node == null || node.next == null)
+            return;
+        node.next = node.next.next;
+        N--;
+    }
+
+    public void insertAfter(Node first, Node second)
+    {
+        if (first == null || second == null)
+            return;
+        second.next = first.next;
+        first.next = second;
+        N++;
+    }
+
+    public void removeKeys(Item key)
+    {
+        if (N == 0 || key == null)
+            return;
+        else if (N == 1)
+        {
+            if (first.item.equals(key))
+            {
+                first = null;
+                last = null;
+                N--;
+            }
+
+        } 
+        else 
+        {
+            Node newfirst = first;
+            while (true)
+            {
+                if (newfirst == null) break;
+                if (newfirst.item.equals(key)) {
+                    newfirst = newfirst.next;
+                    N--;
+                } else 
+                    break;
+            }
+
+            first = newfirst;
+
+            if (first == null) return;
+
+            if (first != null) {
+                for (Node x = first; x.next != null; x = x.next)
+                {
+                    if (x.next.item.equals(key))
+                    {
+                        x.next = x.next.next;
+                        N--;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public static void remove(Queue2<String> q, String key)
+    {
+       q.removeKeys(key); 
+    }
+
 
     public Iterator<Item> iterator()
     { return new ListIterator(); }
@@ -139,7 +207,8 @@ public class Queue2<Item> implements Iterable<Item>
         for (String str : qq){
             StdOut.print(str + " ");
         }
-        qq.removeLastNode();
+        //qq.removeLastNode();
+        remove(qq, args[0]); 
         StdOut.println();
         for (String str : qq){
             StdOut.print(str + " ");

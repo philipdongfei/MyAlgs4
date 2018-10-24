@@ -121,6 +121,35 @@ else if (N == 1)
 
 1.3.21 Write a method find() that takes a linked list and a string key as arguments and returns true if some node in the list has key as its item field, false otherwise.
 
+1.3.22 Suppose that x is a linked list Node. What does the following code fragment do?
+
+```
+    t.next = x.next;
+    x.next = t;
+
+```
+*Answer*: Inserts node t immediately after node x.
+
+1.3.23 Why does the following code fragment not do the same thing as in the previous question?
+
+```
+    x.next = t;
+    t.next = x.next;
+
+```
+*Answer*: When it comes time to update t.next, x.next is no longer the original node following x, but is instead t itself!
+
+1.3.24 Write a method *removeAfter()* that takes a linked-list *Node* as argument and removes the node following the given one (and does nothing if the argument or the next field in the argument node is null).
+
+*Answer*: QUEUE2.java
+
+1.3.25 Wite a method *insertAfter()* that takes two linked-list *Node* arguments and inserts the second after the first on its list (and does nothing if either argument is null).
+
+1.3.26 Write a method *remove()* that takes a linked list and a string *key* as arguments and removes all of the nodes in the list that have key as its item field.
+
+
+
+
 
 
 
