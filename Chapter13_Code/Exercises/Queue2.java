@@ -151,13 +151,16 @@ public class Queue2<Item> implements Iterable<Item>
             if (first == null) return;
 
             if (first != null) {
-                for (Node x = first; x.next != null; x = x.next)
+                for (Node x = first; x != null && x.next != null; x = x.next)
                 {
                     if (x.next.item.equals(key))
                     {
                         x.next = x.next.next;
                         N--;
                     }
+                   // if (x.next == null)
+                   //     break;
+
                 }
             }
 
@@ -168,6 +171,74 @@ public class Queue2<Item> implements Iterable<Item>
     public static void remove(Queue2<String> q, String key)
     {
        q.removeKeys(key); 
+    }
+
+    public Integer findMax() {
+        return max(first);
+    }
+    public Integer max(Node fn) 
+    {
+        if (fn == null)
+            return 0;
+
+        Integer result = (Integer)fn.item;
+        for (Node current = fn.next; current != null; current = current.next)
+        {
+            if ((Integer)current.item > result)
+                result = (Integer)current.item;
+        }
+
+        return result;
+
+    }
+
+    public Integer findMax_Recur() {
+        Integer result = new Integer(0);
+        Integer maxitem = max(first, result);
+        return maxitem;
+
+    }
+
+    private Integer max(Node fn, Integer result)
+    {
+        if (fn == null) return result;
+        else {
+            if ((Integer)fn.item > result)
+                result = (Integer)fn.item;
+            return max(fn.next, result);
+        }
+    }
+
+    public void reverse_Queue_iter() {
+        first = reverse_iter(first);
+    }
+    public Node reverse_iter(Node x)
+    {
+        Node first = x;
+        Node reverse = null;
+        while (first != null)
+        {
+            Node second = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = second;
+        }
+        return reverse;
+    }
+
+    public void reverse_Queue_Recur(){
+        first = reverse_recur(first);
+    }
+
+    public Node reverse_recur(Node first)
+    {
+        if (first == null) return null;
+        if (first.next == null) return first;
+        Node second = first.next;
+        Node rest = reverse_recur(second);
+        second.next = first;
+        first.next = null;
+        return rest;
     }
 
 
@@ -192,6 +263,7 @@ public class Queue2<Item> implements Iterable<Item>
     {  // Create a queue and enqueue/dequeue strings.
         Queue<String> q = new Queue<String>();
         Queue2<String> qq = new Queue2<String>();
+        Queue2<Integer> qi = new Queue2<Integer>();
         int k = Integer.parseInt(args[0]);
 
         while (!StdIn.isEmpty())
@@ -204,12 +276,14 @@ public class Queue2<Item> implements Iterable<Item>
         }
         StdOut.println("(" + q.size() + " left on queue)");
 
+        qq.reverse_Queue_Recur();
         for (String str : qq){
             StdOut.print(str + " ");
         }
         //qq.removeLastNode();
         remove(qq, args[0]); 
         StdOut.println();
+        qq.reverse_Queue_iter();
         for (String str : qq){
             StdOut.print(str + " ");
         }

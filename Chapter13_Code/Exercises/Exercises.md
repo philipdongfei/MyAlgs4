@@ -71,10 +71,10 @@ your program should print
 
 1.3.13 Suppose that a client performs an intermixed sequence of (queue) *enqueue* and *dequeue* operations. The enqueue operations put the integers 0 through 9 in order onto the queue; the dequeue operations print out the return value. Which of the following sequence(s) could *not* occur?
 
-a. 0 1 2 3 4 5 6 7 8 9
-b. 4 6 8 7 5 3 2 9 0 1
-c. 2 5 6 7 4 8 9 3 1 0
-d. 4 3 2 1 0 5 6 7 8 9
+- a. 0 1 2 3 4 5 6 7 8 9
+- b. 4 6 8 7 5 3 2 9 0 1
+- c. 2 5 6 7 4 8 9 3 1 0
+- d. 4 3 2 1 0 5 6 7 8 9
 
 1.3.14 Develop a class **ResizingArrayQueueOfStrings** that implements the queue abstraction with a fixed-size array, and then extend your implementation to use array resizing to remove the size restriction.
 
@@ -146,6 +146,63 @@ else if (N == 1)
 1.3.25 Wite a method *insertAfter()* that takes two linked-list *Node* arguments and inserts the second after the first on its list (and does nothing if either argument is null).
 
 1.3.26 Write a method *remove()* that takes a linked list and a string *key* as arguments and removes all of the nodes in the list that have key as its item field.
+
+
+1.3.27 Write a method *max()* that takes a reference to the first node in a linked list as argument and returns the value of the maximum key in the list. Assume that all keys are positive integers, and return 0 if the list is empty. 
+
+Answer: Queue2.java
+
+1.3.28 Develop a recursive solution to the previous question.
+
+Answer: Queue2.java
+
+1.3.29 Write a Queue implementation that uses a *circular* linked list, which is the same as linked list except that no links are *null* and the value of last.next is first whenever the list is not empty. Keep only one Node instance variable (last).
+
+Answer: Queue3.java
+
+1.3.30 Write a function that takes the first Node in a linked list as argument and (destructively) reverses the list, returning the first Node in the result.
+
+*Iterative solution*: To accomplish this task, we maintain references to three consecutive nodes in the linked list, *reverse*, *first* and *second*. At each iteration, we extract the node *first* from the original linked list and insert it at the beginning of the reversed list. We maintain the invariant the *first* is the first node of what's left of the original list, *second* is the second node of what's left of the original list, and *reverse* is the first node of the
+resulting reversed list.
+
+```
+    public Node reverse(Node x)
+    {
+        Node first = x;
+        Node reverse = null;
+        while (first != null)
+        {
+            Node second = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = second;
+        }
+        return reverse;
+    }
+
+```
+When writing code involving linked lists, we must always be careful to properly handle the exceptional cases (when the linked list is empty, when the list has only one or two nodes) and the boundary cases (dealing with the first or last items). This is usually much trickier than handling the normal cases.
+
+*Recursive solution*: Assuming the linked list has N nodes, we recursively reverse the last N-1 nodes, and then carefully append the first node to the end.
+
+```
+    public Node reverse(Node first)
+    {
+        if (first == null) return null;
+        if (first.next == null) return first;
+        Node second = first.next;
+        Node rest = reverse(second);
+        second.next = first;
+        first.next = null;
+        return rest;
+    }
+
+```
+*Answer*: Queue2.java
+
+1.3.31 Implement a nested class *DoubleNode* for building doubly-linked lists, where each node contains a reference to the item preceding it and the item following it in the list (*null* if there is no such item). Then implement static methods for the following tasks: *insert* at the beginning, insert at the end, remove from the beginning, remove from the end, insert before a given node, insert after a given node, and remove a given node.
+
+1.3.32 *Seque*. A stack-ended queue or *steque* is a data type that supports *push*, *pop*, and *enqueue*. Articulate an API for this ADT. Develop a linked-list-based implementation.
 
 
 
