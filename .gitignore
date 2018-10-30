@@ -1,3 +1,6 @@
 *.class
 *.drjava
 *.txt
+.idea
+out/
+*.iml
