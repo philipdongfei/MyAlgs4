@@ -13,6 +13,9 @@ public class RandomBag<Item> implements Iterable<Item>
     private RandomBag(){
         N = 0;
         a = (Item[]) new Object[1];
+        getArray = new int[100];
+        for(int i=0; i<100; i++)
+            getArray[i] = 0;
     } 
     private void resize(int max)
     {
@@ -57,12 +60,6 @@ public class RandomBag<Item> implements Iterable<Item>
     }
     private class RandomBagIterator implements Iterator<Item>
     {
-        private RandomBagIterator() {
-            getArray = new int[N];
-            for(int i=0; i<N; i++)
-                getArray[i] = 0;
-
-        }
         private int current = uniform(N);
         public boolean hasNext()
         { return current >= 0; }
@@ -73,12 +70,16 @@ public class RandomBag<Item> implements Iterable<Item>
             current = uniform(N);
             return item;
         }
-        
+    }
+    public static void main(String[] args)
+    {
+        RandomBag<Integer> rb = new RandomBag<Integer>();
+        rb.add(1);
+        rb.add(2);
+        rb.add(3);
+        for (int x : rb)
+            StdOut.println(x);
 
     }
-
-
-
-    
 }
 

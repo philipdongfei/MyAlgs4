@@ -233,6 +233,85 @@ void add(Item item)         *add an item*
 Write a class RandomBag that implements this API. Note that this API is the same as for Bag, except for the adjective random, which indicates that the iteration should provide the items in random order (all N! permutations equally likely, for each iterator). 
 *Hint*: Put the items in an array and randomize their order in the iterator's constructor.
 
+1.3.35 *Random queue*. A *random queue* stores a collection of items and supports the following API:
+
+public class RandomQueue<Item>
+------------------------------
+RandomQueue()           *create an empty random queue*
+boolean isEmpty()       *is the queue empty?*
+void enqueue(Item item) *add an item*
+Item dequeue()          *remove and return a random item
+                        (sample without replacement)*
+Item sample()           *return a random item, but do not remove
+                        (sample with replacement)*
+**API for a generic random queue**
+
+Write a class *RandomQueue* that implements this API. *Hint*: Use an array representation (with resizing). To remove an item, swap one at a random position (indexed 0 through N-1) with the one at the last position (index N-1). Then delete and return the last object, as in *ResizingArrayStack*. Write a client that deals bridge hands (13 cards each) using *RandomQueue<Card>*.
+
+
+1.3.34 Random bag. A random bag stores a collection of items and supports the following API:
+
+public class RandomBag<Item> implements Iterable<Item>
+
+RandomBag()                 *create an empty random bag*
+boolean isEmpty()           *is the bag empty?*
+int size()                  *number of items in the bag*
+void add(Item item)         *add an item*
+
+**API for a generic random bag**
+
+Write a class RandomBag that implements this API. Note that this API is the same as for Bag, except for the adjective random, which indicates that the iteration should provide the items in random order (all N! permutations equally likely, for each iterator). Hint: put the items in an array and randomize their order in the iterator's constructor.
+
+1.3.35 *Random queue*. A *random queue* stores a collection of items and supports the following API:
+
+public class RandomQueue<Item>
+
+-----
+RandomQueue()               *create an empty random queue*
+boolean isEmpty()           *is the queue empty?*
+void enqueue(Item item)     *add an item*
+Item dequeue()              *remove and return a random item
+                            (sample without replacement)*
+Item sample()               *return a random item, but do not remove
+                            (sample with replacement)
+**API for a generic random queue**
+
+Write a class *RandomQueue* that implements this API. *Hint*: Use an array representation (with resizing). To remove an item, swap one at a random position (indexed 0 through N-1) with the one at the last position (index N-1). Then delete and return the last object, as in ResizingArrayStack. Write a client that deals bridge hands (13 cards each) using RandomQueue<Card>.
+
+
+1.3.36 *Random iterator*. Write an iterator for RandomQueue<Item> from the previous exercise that return the items in random order.
+
+1.3.37 *Josephus problem*. In the Josephus problem from antiquity, N people are in dire straits and agree to the following strategy to reduce the population. They arrange themselves in a circle (at positions numbered from 0 to N-1) and proceed around the circle, eliminating every Mth person until only one person is left. Legend has it that Josephus figured out where to sit to avoid being eliminated. Write a Queue client Josephus that takes N and M from the command line and prints out
+the order in which people are eliminated (and thus would show Josephus where to sit in the circle).
+
+% java Josephus 7 2
+1 3 5 0 4 2 6
+
+1.3.38 *Delete Kth element*. Implement a class that supports the following API:
+
+public class GeneralizedQueue<Item>
+
+GeneralizedQueue()          *create an empty queue*
+boolean isEmpty()           *is the queue empty?*
+void insert(Item x)         *add an item*
+Item delete(int k)          *delete and return the Kth least recently inserted item*
+
+**API for a generic generalized queue**
+
+First, develop an implementation that uses an array implementation, and then develop one that usese a linked-list implementation. Note: the algorithms and data structures that we introduce in **CHAPTER 3** make it possible to develop an implementation that can guarantee that both insert() and delete() take time prortional to the logarithm of the number of items in the queue--see EXERCISE 3.5.27.
+
+1.3.39 *Ring buffer*. A ring buffer, or circular queue, is a FIFO data structure of a fixed size N. It is useful for transferring data between asynchronous processes or for storing log files. when the buffer is empty, the consumer waits until data is deposited; when the buffer is full, the producer waits to deposit data. Develop an API for a RingBuffer and an implementation that uses an array representation (with circular wrap-around).
+
+1.3.40 *Move-to-front*. Read in a sequence of characters from standard input and maintain the characters in a linked list with no duplicates. When you read in a previously unseen character, insert it at the front of the list. When you read in a duplicate character, delete it from the list and reinsert it at the beginning. Name your program **MoveToFront**: it implements the well-known *move-to-front* strategy, which is useful for caching, data compression, and many other
+applications where items that have been recently accessed are more likely to be reaccessed.
+
+
+
+
+
+
+
+
 
 
 
