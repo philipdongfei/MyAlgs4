@@ -14,6 +14,18 @@ public class Queue2<Item> implements Iterable<Item>
         Item item;
         Node next;
     }
+    public Queue2(){
+        first = last = null;
+        N = 0;
+    }
+    public Queue2(Queue2 q) {
+        for (Object temp : q) {
+            Item i = (Item)temp;
+            if (i != null && (!this.find(i))){
+                this.enqueue(i);
+            }
+        }
+    }
 
     public boolean isEmpty() { return first == null; } // Or: N == 0.
     public int size()   { return N;  }
@@ -46,7 +58,6 @@ public class Queue2<Item> implements Iterable<Item>
                 return true;
         }
         return false;
-
     }
 
     public boolean find(Queue2<String> q, String key)
@@ -276,6 +287,12 @@ public class Queue2<Item> implements Iterable<Item>
         }
         StdOut.println("(" + q.size() + " left on queue)");
 
+    
+        Queue2<String> r = new Queue2<String>(qq);
+        StdOut.println("r:");
+        for (String str : r)
+            StdOut.print(str + " ");
+        StdOut.println("");
         qq.reverse_Queue_Recur();
         for (String str : qq){
             StdOut.print(str + " ");

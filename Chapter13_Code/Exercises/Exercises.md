@@ -305,6 +305,24 @@ First, develop an implementation that uses an array implementation, and then dev
 1.3.40 *Move-to-front*. Read in a sequence of characters from standard input and maintain the characters in a linked list with no duplicates. When you read in a previously unseen character, insert it at the front of the list. When you read in a duplicate character, delete it from the list and reinsert it at the beginning. Name your program **MoveToFront**: it implements the well-known *move-to-front* strategy, which is useful for caching, data compression, and many other
 applications where items that have been recently accessed are more likely to be reaccessed.
 
+1.3.41 *Copy a queue*. Create a new constructor so that
+'Queue<Item> r = new Queue<Item>(q);'
+makes r a reference to a new and independent copy of the queue q. You should be able to push and pop from either q or r without influencing the other. *Hint*: Delete all of the elements from q and add these elements to both q and r.
+
+*Answer*: Queue2.java
+
+1.3.42 *Copy a stack*. Create a new constructor for the linked-list implementation of Stack so that
+'Stack<Item> t = new Stack<Item>(s);'
+makes t a reference to a new and independent copy of the stack s.
+
+*Answer*: Stack42.java
+
+1.3.43 *Listing files*. A folder is a list of files and folders. Write a program that takes the name of a folder as a command-line argument and prints out all of the files contained in that folder, with the contents of each folder recursively listed (indented) under that folder's name. *Hint*: Use a queue, and see java.io.File.
+
+
+
+
+
 
 
 
