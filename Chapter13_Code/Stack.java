@@ -37,8 +37,12 @@ public class Stack<Item> implements Iterable<Item>
     public Item peek()
     { // return item from top of stack.
         Item item = first.item;
-
         return item;
+    }
+
+    public void catenation(Stack<Item> s) {
+        for (Item x : s)
+            this.push(s.pop());
 
     }
 

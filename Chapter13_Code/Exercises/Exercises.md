@@ -342,6 +342,20 @@ determines whether a given permutation can be generated as output by our test cl
 
 *Partial solution*: Suppose that there is a forbidden trip(a, b, c). Item c is popped before a and b, but a and b are pushed before c. Thus, when c is pushed, both a and b are on the stack. Therefore, a cannot be popped before b.
 
+1.3.47 *Catenable queues, stacks, or steques*. Add an extra operation *catenation* that (destructively) concatenates two queues, stacks, or steques (**see EXERCISE 1.3.32**). *Hint*: Use a circular linked list, maintaining a pointer to the last item.
+
+1.3.48 *Two stacks with a deque*. Implement two stacks with a single deque so that each operation takes a constant number of deque operations(see EXERCISE 1.3.33).
+
+1.3.49 *Queue with three stacks*. Implement a queue with three stacks so that each queue operation takes a constant(worst-case) number of stack operations. *Warning*: high degree of difficulty.
+
+1.3.50 *Fail-fast iterator*. Modify the iterator code in Stack to immediately throw a java.util.ConcurrentModificationException if the client modifies the collection (via push() or pop()) during iteration.
+
+*Solution*: Maintain a counter that counts the number of push() and pop() operations. When creating an iterator, store this value as an iterator instance variable. Before each call to hasNext() and next(), check that this value has not changed since constructioin of the iterator; if has, throw an exception.
+
+1.3.51 **Expression evaluation with precedence**. Write a program EvaluateDeluxe.java that extends Evaluate.java to handle expressions that are not fully parenthesized, using the standard precedence order for the operators+,-,*, and /.
+
+
+
 
 
 
