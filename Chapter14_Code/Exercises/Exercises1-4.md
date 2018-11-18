@@ -79,4 +79,26 @@ p182, Cost model.
 - f. Interval2D
 - g. Double
 
+*Answer*:
+
+
+1.4.14 *4-sum*. Develop an algorithm for the 4-sum problem.
+
+1.4.15 *Faster 3-sum*. As a warmup, develop an implementation **TwoSumFaster** that uses a *linear* algorithm to count the pairs that sum to zero after the array is sorted (instead of the binary-search-based linearithmic algorithm). Then apply a similar idea to develop a quadratic algorithm for the 3-sum problem.
+
+1.4.16 *Closest pair (in one dimension).* Write a program that, given an array a[] of N double values, finds a *closest pair*: two values whose difference is no greater than the the difference of any other pair (in absolute value). The running time of your program should be linearithmic in the worst case.
+
+1.4.17 *Farthest pair (in one dimension)*. Write a program that, given an array a[] of N *double* values, finds a *farthest pair*: two values whose difference is no smaller than the difference of any other pair (in absolute value). The running time of your program should be linear in the worst case.
+
+1.4.18 **Local minimum of an array**. Write a program that, given an array a[] of N distinct integers, finds a local minimum: an index i such that both a[i] < a[i-1] and a[i] < a[i+1] (assuming the neighboring entry is bounds). Your program should use ~2lgN compares in the worst case.
+
+*Answer*: Examine the middle value a[N/2] and its two neighbors a[N/2-1] and a[N/2+1]. If a[N/2] is a local minimum, stop; otherwise search in the half with smaller neighbor.
+
+1.4.19 *Local minimum of a matrix*. Given an N-by-N array a[] of $N^2 distinct integers, design an algorithm that runs in time proportional to N to find a *local minimum*: a pair of indices i and j such that a[i][j] < a[i+1][j], a[i][j] < a[i][j+1], a[i][j] < a[i-1][j], and a[i][j] < a[i][j-1]. The running time of your program should be proportional to N in the worst case.
+
+
+
+
+
+
 
