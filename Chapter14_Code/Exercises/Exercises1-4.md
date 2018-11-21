@@ -90,11 +90,31 @@ p182, Cost model.
 
 1.4.17 *Farthest pair (in one dimension)*. Write a program that, given an array a[] of N *double* values, finds a *farthest pair*: two values whose difference is no smaller than the difference of any other pair (in absolute value). The running time of your program should be linear in the worst case.
 
-1.4.18 **Local minimum of an array**. Write a program that, given an array a[] of N distinct integers, finds a local minimum: an index i such that both a[i] < a[i-1] and a[i] < a[i+1] (assuming the neighboring entry is bounds). Your program should use ~2lgN compares in the worst case.
+1.4.18 **Local minimum of an array**. Write a program that, given an array a[] of N **distinct**(if not, linear) integers, finds a local minimum: an index i such that both a[i] < a[i-1] and a[i] < a[i+1] (assuming the neighboring entry is bounds). Your program should use ~2lgN compares in the worst case.
 
 *Answer*: Examine the middle value a[N/2] and its two neighbors a[N/2-1] and a[N/2+1]. If a[N/2] is a local minimum, stop; otherwise search in the half with smaller neighbor.
 
-1.4.19 *Local minimum of a matrix*. Given an N-by-N array a[] of $N^2 distinct integers, design an algorithm that runs in time proportional to N to find a *local minimum*: a pair of indices i and j such that a[i][j] < a[i+1][j], a[i][j] < a[i][j+1], a[i][j] < a[i-1][j], and a[i][j] < a[i][j-1]. The running time of your program should be proportional to N in the worst case.
+**solution**:
+Use a divide-and-conquer algorithm. Let m = n/2, and examine the value A[m] (that is, the element in the middle of the array).
+
+Case 1: A[m−1] < A[m]. Then the left half of the array must contain a local minimum, so recurse on the left half. We can show this by contradiction: assume that A[i] is not a local minimum for each 0 ≤ i < m. Then A[m−1] is not a local minimum, which implies that A[m−2] < A[m−1]. Similarly, A[m −3] < A[m −2]. Continuing in this fashion, we obtain A[0] < A[1]. But then A[0] is a local minimum, contrary to our initial assumption.
+
+Case 2: A[m + 1] > A[m]. Then the right half of the array must contain a local minimum, so recurse on the right half. This is symmetrical to Case 1.
+
+Case 3: A[m − 1] > A[m] and A[m + 1] < A[m]. Then A[m] is a local minimum, so return it. The running time recurrence is T(n) = T(n/2) + Θ(1), which yields T(n) = Θ(log n).
+
+[Solution Web](https://www.geeksforgeeks.org/find-local-minima-array/)
+
+1.4.19 *Local minimum of a matrix*. Given an N-by-N array a[] of $N^2 **distinct** integers, design an algorithm that runs in time proportional to N to find a *local minimum*: a pair of indices i and j such that a[i][j] < a[i+1][j], a[i][j] < a[i][j+1], a[i][j] < a[i-1][j], and a[i][j] < a[i][j-1]. The running time of your program should be proportional to N in the worst case.
+
+*Hint*: Find the minimum entry in row N/2, say a[N/2][j]. Check its two vertical neighbors a[N/2-1][j] and a[N/2+1][j]. Recur in the half with the samller neighbor. In that half, find the minimum entry in column N/2.
+
+
+**No To Do**.
+
+1.4.20 *Bitonic search*. An array is *bitonic* if it is comprised of an increasing sequence of integers followed immediately by a decreasing sequence of integers. Write a program that, given a bitonic array of N distinct int values, determines whether a given integer is in the array. Your program should use ~3lgN compares in the worst case.
+
+[Solution Web](https://www.geeksforgeeks.org/find-element-bitonic-array/)
 
 
 
