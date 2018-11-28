@@ -116,6 +116,37 @@ Case 3: A[m − 1] > A[m] and A[m + 1] < A[m]. Then A[m] is a local minimum, so 
 
 [Solution Web](https://www.geeksforgeeks.org/find-element-bitonic-array/)
 
+1.4.21 *Binary search on distinct values*. Develop an implementation of binary search for **StaticSETofInts**(see page 98) where the running time of contains() is guaranteed to be ~lgR, where R is the number of different integers in the array given as argument to the constructor.
+
+1.4.22 *Binary search with only addition and substraction.* [Mihai Patrascu] Write a program that, given an array of N distinct int values in ascending order, determines whether a given integer is in the array. You may use only additions and substractions and a constant amout of extra memory. The running time of your program should be proportional to log N in the worst case.
+
+**Answer**: Instead of searching based on powers of two (binary search), use Fibonacci numbers (which also grow exponentially). Maintain the current search range to be the interval[i, i+F_k] and keep $F_k and $F_k-1 in two variables. At each step compute $F_k-2 via substraction, check element i+$F_k-2, and update the current range to either [i, i+$F_k-2] or [i+$F_k-2, i+$F_k-2+$F_k-1].
+
+1.4.23 *Binary search for a fraction*. Devise a method that uses a logarithmic number of queries of the form *Is the number less than x*? to find a rational number p/q such that 0 < p < q < N. *Hint*: Two fractions with denominators less than N cannot differ by more than 1/$N^2.
+
+
+1.4.23 **Binary search with duplicates**. Modify binary search so that it always returns the smallest(largest) index of a key of an item matching the search key.
+
+1.4.24 **Throwing eggs from a building**. Suppose that you have an N-story building and plenty of eggs. Suppose also that an egg is broken if it is thrown off floor F or higher, and unbroken otherwise. First, devise a strategy to determine the value of F such that the number of broken eggs is ~lg N when eggs is ~lg N throws, then find a way to reduce the cost to ~2lgF when N is much larger than F.
+
+1.4.25 **Throwing two eggs from a building**. Consider the previous question, but now suppose you only have two eggs, and your cost model is the number of throws. Devise a strategy to determine F such that the number of throws is at most 2 sqrt(N), then find a way to reduce the cost to ~csqrt(F) for some constant c.
+
+1.4.26 *3-collinearity*. Suppose that you have an algorithm that takes as input N distinct points in the plane and can return the number of triples that fall on the same line. Show that you can use this algorithm to solve the 3-sum problem. *Strong hint*: Use algebra to show that (a,a^3), (b, b^3),and (c,c^3) are collinear if and only if a+b+c = 0.
+
+1.4.27 *Queue with two stack*. Implement a queue with two stacks so that each queue operation takes a constant amortized number of stack operation. *Hint*: If you push elements onto a stack and then pop them all, they appear in reverse order. If you repeat this process, they're now back in order.
+
+1.4.28 *Stack with a queue*. Implement a stack with a single queue so that each stack operations takes a linear number of queue operations. *Hint*: to delete an item, get all of the elements on the queue one at a time, and put them at the end, except for the last one which you should delete and return. (This solution is admittedly very inefficient.)
+
+1.4.29 *Steque with two stacks*. Implement a steque with two stacks so that each steque operation (see EXERCISE 1.3.32) takes a constant amortized number of stack operations.
+
+
+
+
+
+
+
+
+
 
 
 
