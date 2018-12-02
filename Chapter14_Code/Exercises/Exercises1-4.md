@@ -139,6 +139,49 @@ Case 3: A[m − 1] > A[m] and A[m + 1] < A[m]. Then A[m] is a local minimum, so 
 
 1.4.29 *Steque with two stacks*. Implement a steque with two stacks so that each steque operation (see EXERCISE 1.3.32) takes a constant amortized number of stack operations.
 
+1.4.30 *Deque with a stack and a steque*. Implement a deque with a stack and a steque (see EXERCISE 1.3.32) so that each deque operation takes a constant amortized number of stack and steque operations.
+
+1.4.31 *Deque with three stacks*. Implement a deque with three stacks so that each deque operation takes a constant amortized number of stack operations.
+
+1.4.32 *Amortized analysis*. Prove that, starting from an empty stack, the number of array accesses used by any sequence of M operations in the resizing array implementation of Stack is proportional to M.
+
+1.4.33 *Memory requirements on a 32-bit machine.* Give the memory requirements for Integer, Date, Counter, int[], double[], double[][], String, Node, and Stack (linked-list representation) for a 32-bit machine. Assume that references are 4 bytes, object overhead is 8 bytes, and padding is to a multiple of 4 bytes.
+
+1.4.34 *Hot or cold*. Your goal is to guess a secret integer between 1 and N. You repeatedly guess integers between 1 and N. After each guess you learn if your guess equals the secret integer (and the game stops). Otherwise, you learn if the guess is hotter (closer to) or colder (farther from) the secret number than your previous guess. Design an algorithm that finds the secret number in at most ~2lgN guesses. Then design an algorithm that finds the secret number in at most ~1lgN
+guesses.
+
+*Hint*: use binary search for the first part. For the second part, first design an algorithm that solves the problem in ~ 1 lg N guesses assuming you are permitted to guess integers in the range -N to 2N.
+
+*Answer*: We still need to prove that our guess will always fall in between [-N,2N].
+By recurrence, suppose that c (our previous guess) is in [a-(a+b), b+(a+b)] = [-b, a+2b]
+Then d = a+b-c <= a+b-(-b) <= (a+2b) and d = a+b-c >= a+b-(a+2b) >= -b
+Initial case: a = 1, b = N, c = 1, c is indeed in [-b, a+2*b]
+
+1.4.35 *Time costs for pushdown stacks*. Justify the entries in the table below, which shows typical time costs for various pushdown stack implementations, using a cost model that counts both *data references* (references to data pushed onto the stack, either an array reference or a reference to an object's instance variable) and *object created*.
+
+data structure         item type      data references    objects created
+linked list             int                 2N               N
+                        Integer             3N              2N
+resizing array          int                 ~5N             lgN
+                        Integer             ~5N             ~N
+
+1.4.36 *Space usage for pushdown stacks. Justify the entries in the table below, which show typical space usage for various pushdown stack implementations. Use a static nested class for linked-list nodes to avoid the non-static nested class overhead.
+
+data structure         item type        space usage for N int values(bytes)
+linked list             int                 ~32N
+                        Integer             ~56N
+resizing array          int             between ~4N and ~16N
+                        Integer         between ~32N and ~56N
+
+1.4.37 *Autoboxing performance penalty*. Run experiments to determine the performance penalty on your machine for using autoboxing and auto-unboxing. Develop an implementation **FixedCapacityStackOfInts** and use a client such as **DoublingRatio** to compare its performance with the generic **FixedCapacityStack<Integer>**, for a large number of push() and pop() operation.
+
+
+
+
+
+
+
+
 
 
 
