@@ -175,6 +175,35 @@ resizing array          int             between ~4N and ~16N
 
 1.4.37 *Autoboxing performance penalty*. Run experiments to determine the performance penalty on your machine for using autoboxing and auto-unboxing. Develop an implementation **FixedCapacityStackOfInts** and use a client such as **DoublingRatio** to compare its performance with the generic **FixedCapacityStack<Integer>**, for a large number of push() and pop() operation.
 
+1.4.38 *Naive 3-sum implementation*. Runexperiments to evaluate the following implementation of the inner loop of ThreeSum:
+```
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            for (int k = 0; k < N; k++)
+                if (i < j && j < k)
+                    if (a[i] + a[j] + a[k] == 0)
+                        cnt++;
+                
+```
+Do so by developing a version of DoublingTest that computes the ratio of the running times of this program and ThreeSum.
+
+1.4.39 *Improved accuracy for doubling test*. Modify DoublingRatio to take a second command-line argument that specifies the number of calls to make to timeTrial() for each value of N. Run your program for 10, 100, and 1,000 trials and comment on the precision of the results.
+
+1.4.40 *3-sum for random values*. Formulate and validate a hypothesis describing the number of triples of N random int values that sum to 0. If you are skilled in mathematical analysis, develop an appropriate mathematical model for this problem, where the values are uniformly distributed between - M and M, where M is not small.
+
+1.4.41 *Running times*. Estimate the amount of time it would take to run *TwoSumFast, TwoSum, ThreeSumFast and ThreeSum on your computer to solve the problems for a file of 1 million numbers. Use *DoublingRaton* to do so.
+
+1.4.42 *Problem sizes*. Estimate the size of the largest value of P for which you can run *TwoSumFast, TwoSum, ThreeSumFast,* and *ThreeSum* on your computer to solve the problems for a file of 2^p thousand numbers. Use *DoublingRatio* to do so.
+
+1.4.43 *Resizing arrays versus linked lists*. Run experiments to validate the hypothesis that resizing arrays are faster than linked lists for stacks (see EXERCISE 1.4.35 and EXERCISE 1.4.36). do so by developing a version of DoublingRatio that computes the ratio of the running times of the two programs.
+
+1.4.44 *Birthday problem*. Write a program that takes an integer N from the command line and uses StdRandom.uniform() to generate a random sequence of integers between 0 and N-1. Run experiments to validate the hypothesis that the number of integers generated before the first repeated value is found is ~sqrt(pi*N/2).
+
+1.4.45 *Coupon collector problem*. Generating random integers as in the previous exercise, run experiments to validate the hypothesis that the number of integers generated before all possible values are generated is ~NH_N.
+
+
+
+
 
 
 
