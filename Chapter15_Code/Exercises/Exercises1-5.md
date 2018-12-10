@@ -40,5 +40,34 @@ id[5] is a child of id[6] -> id[6] must have at least 2 child before union(6,5)[
 
 1.5.11 Implement *weighted quick-find*, where you always change the id[] entries of the smaller component to the identifier of the larger component. How does this change affect performance?
 
+1.5.12 *Quick-union with path compression*. Modify quick-union (page 224) to include *path compression*, by adding a loop to find() that links every site on the path from p to the root. Give a sequence of input pairs that causes this method to produce a path of length4. Note: the amortized cost per operation for this algorithm is known to be logarithmic.
 
+
+1.5.13 *Weighted quick-union with path compression*. Modify weighted quick-union (ALGORITHM 1.5) to implement path compression, as described in EXERCISE 1.5.12. *Note*: The amortized cost per operation for this algorithm is known to be bounded by a function known as the *inverse Ackermann function* and is less than 5 for any conceivable practical value of N.
+
+1.5.14 *Weighted quick-union by height*. Develop a UF implementation that uses the same basic strategy as weighted quick-union but keeps track of tree height and always links the shorter tree to the taller one. Prove a logarithmic upper bound on the height of the trees for N sites with your algorithm.
+
+1.5.15 *Binomial trees*. Show that the number of nodes at each level in the worst-case trees for weighted quick-union are binomial coefficients. Compute the average depth of a node in a worst-case tree with N = 2^n nodes.
+
+Answer: lgN = lg(2^n) = n
+
+1.5.16 *Amortized costs plots*. Instrument your implementations from EXERCISE 1.5.7 to make amortized costs plots like those in the text.
+
+1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
+that take N from the command line, calls count(), and prints the returned value.
+
+1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
+that take N from the command line, calls count(), and prints the returned value.
+
+1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
+that take N from the command line, calls count(), and prints the returned value.
+
+1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
+that take N from the command line, calls count(), and prints the returned value.
+
+1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
+that take N from the command line, calls count(), and prints the returned value.
+
+1.5.18 *Random grid generator*. Write a program *RandomGrid* that takes an int value N from the command line, generates all the connections in an N-by-N grid, puts them in random order, randomly orients them (so that p q and q p are equally likesly to occur), and prints the result to standard output. To randomly order the connections, use a RandomBag(see EXERCISE 1.3.34 on page 167). To encapsulate p and q in a single object, use the Connection nested class shown below. Package your
+program as two static methods: generate(), whick takes N as argument and returns an array of connections, and main(), which takes N from the command line, call geerate(), and iterates through the returned array to print the connections.
 
