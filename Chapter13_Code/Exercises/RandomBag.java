@@ -10,9 +10,10 @@ public class RandomBag<Item> implements Iterable<Item>
     private int N ;
     int[] getArray;
 
-    private RandomBag(){
+    public RandomBag(){
         N = 0;
         a = (Item[]) new Object[1];
+        // FIXME:
         getArray = new int[100];
         for(int i=0; i<100; i++)
             getArray[i] = 0;
