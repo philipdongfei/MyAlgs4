@@ -62,6 +62,16 @@ that take N from the command line, calls count(), and prints the returned value.
 1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
 that take N from the command line, calls count(), and prints the returned value.
 
+```
+    private class Connection
+    {
+        int p;
+        int q;
+        public Connection(int p, int q)
+        { this.p = p; this.q = q; }
+    }
+
+```
 1.5.17 *Random connections*. Develop a UF client ErdosRenyi that takes an integer value N from the command line, generates random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected, and printing the number of connections generated. Package your program as a static method count() that takes N as argument and returns the number of connections and a main()
 that take N from the command line, calls count(), and prints the returned value.
 
@@ -70,4 +80,8 @@ that take N from the command line, calls count(), and prints the returned value.
 
 1.5.18 *Random grid generator*. Write a program *RandomGrid* that takes an int value N from the command line, generates all the connections in an N-by-N grid, puts them in random order, randomly orients them (so that p q and q p are equally likesly to occur), and prints the result to standard output. To randomly order the connections, use a RandomBag(see EXERCISE 1.3.34 on page 167). To encapsulate p and q in a single object, use the Connection nested class shown below. Package your
 program as two static methods: generate(), whick takes N as argument and returns an array of connections, and main(), which takes N from the command line, call geerate(), and iterates through the returned array to print the connections.
+
+1.5.19 *Animation*. Write a RandomGrid client (see EXERCISE 1.5.18) that uses UnionFind as in our development client to check connectivity and uses StdDraw to draw the connections as they are processed.
+
+1.5.20 *Dynamic growth*. Using linked lists or a resizing array, develop a weighted quick-union implementation that removes the restriction on needing the number of objects ahead of time. Add a method *newSite()* to the API, which returns an int identifier.
 
