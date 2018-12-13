@@ -17,20 +17,23 @@ public class RandomGrid{
     }
 
     public static Connection[] generate(int n){
+        int orient_n = 3;
         RandomBag<Connection> b = new RandomBag<Connection>();
         int m = n * n;
         for (int i = 1; i <= m ; i++) {
             // try to connect to right neighbor
             if (i % n > 0){
-                int orient = StdRandom.uniform(2);
+                int orient = StdRandom.uniform(orient_n );
                 if (orient == 0) b.add(new Connection(i, i+1));
-                else             b.add(new Connection(i+1, i));
+                else if (orient == 1) b.add(new Connection(i+1, i));
+                //else b.add(new Connection(i+1, i));
             }
             // try to connect bottom neighbor
             if (m - i >= n) {
-                int orient = StdRandom.uniform(2);
+                int orient = StdRandom.uniform(orient_n);
                 if (orient == 0) b.add(new Connection(i, i+n));
-                else             b.add(new Connection(i+n, i));
+                else if (orient == 1) b.add(new Connection(i+n, i));
+                //else b.add(new Connection(i+n, i));
             }
         }
 
