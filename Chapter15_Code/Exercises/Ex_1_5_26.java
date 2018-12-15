@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.lang.Math;
 
 
-public class Animation_Grid {
+public class Ex_1_5_26{
 
     public static void main(String[] args){
         int N = Integer.parseInt(args[0]);
@@ -22,13 +22,15 @@ public class Animation_Grid {
         UF uf = new UF(N*N);
         int i = 1;
         for (RandomGrid.Connection con : cons){
+            if (uf.count() == 1)
+                break;
             int p = con.p;
             int q = con.q;
             StdOut.println(i+":"+p + " " + q);
             p--;
             q--;
             if (uf.connected(p,q)) continue;
-            uf.union(p,q);
+            //uf.union(p,q);
             int x1 = (p)/N;
             int y1 = (p)%N;
             int x2 = (q)/N;
@@ -39,7 +41,7 @@ public class Animation_Grid {
             StdDraw.line(x1,y1,x2,y2);
             i++;
         }
-        StdOut.println(uf.count() + " components");
+        StdOut.println("pairs: "+ i + "," + uf.count() + " components");
         
     }
 }
