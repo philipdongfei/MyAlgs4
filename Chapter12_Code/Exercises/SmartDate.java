@@ -45,6 +45,23 @@ public class SmartDate
         if (this.year != that.year) return false;
         return true;
     }
+    public Integer compareTo(Object x)
+    {
+        SmartDate that = (SmartDate)x;
+        if (this.year > that.year)
+            return +1;
+        else if (this.year < that.year)
+            return -1;
+        if (this.month > that.month)
+            return +1;
+        else if (this.month < that.month)
+            return -1;
+        if (this.day > that.day)
+            return +1;
+        else if (this.day < that.day)
+            return -1;
+        return 0;
+    }
     public String toString()
     {
         return month()+"/"+day()
