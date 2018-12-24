@@ -71,6 +71,49 @@ the canvas and draws the bars.
 
 2.1.20 *shellsort best case*. What is the best case for shellsort? Justify your answer.
 
+2.1.21 *Comparable transactions*. Using our code for Date (page 247) as a model, expand your implementation of Transaction (EXERCISE 1.2.13) so that it implements Comparable, such that transactions are kept in order by amount.
+
+*Solution*:
+```
+public class Transaction implements Comparable<Transaction>
+{
+    ...
+    private final double amount;
+    ...
+    public int compareTo(Transaction that)
+    {
+        if (this.amount > that.amount) return +1;
+        if (this.amount < that.amount) return -1;
+        return 0;
+    }
+    ...
+}
+
+```
+
+2.1.22 *Transaction sort test client*. Write a class SortTransactions that consists of a static method main() that reads a sequence of transactions from standard input, sorts them, and prints the result on standard output (see EXERCISE 1.3.17).
+
+*Solution*:
+```
+public class SortTransactions
+{
+    public static Transaction[] readTransactions()
+    { // See Ex 1.3.17 }
+    public static void main(String[] args)
+    {
+        Transaction[] transactions = readTransactions();
+        Shell.sort(transactions);
+        for (Transaction t : transactions)
+            StdOut.println(t);
+    }
+
+}
+
+```
+
+2.1.23 *Deck sort*. Ask a few friends to sort a deck of cards (see EXERCISE 2.1.13). Observe them carefully and write down the method(s) that they use.
+
+2.1.24 *Insertion sort with sentinel*. Develop an implementation of insertion sort that eliminates the j>0 test in the inner loop by first putting the smallest item into position. Use *SortCompare* to evaluate the effectiveness of doing so. Note: It is often possible to avoid an index-out-of-bounds test in this way--the element that enables the test to be eliminated is known as a *sentinel*.
 
 
 
