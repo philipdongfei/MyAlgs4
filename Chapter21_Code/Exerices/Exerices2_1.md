@@ -115,6 +115,35 @@ public class SortTransactions
 
 2.1.24 *Insertion sort with sentinel*. Develop an implementation of insertion sort that eliminates the j>0 test in the inner loop by first putting the smallest item into position. Use *SortCompare* to evaluate the effectiveness of doing so. Note: It is often possible to avoid an index-out-of-bounds test in this way--the element that enables the test to be eliminated is known as a *sentinel*.
 
+2.1.25 *Insertion sort without exchanges*. Develop an implementation of insertion sort that moves larger elements to the right one position with one array access per entry, rather than using exch(). Use SortCompare to evaluate the effectiveness of doing so.
+
+##Web Exercises
+
+1. **Sorting networks**. Write a program Sort3.java with three if statements (and no loops) that reads in three integers a, b, and c from the command line and prints them out in ascending order.
+
+```
+if (a > b) swap a and b
+if (a > c) swap a and c
+if (b > c) swap b and c
+
+```
+
+2. **Oblivious sorting network**. Convince yourself that the following code fragment rearranges the integers stored in the variables A, B, C, and D so that A<=B<=C<=D.
+
+```
+if (A > B) {t = A; A = B; B = t;}
+if (B > C) {t = B; B = C; C = t;}
+if (A > B) {t = A; A = B; B = t;}
+if (C > D) {t = C; C = D; D = t;}
+if (B > C) {t = B; B = C; C = t;}
+if (A > B) {t = A; A = B; B = t;}
+if (D > E) {t = D; D = E; E = t;}
+if (C > D) {t = C; C = D; D = t;}
+if (B > C) {t = B; B = C; C = t;}
+if (A > B) {t = A; A = B; B = t;}
+
+```
+Devise a sequence of statements that would sort 5 integers. How many if statements does your program use?
 
 
 
