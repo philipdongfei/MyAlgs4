@@ -145,9 +145,20 @@ if (A > B) {t = A; A = B; B = t;}
 ```
 Devise a sequence of statements that would sort 5 integers. How many if statements does your program use?
 
+3. *Optimal oblivious sorting networks*. Create a program that sorts four integers using only 5 if statements, and one that sorts five integers using only 9 if statements of the type above? Oblivious sorting networks are useful for implementing sorting algorithms in hardware. How can you check that your program works for all inputs?
+
+*Answer*: Sort4.java Sort5.java
+The 0-1 principle says that you can verify the correctness of a (deterministic) sorting network by checking whether it correctly sorts an input that is a sequence of 0s and 1s. Thus, to check that sort5.java works, you only need to test it on the 2^5 = 32 possible inputs of 0s and 1s.
 
 
+4.**Optimal oblivious sorting (challenging)**. Find an optimal sorting network for 6, 7, and 8 inputs, using 12, 16, and 19 if statements of the form in the previous problem, respectively.
+
+Answer: Sort6.java is the solution for sorting 6 items. 
+
+5. **Optimal non-oblivious sorting**. Write a program that sorts 5 inputs using only 7 comparisons. Hint: First compare the first two numbers, the second two numbers, and the larger of the two groups, and label them so that a < b < d and c < d. Second, insert the remaining item e into its proper place in the chain a < b < d by first comparing against b, then either a or d depending on the outcome. Third, insert c into the proper place in the chain involving a, b, d, and e in the
+   same manner that you inserted e (with the knowledge that c < d). This uses 3 (first step) + 2 (second step) + 2 (third step) = 7 comparisons. This method was first discovered by H. B. Demuth in 1956. 
 
 
+14. **Binary insertion sort**. Develop an implementation BinaryInsertion.java of insertion sort that uses binary search to find the insertion point j for entry a[i] and then shifts all of the entries a[j] to a[i-1] over one position to the right. The number of compares to sort an array of length n should be ~ n lg n in the worst case. Note that the number of array accesses will still be quadratic in the worst case. Use SortCompare.java to evaluate the effectiveness of doing so. 
 
 
