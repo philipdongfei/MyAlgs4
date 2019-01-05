@@ -5,18 +5,24 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class MergeBU{
+    private static int access;
     private static Comparable[] aux;   // auxiliary array for merges
+    public static int getAccess(){
+        return access;
+    }
     public static void sort(Comparable[] a) {
         // Do lg N passes of pairwise merges.
+        access = 0;
         int N = a.length;
         aux = new Comparable[N];
         for (int sz = 1; sz < N; sz = sz+sz)  // sz: subarray size
         {
-            StdOut.println("sz="+sz);
+        //    StdOut.println("sz="+sz);
             for (int lo = 0; lo < N - sz; lo += sz+sz) // lo: subarray index
             {
                 merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, N-1));
-                show(a);
+                
+                //show(a);
             }
         }
     }
@@ -28,20 +34,40 @@ public class MergeBU{
         sort(a, lo, mid);   //Sort left half
         sort(a, mid+1, hi);  // Sort right half
         merge(a, lo, mid, hi);   // Merge results 
-        show(a);
+        //show(a);
 
     }
     public static void merge(Comparable[] a, int lo, int mid, int hi){
         // Merge a[lo..mid] with a[mid+1..hi].
         int i = lo, j = mid+1;
         for (int k = lo; k <= hi; k++)  //Copy a[lo..hi] to aux[lo..hi]
+        {
+            access += 2;
             aux[k] = a[k];
+
+        }
         for (int k = lo; k <= hi; k++)  // Merge back to a[lo..hi].
         {
-            if (i > mid)                a[k] = aux[j++];
-            else if (j > hi)            a[k] = aux[i++];
-            else if (less(aux[j], aux[i])) a[k] = aux[j++];
-            else                           a[k] = aux[i++];
+            if (i > mid){
+                access += 2;
+                a[k] = aux[j++];
+            }                
+            else if (j > hi) {
+                access += 2;
+                a[k] = aux[i++];
+
+            }            
+            else if (less(aux[j], aux[i])){
+                access += 2;
+                a[k] = aux[j++];
+                access += 2;
+
+            } 
+            else {
+                access += 2;
+                a[k] = aux[i++];
+
+            }                          
         }
         
     }
@@ -67,9 +93,9 @@ public class MergeBU{
     public static void main(String[] args) {
         // Read strings from standard input, sort them, and print.
         String[] a = StdIn.readAllStrings();
-        show(a);
+        //show(a);
         sort(a);
         assert isSorted(a);
-        show(a);
+        //show(a);
     }
 }

@@ -4,30 +4,30 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Merge{
+public class Merge9{
     private static int access;
-    private static Comparable[] aux;   // auxiliary array for merges
+    //private static Comparable[] aux;   // auxiliary array for merges
 
     public static int getAccess() {
         return access;
     }
     public static void sort(Comparable[] a) {
         access = 0;
-        aux = new Comparable[a.length];
-        sort(a, 0, a.length - 1);
+        Comparable[] aux = new Comparable[a.length];
+        sort(a, aux, 0, a.length - 1);
     }
     
-    private static void sort (Comparable[] a, int lo, int hi)
+    private static void sort (Comparable[] a, Comparable[] aux, int lo, int hi)
     {// Sort a[lo...hi]
         if (hi <= lo) return;
         int mid = lo + (hi - lo)/2;
-        sort(a, lo, mid);   //Sort left half
-        sort(a, mid+1, hi);  // Sort right half
-        merge(a, lo, mid, hi);   // Merge results 
+        sort(a, aux, lo, mid);   //Sort left half
+        sort(a, aux, mid+1, hi);  // Sort right half
+        merge(a, aux, lo, mid, hi);   // Merge results 
 //        show(a);
 
     }
-    public static void merge(Comparable[] a, int lo, int mid, int hi){
+    public static void merge(Comparable[] a, Comparable[] aux,  int lo, int mid, int hi){
         // Merge a[lo..mid] with a[mid+1..hi].
         int i = lo, j = mid+1;
         for (int k = lo; k <= hi; k++)  //Copy a[lo..hi] to aux[lo..hi]
@@ -84,9 +84,9 @@ public class Merge{
     public static void main(String[] args) {
         // Read strings from standard input, sort them, and print.
         String[] a = StdIn.readAllStrings();
-        //show(a);
+        show(a);
         sort(a);
         assert isSorted(a);
-        //show(a);
+        show(a);
     }
 }
