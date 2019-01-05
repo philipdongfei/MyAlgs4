@@ -31,5 +31,11 @@ Code: MergeSizes.java
 2.2.9 Use of a static array like aux[] is inadvisable in library software because multiple clients might use the class concurrently. Give an implementation of Merge that does not use a static array. Do not makeaux[] local to merge() (see the Q&A for this section).
 *Hint*. Pass the auxiliary array as an argument to the recursive sort().
 
+2.2.10 *Faster merge*. Implement a version of merge() that copies the second half of a[] to aux[] in decreasing order and then does the merge back to a[]. This change allows you to remove the code to test that each of the halves has been exhausted from the inner loop. Note: The resulting sort is not stable.
+
+2.2.11 **Improvements**. Write a program MergeX.java that implements the three improvements to mergesort that are described in the text: add a cutoff from small subarrays, test whether the array is already in order, and avoid the copy by switching arguments in the recursive code.
+
+
+
 
 
