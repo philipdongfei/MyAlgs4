@@ -35,6 +35,10 @@ Code: MergeSizes.java
 
 2.2.11 **Improvements**. Write a program MergeX.java that implements the three improvements to mergesort that are described in the text: add a cutoff from small subarrays, test whether the array is already in order, and avoid the copy by switching arguments in the recursive code.
 
+2.2.12 *Sublinear extra space*. Develop a merge implementation that reduces the extra space requirement to max(M, N/M), based on the following idea: Divide the array into N/M blocks of size M (for simplicity in this description, assume that N is a multiple of M). Then, (i) considering the blocks as items with their first key as the sort key, sort them using selection sort; and (ii) run through the array merging the first block with the second, then the second block with the
+third, and so forth.
+
+
 
 
 
