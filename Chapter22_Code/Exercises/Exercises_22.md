@@ -38,6 +38,36 @@ Code: MergeSizes.java
 2.2.12 *Sublinear extra space*. Develop a merge implementation that reduces the extra space requirement to max(M, N/M), based on the following idea: Divide the array into N/M blocks of size M (for simplicity in this description, assume that N is a multiple of M). Then, (i) considering the blocks as items with their first key as the sort key, sort them using selection sort; and (ii) run through the array merging the first block with the second, then the second block with the
 third, and so forth.
 
+2.2.13 *Lower bound for average case.* Prove that the expected number of compares used by any compare-based sorting algorithm must be at least ~N lg N (assuming that all possible orderings of the input are equally likely). *Hint*: The expected number of compares is at least the external path length of the compare tree (the sum of the lengths of the paths from the root to all leaves), which is minimized when it is balanced.
+
+2.2.14 *Merging sorted queues*. Develop a static method that takes two queues of sorted items as arguments and returns a queue that results from merging the queues into sorted order.
+
+2.2.15 *Bottom-up queue mergesort.* Develop a bottom-up mergesort implementation based on the following approach: Given N items, create N queues, each containing one of the items. Create a queue of the N queues. Then repeatedly apply the merging operation of EXERCISE 2.2.14 to the first two queues and reinsert the merged queue at the end. Repeat until the queue of queues contains only one queue.
+
+2.2.16 *Natural mergesort*. Write a version of bottom-up mergesort that takes advantage of order in the array by proceeding as follows each time it needs to find two arrays to merge: find a sorted subarray (by incrementing a pointer until finding an entry that is smaller than its predecessor in the array), then find the next, then merge them. Analyze the running time of this algorithm in terms of the array size and the number of maximal increasing sequences in the
+array.
+
+2.2.17 *Linked-list sort*. Implement a natural mergesort for linked lists. (This is the method of choice for sorting linked lists because it uses no extra space and is guaranteed to be linearithmic.)
+*Solution*. ToDo
+
+2.2.18 *shuffling a linked list*. Develop and implement a divide-andconquer algorithm that randomly shuffles a linked list in linearithmic time and logarithmic extra space.
+
+2.2.19 *Inversions*. Develop and implement a linearithmic algorithm for computing the number of inversions in a given array (the number of exchanges that would be performed by insertion sort for that array--see SECTION 2.1). This quantity is related to the *kendall tau distance*; see SECTION 2.5.
+
+2.2.20 *Indirect sort*. Develop and implement a version of mergesort that does not rearrange the array, but returns an int[] array perm such that perm[i] is the index of the ith smallest entry in the array.
+
+2.2.21 *Triplicates*. Given three lists of N names each, devise a linearithmic algorithm to determine if there is any name common to all three lists, and if so, return the first such name.
+
+2.2.22 *3-way mergesort*. Suppose instead of dividing in half at each step, you divide into thirds, sort each third, and combine using a 3-way merge. What is the order of growth of the overall running time of this algorithm?
+*Solution*. log_3
+
+
+
+
+
+
+
+
 
 
 
