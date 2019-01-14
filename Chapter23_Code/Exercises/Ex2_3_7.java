@@ -5,22 +5,33 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Ex2_3_2 {
+public class Ex2_3_7 {
+
     public static class Quick{
-        public static void sort(Comparable[] a) {
-            //StdRandom.shuffle(a); // Eliminate dependence on input.
+        private static int count;
+        private static int count0;
+        private static int count1;
+        private static int count2;
+    
+        public static int getCount0() {return count0;}
+        public static int getCount1() {return count1;}
+        public static int getCount2() {return count2;}
+
+        public static int sort(Comparable[] a) {
+            StdRandom.shuffle(a); // Eliminate dependence on input.
+            count = 0;
+            count0 = 0;
+            count1 = 0;
+            count2 = 0;
             sort(a, 0, a.length-1);
+            return count;
         }
         private static void sort(Comparable[] a, int lo, int hi) {
-            if (hi <= lo) {
-                StdOut.printf("%2d    %2d ", lo ,hi);
-                show(a);
-                return;
-
-            }
+            if ((hi - lo) == 0) count0++;
+            if ((hi - lo) == 1) count1++;
+            if ((hi - lo) == 2) count2++;
+            if (hi <= lo) return;
             int j = partition(a, lo, hi); // Partition
-            StdOut.printf("%2d %2d %2d ", lo, j ,hi);
-            show(a);
             sort(a, lo, j-1);
             sort(a, j+1, hi);
         }
@@ -30,14 +41,20 @@ public class Ex2_3_2 {
             Comparable v = a[lo];    // partitioning item
             while (true){
                 // Scan right, scan left, check for scan complete, and exchange.
-                while (less(a[++i], v)) if (i == hi) break;
-                while (less(v, a[--j])) if (j == lo) break;
+                count++;
+                while (less(a[++i], v)) {
+                    count++;
+                    if (i == hi) break;
+    
+                }
+                count++;
+                while (less(v, a[--j])){
+                    count++;
+                    if (j == lo) break;
+                } 
+                count++;
                 if (i >= j) break;
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
                 exch(a, i, j);
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
             }
             exch(a, lo, j);     // Put v = a[j] into position
             return j;          // with a[lo..j-1]<=a[j]<=a[j+1..hi].
@@ -71,14 +88,24 @@ public class Ex2_3_2 {
         }
     }
     public static void main(String[] args) {
-        // Read strings from standard input, sort them, and print.
-        String[] a = StdIn.readAllStrings();
-        StdOut.print("lo  j hi ");
-        Quick.show(a);
-        Quick.sort(a);
-        assert Quick.isSorted(a);
-        StdOut.print("         ");
-        Quick.show(a);
+        int trials = 10000;
+        StdOut.printf("%8s %8s %8s %8s \n", "n", "cnt0", "cnt1", "cnt2");
+        for (int n = 100; n <= 10000; n*=10){
+            double count = 0.0;
+            double count0 = 0.0;
+            double count1 = 0.0;
+            double count2 = 0.0;
+            for (int t = 0; t < trials; t++) {
+                Integer[] a = new Integer[n];
+                for (int i=0; i < n; i++){
+                    a[i] = (1+StdRandom.uniform(trials));
+                }
+                count += Quick.sort(a);
+                count0 += Quick.getCount0();
+                count1 += Quick.getCount1();
+                count2 += Quick.getCount2();
+            }
+            StdOut.printf("%8d %8.1f %8.1f %8.1f \n", n, count0/trials, count1/trials, count2/trials );
+        }
     }
-
 }

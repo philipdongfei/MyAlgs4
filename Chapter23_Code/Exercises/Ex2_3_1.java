@@ -26,13 +26,17 @@ public class Ex2_3_1 {
                 while (less(a[++i], v)) if (i == hi) break;
                 while (less(v, a[--j])) if (j == lo) break;
                 if (i >= j) break;
-                StdOut.printf("%2d %2d ", i ,j);
+                StdOut.printf(" %2d %2d ", i ,j);
                 show(a);
                 exch(a, i, j);
-                StdOut.printf("%2d %2d ", i ,j);
+                StdOut.printf(" %2d %2d ", i ,j);
                 show(a);
             }
+            StdOut.printf("*%2d %2d ", lo ,j);
+            show(a);
             exch(a, lo, j);     // Put v = a[j] into position
+            StdOut.printf("*%2d %2d ", lo ,j);
+            show(a);
             return j;          // with a[lo..j-1]<=a[j]<=a[j+1..hi].
         }
         
@@ -66,11 +70,11 @@ public class Ex2_3_1 {
     public static void main(String[] args) {
         // Read strings from standard input, sort them, and print.
         String[] a = StdIn.readAllStrings();
-        StdOut.print("      ");
+        StdOut.print("       ");
         Quick.show(a);
         Quick.sort(a);
         assert Quick.isSorted(a);
-        StdOut.print("      ");
+        StdOut.print("       ");
         Quick.show(a);
     }
 

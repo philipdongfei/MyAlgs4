@@ -5,24 +5,35 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Ex2_3_2 {
-    public static class Quick{
+public class Ex2_3_12 {
+    public static class Quick3way{
         public static void sort(Comparable[] a) {
             //StdRandom.shuffle(a); // Eliminate dependence on input.
             sort(a, 0, a.length-1);
         }
         private static void sort(Comparable[] a, int lo, int hi) {
             if (hi <= lo) {
-                StdOut.printf("%2d    %2d ", lo ,hi);
+                StdOut.printf("%02d    %02d ", lo, hi);
                 show(a);
                 return;
 
             }
-            int j = partition(a, lo, hi); // Partition
-            StdOut.printf("%2d %2d %2d ", lo, j ,hi);
+            int lt = lo, i = lo+1, gt = hi;
+            Comparable v = a[lo];
+            while (i <= gt) {
+                StdOut.printf("%02d %02d %02d ", lt, i, gt);
+                show(a);
+                int cmp = a[i].compareTo(v);
+                if (cmp < 0) exch(a, lt++, i++);
+                else if (cmp > 0) exch(a, i, gt--);
+                else        i++;
+                StdOut.printf("%02d %02d %02d ", lt, i, gt);
+                show(a);
+            }  // Now a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi].
+            StdOut.printf("%02d    %02d ", lt, gt);
             show(a);
-            sort(a, lo, j-1);
-            sort(a, j+1, hi);
+            sort(a, lo, lt-1);
+            sort(a, gt+1, hi);
         }
         private static int partition(Comparable[] a, int lo, int hi) {
             // Partition into a[lo..i-1], a[i], a[i+1..hi].
@@ -33,11 +44,7 @@ public class Ex2_3_2 {
                 while (less(a[++i], v)) if (i == hi) break;
                 while (less(v, a[--j])) if (j == lo) break;
                 if (i >= j) break;
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
                 exch(a, i, j);
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
             }
             exch(a, lo, j);     // Put v = a[j] into position
             return j;          // with a[lo..j-1]<=a[j]<=a[j+1..hi].
@@ -64,21 +71,23 @@ public class Ex2_3_2 {
         public static void main(String[] args) {
             // Read strings from standard input, sort them, and print.
             String[] a = StdIn.readAllStrings();
+            //StdOut.print("%9s");
             show(a);
             sort(a);
             assert isSorted(a);
+            //StdOut.print("%9s");
             show(a);
         }
     }
-    public static void main(String[] args) {
-        // Read strings from standard input, sort them, and print.
-        String[] a = StdIn.readAllStrings();
-        StdOut.print("lo  j hi ");
-        Quick.show(a);
-        Quick.sort(a);
-        assert Quick.isSorted(a);
-        StdOut.print("         ");
-        Quick.show(a);
-    }
+        public static void main(String[] args) {
+            // Read strings from standard input, sort them, and print.
+            String[] a = StdIn.readAllStrings();
+            StdOut.printf("%9s", " ");
+            Quick3way.show(a);
+            Quick3way.sort(a);
+            assert Quick3way.isSorted(a);
+            StdOut.printf("%9s", " ");
+            Quick3way.show(a);
+        }
 
 }

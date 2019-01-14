@@ -5,22 +5,15 @@ import edu.princeton.cs.algs4.StdRandom;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Ex2_3_2 {
+public class Ex2_3_17 {
     public static class Quick{
         public static void sort(Comparable[] a) {
-            //StdRandom.shuffle(a); // Eliminate dependence on input.
+            StdRandom.shuffle(a); // Eliminate dependence on input.
             sort(a, 0, a.length-1);
         }
         private static void sort(Comparable[] a, int lo, int hi) {
-            if (hi <= lo) {
-                StdOut.printf("%2d    %2d ", lo ,hi);
-                show(a);
-                return;
-
-            }
+            if (hi <= lo) return;
             int j = partition(a, lo, hi); // Partition
-            StdOut.printf("%2d %2d %2d ", lo, j ,hi);
-            show(a);
             sort(a, lo, j-1);
             sort(a, j+1, hi);
         }
@@ -30,14 +23,10 @@ public class Ex2_3_2 {
             Comparable v = a[lo];    // partitioning item
             while (true){
                 // Scan right, scan left, check for scan complete, and exchange.
-                while (less(a[++i], v)) if (i == hi) break;
+                while (less(a[++i], v));// if (i == hi) break;
                 while (less(v, a[--j])) if (j == lo) break;
                 if (i >= j) break;
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
                 exch(a, i, j);
-                //StdOut.printf("%2d %2d ", i ,j);
-                //show(a);
             }
             exch(a, lo, j);     // Put v = a[j] into position
             return j;          // with a[lo..j-1]<=a[j]<=a[j+1..hi].
@@ -70,15 +59,13 @@ public class Ex2_3_2 {
             show(a);
         }
     }
-    public static void main(String[] args) {
-        // Read strings from standard input, sort them, and print.
-        String[] a = StdIn.readAllStrings();
-        StdOut.print("lo  j hi ");
-        Quick.show(a);
-        Quick.sort(a);
-        assert Quick.isSorted(a);
-        StdOut.print("         ");
-        Quick.show(a);
-    }
+        public static void main(String[] args) {
+            // Read strings from standard input, sort them, and print.
+            String[] a = StdIn.readAllStrings();
+            Quick.show(a);
+            Quick.sort(a);
+            assert Quick.isSorted(a);
+            Quick.show(a);
+        }
 
 }
