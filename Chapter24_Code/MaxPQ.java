@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.StdOut;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -31,6 +32,12 @@ public class MaxPQ<Key extends Comparable<Key>>
         pq[N+1] = null;     // Avoid loitering.
         sink(1);            // Restore heap property.
         return max; 
+    }
+    public void show() 
+    {
+        for (int i = 1; i < (N+1); i++)
+            StdOut.print(pq[i]+" ");
+        StdOut.println();
     }
     private boolean less(int i, int j)
     {

@@ -39,6 +39,47 @@ public class IndexMinPQ<Key extends Comparable<Key>>
         qp[pq[N+1]] = -1;
         return indexOfMin;
     }
+    public int minIndex(){
+        return pq[1];
+    }
+    public void change(int k, Key key) {
+        keys[k] = key;
+        swim(qp[k]);
+        sink(qp[k]);
+    }
+    public void delete(int k) {
+        exch(k, N--);
+        swim(qp[k]);
+        sink(qp[k]);
+        keys[pq[N+1]] = null;
+        qp[pq[N+1]] = -1;
+    }
+    private boolean greater(int i, int j) {
+        return keys[pq[i]].compareTo(keys[pq[j]]) > 0;
+    }
+    private void exch(int i, int j) {
+        int swap = pq[i];
+        pq[i] = pq[j];
+        pq[j] = swap;
+        qp[pq[i]] = i;
+        qp[pq[j]] = j;
+    }
+    private void swim(int k) {
+        while (k > 1 && greater(k/2, k)) {
+            exch(k, k/2);
+            k = k/2;
+        }
+    }
+    private void sink(int k) {
+        while (2*k <= N) {
+            int j = 2*k;
+            if (j < N && greater(j, j+1)) j++;
+            if (!greater(k, j)) break;
+            exch(k, j);
+            k = j;
+        }
+    }
+
 }
 
 
