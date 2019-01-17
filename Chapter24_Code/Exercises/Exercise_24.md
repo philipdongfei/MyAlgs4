@@ -42,4 +42,40 @@
 
 *Solution*. while(2*k < N) j = 2*k;
 
+2.4.14 What is the minimum number of items that must be exchanged during a remove the maximum operation in a heap of size N with no duplicate keys? Give a heap of size 15 for which the minimum is achieved. Answer the same questions for two and three successive *remove the maximum* operations.
+
+*Solution*. heap: 15 14 13 6 5 11 12 4 3 2 1 8 7 9 10
+1) 2
+2) 5
+3) 8
+
+
+2.4.15 Design a linear-time certification algorithm to check whether an array pq[] is a min-oriented heap.
+
+2.4.16 For N=32, give arrays of items that make heapsort use as many and as few compares as possible.
+
+2.4.17 Prove that building a minimum-oriented priority queue of size k then doing N-k replace the minimum (insert followed by remove the minimum) operations leaves the k largest of the N items in the priority queue.
+
+2.4.18 In MaxPQ, suppose that a client calls insert() with an item that is larger than all items in the queue, and then immediately calls delMax(). Assume that there are no duplicate keys. Is the resulting heap identical to the heap as it was before these operations? Answer the same question for two insert() operations (the first with a key larger than all keys in the queue and the second for a key larger than that one) followed by two delMax() operations.
+
+*Answer*. Yes, Yes
+
+2.4.19 Implement the constructor for MaxPQ that takes an array of items as argument, using the bottom-up heap construction method described on page 323 in the text.
+
+2.4.20 Prove that sink-based heap construction uses at most 2N compares and at most N exchanges.
+
+2.4.21 *Elementary data structures*. Explain how to use a priority queue to implement the stack, queue, and randomized queue data types from CHAPTER 1.
+
+2.4.22 *Array resizing*. Add array resizing to MaxPQ, and prove bounds like those of PROPOSITION Q from array accesses, in an amortized sense.
+
+2.4.23 *Multiway heaps*. Considering the cost of compares only, and assuming that it takes t compares to find the largest of t items, find the value of t that minimizes the coefficient of NlgN in the compare count when a t-ary heap is used in heapsort. First, assume a straightforward generalization of sink(); then, assume that Floyd's method can save one compare in the inner loop.
+
+*TODO*.
+
+2.4.24 *Priority queue with explicit links. Implement a priority queue using a heapordered binary tree, but use a triply linked structure instead of an array. You will need three links per node: two to traverse down the tree and one to traverse up the tree. Your implementation should guarantee logarithmic running time per operation, even if no maximum priority-queue size is known ahead of time.
+
+
+
+
+
 

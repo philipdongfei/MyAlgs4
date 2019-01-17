@@ -12,6 +12,16 @@ public class MaxPQ<Key extends Comparable<Key>>
     {
         pq = (Key[]) new Comparable[maxN+1];
     }
+    public MaxPQ(Key[] pq){
+        N = pq.length;
+        this.pq = (Key[]) new Comparable[N+1];
+        for (int i=0; i<N; i++){
+            this.pq[i+1] = pq[i];
+        }
+        for (int k = N/2; k >= 1; k--)
+            sink(k);
+        assert isMaxHeap();
+    }
     public boolean isEmpty()
     {
         return N==0;
@@ -22,6 +32,7 @@ public class MaxPQ<Key extends Comparable<Key>>
     }
     public void insert(Key v)
     {
+        if (N == pq.length-1) resize(2*pq.length);
         pq[++N] = v;
         swim(N);
     }
@@ -33,11 +44,29 @@ public class MaxPQ<Key extends Comparable<Key>>
         sink(1);            // Restore heap property.
         return max; 
     }
+    // helper function to double the size of the heap array
+    private void resize(int capacity) {
+        assert capacity > n;
+        Key[] temp = (Key[]) new Object[capacity];
+        for (int i = 1; i <= n; i++) {
+            temp[i] = pq[i];
+        }
+        pq = temp;
+
+    }
     public void show() 
     {
         for (int i = 1; i < (N+1); i++)
             StdOut.print(pq[i]+" ");
         StdOut.println();
+    }
+    public boolean isMaxHeap(){
+        if (N <= 1) return true;
+        for (int k = 1; k <= N; k++){
+            if ((2*k) <= N && less(k, 2*k)) return false;
+            if ((2*k+1) <= N && less(k, 2*k+1)) return false;
+        }
+        return true;
     }
     private boolean less(int i, int j)
     {
