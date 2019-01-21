@@ -23,6 +23,11 @@ public class MinPQ<Key extends Comparable<Key>>{
         pq[++N] = x;
         swim(N);
     }
+    public Key min() {
+        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
+        Key key = pq[1];
+        return key;
+    }
     public Key delMin() {
         if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
         Key min = pq[1];
@@ -41,11 +46,11 @@ public class MinPQ<Key extends Comparable<Key>>{
     }
     // is subtree of pq[1..n] rooted at k a min heap?
     private boolean isMinHeap(int k) {
-        if (k > n) return true;
+        if (k > N) return true;
         int left = 2*k;
         int right = 2*k+1;
-        if (left <= n && greater(k, left)) return false;
-        if (right <= n && greater(k, right)) return false;
+        if (left <= N && greater(k, left)) return false;
+        if (right <= N && greater(k, right)) return false;
         return isMinHeap(left) && isMinHeap(right);
     }
     public void show() 

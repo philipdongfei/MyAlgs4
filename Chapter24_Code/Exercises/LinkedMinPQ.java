@@ -1,6 +1,6 @@
 
 
-public class LinkedPQ<Key extends Comparable<Key>> {
+public class LinkedMinPQ<Key extends Comparable<Key>> {
     private class Node {
         int N;
         Key data;
@@ -20,7 +20,7 @@ public class LinkedPQ<Key extends Comparable<Key>> {
     private void swim(Node x) {
         if (x == null) return;
         if (x.parent == null) return; // root.
-        if (greater(x.data, x.parent.data)) {
+        if (less(x.data, x.parent.data)) {
             swapNodeData(x, x.parent);
             swim(x.parent);
         }
@@ -32,18 +32,18 @@ public class LinkedPQ<Key extends Comparable<Key>> {
             return;
         else if (x.left == null) {
             swapNode = x.right;
-            if (less(x.data, swapNode.data))
+            if (greater(x.data, swapNode.data))
                 swapNodeData(swapNode, x);
         } else if (x.right == null) {
             swapNode = x.left;
-            if (less(x.data, swapNode.data))
+            if (greater(x.data, swapNode.data))
                 swapNodeData(swapNode, x);
         } else {
-            if (less(x.left.data, x.right.data))
+            if (greater(x.left.data, x.right.data))
                 swapNode = x.right;
             else
                 swapNode = x.left;
-            if (less(x.data, swapNode.data)){
+            if (greater(x.data, swapNode.data)){
                 swapNodeData(swapNode, x);
                 sink(swapNode);
             }
@@ -92,7 +92,7 @@ public class LinkedPQ<Key extends Comparable<Key>> {
         if (root == null) return null;
         return root.data;
     }
-    public Key delMax() {
+    public Key delMin() {
         if (size() == 1) {
             Key ret = root.data;
             root = null;

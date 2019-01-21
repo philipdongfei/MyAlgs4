@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+public class Ex2_4_26 {
+
 public class MaxPQ<Key extends Comparable<Key>>
 {
     private Key[] pq;    // heap-ordered complete binary tree
@@ -36,14 +38,8 @@ public class MaxPQ<Key extends Comparable<Key>>
         pq[++N] = v;
         swim(N);
     }
-    public Key max(){
-        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
-        Key key = pq[1];
-        return key; 
-    } 
     public Key delMax()
     {
-        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
         Key max = pq[1];    // Retrieve max key from top.
         exch(1, N--);       // Exchange with last item.
         pq[N+1] = null;     // Avoid loitering.
@@ -52,9 +48,9 @@ public class MaxPQ<Key extends Comparable<Key>>
     }
     // helper function to double the size of the heap array
     private void resize(int capacity) {
-        assert capacity > N;
+        assert capacity > n;
         Key[] temp = (Key[]) new Object[capacity];
-        for (int i = 1; i <= N; i++) {
+        for (int i = 1; i <= n; i++) {
             temp[i] = pq[i];
         }
         pq = temp;
@@ -104,4 +100,5 @@ public class MaxPQ<Key extends Comparable<Key>>
         }
     }
 
+}
 }

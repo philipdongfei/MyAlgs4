@@ -74,6 +74,29 @@
 
 2.4.24 *Priority queue with explicit links. Implement a priority queue using a heapordered binary tree, but use a triply linked structure instead of an array. You will need three links per node: two to traverse down the tree and one to traverse up the tree. Your implementation should guarantee logarithmic running time per operation, even if no maximum priority-queue size is known ahead of time.
 
+2.4.25 *Computational number theory*. Write a program CubeSum.java that prints out all integers of the form a^3+b^3 where a and b are integers between 0 and N in sorted order, without using excessive space. That is, instead of computing an array of the N^2 sums and sorting them, build a minimum-oriented priority queue, initially containing (0^3,0,0), (1^3,1,0),(2^3,2,0),...(N^3,N,0). Then, while the priority queue is nonempty, *remove the smallest* item(i^3+j^3, i, j), print
+it, and then, if j < N, insert the item (i^3+(j+1)^3,i,j+1). Use this program to find all distinct mintegers a, b, c ,and d between 0 and 10^6 such that a^3+b^3=c^3+d^3.
+
+
+2.4.26 *Heap without exchanges*. Because the exch() primitive is used in the sink() and swim() operations, the items are loaded and stored twice as often as necessary. Give more efficient implementations that avoid this inefficiency, a la insertion sort(see EXERCISE 2.1.25).
+
+**TODO**.
+
+
+2.4.27 *Find the minimum*. Add a min() method to MaxPQ. Your implementation should use constant time and constant extra space.
+
+*Solution*. add an extra instance variable that points to the minimum item. Update it after each call to insert(). Reset it to null if the priority queue becomes empty.
+
+2.4.28 *Selection filter*. Write a TopM client that reads points(x, y, z) from standard input, takes a value M from the command line, and prints the M points that are closest to the origin in Euclidean distance. Estimate the running time of your client from N = 10^8 and M = 10^4;
+
+2.4.29 *Min/max priority queue*. Design a data type that supports the following operations: insert, delete the maximum, and delete the minimum (all in logithmic time); and find the maximum and find the minimum (both in constant time). *Hint*: Use two heaps.
+
+2.4.30 *Dynamic median-finding*. Design a data type that supports insert in logarithmic time, find the median in constant time, and delete the median in logarithmic time. *Hint*: Use a min-heap and a max-heap.
+
+*Solution*. Keep the median key in v; use a max-oriented heap for keys less than the key of v; use a min-oriented heap for keys greater than the key of v. To insert, add the new key into the appropriate heap, replace with the key extracted from that heap.
+
+
+
 
 
 
