@@ -95,6 +95,22 @@ it, and then, if j < N, insert the item (i^3+(j+1)^3,i,j+1). Use this program to
 
 *Solution*. Keep the median key in v; use a max-oriented heap for keys less than the key of v; use a min-oriented heap for keys greater than the key of v. To insert, add the new key into the appropriate heap, replace with the key extracted from that heap.
 
+2.4.31 *Fast insert*. Develop a compare-based implementation of the MinPQ API such that insert uses ~log log N compares and delete the minimum uses ~2log N compares. *Hint*: Use binary search on parent pointers to find the ancestor in swim().
+
+2.4.32 *Lower bound*. Prove that it is impossible to develop a compare-based implementation of the MinPQ API such that both insert and delete the minimum guarantee to use ~NloglogN compares.
+*Solution*. This would yield an nloglogn compare-based sorting algorithm(insert the n items, then repeatedly remove the minimum), violating the proposition of Sectioin 2.3.
+
+2.4.33 *Index priority-queue implementation*. Implement the basic operations in the index priority-queue API on page 320 by modifying ALGORITHM 2.6 as follows: Change pq[] to hold indices, add an array keys[] to hold the key values, and add an array qp[] that is the inverse of pq[]--qp[] gives the position of i inpq[] (the index j such that pq[j] is i). Then modify the code in ALGORITHM 2.6 to maintain these data structures. Use the convention that qp[i] = -1 if i is not on
+the queue, and include a method contains() that tests this condition. You need to modify the helper methods exch() and less() but not sink() or swim().
+
+
+2.4.34 *Index priority-queue implementation(additional operations)*. Add minIndex(), change(), and delete() to your implementation of EXERCISE 2.4.33.
+
+2.4.35 *Sampling from a discrete probability distribution*. Write a class Sample with a constructor that takes an array p[] of double values as argument and supports the following two operations: random()-return an index i with probability p[i]/T (where T is the sum of the numbers in p[])--and change(i, v)--change the value of p[i] to v. *Hint*: Use a complete binary tree where each node has implied weight p[i]. Store in each node the cumulative weight of all the nodes
+in its subtree. To generate a random index, pick a random number between 0 and T and use the cumulative weights to determine which branch of the subtree to explore. When updating p[i], change all of the weights of the nodes on the path from the root to i. Avoid explicit pointers, as we do for heaps.
+
+
+
 
 
 
