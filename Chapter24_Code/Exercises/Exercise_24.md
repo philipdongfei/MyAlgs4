@@ -110,6 +110,20 @@ the queue, and include a method contains() that tests this condition. You need t
 in its subtree. To generate a random index, pick a random number between 0 and T and use the cumulative weights to determine which branch of the subtree to explore. When updating p[i], change all of the weights of the nodes on the path from the root to i. Avoid explicit pointers, as we do for heaps.
 
 
+##Web Exercises
+1. **Best, average, and worst case of heapsort**. What's are the best case, average case, and worst case number of compares for heapsorting an array of length n?
+
+*Solution*. If we allow duplicates, the best case is linear time (n equal keys); if we disallow duplicates, the best case is ~ n lg n compares (but the best case input is nontrivial). The average and worst case number of compares is ~2 n lg n compares. 
+
+
+2.**Best and worst case of heapify**. What is the fewest and most number of compares/exchanges needed to heapify an array of n items?
+*Solution*. Heapifying an array of n items in descending order requires 0 exchanges and n-1 compares. Heapifying an array of n items in ascending order requires ~n exchanges and ~2n compares.
+
+3. **Taxicab numbers**. Find the smallest integers that can be expressed as the sum of cubes of integers in two different ways(1729), three different ways(87,539,319), four different ways(6,963,472,309,248), five different ways (48,988,659,276,962,496), and six different ways(24,153,319,581,254,312,065,344). Such integers are named Taxicab numbers after the famous Ramanujan story. The smallest integers that can be expressed as the sum of cubes of integers in seven different ways
+   is currently unknown. Write a program Taxicab.java that reads in a command line parameter N and prints out all nontrivial solutions of $$a^3+b^3=c^3+d^3$$.such the a, b, c, and d, are less than or equal to N.
+
+
+
 
 
 
