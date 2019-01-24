@@ -199,8 +199,6 @@ Do so by developing a version of DoublingTest that computes the ratio of the run
 
 1.4.44 *Birthday problem*. Write a program that takes an integer N from the command line and uses StdRandom.uniform() to generate a random sequence of integers between 0 and N-1. Run experiments to validate the hypothesis that the number of integers generated before the first repeated value is found is ~sqrt(pi*N/2).
 
-1.4.45 *Coupon collector problem*. Generating random integers as in the previous exercise, run experiments to validate the hypothesis that the number of integers generated before all possible values are generated is ~NH_N.
-
 
 
 

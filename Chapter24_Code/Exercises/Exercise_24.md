@@ -122,6 +122,18 @@ in its subtree. To generate a random index, pick a random number between 0 and T
 3. **Taxicab numbers**. Find the smallest integers that can be expressed as the sum of cubes of integers in two different ways(1729), three different ways(87,539,319), four different ways(6,963,472,309,248), five different ways (48,988,659,276,962,496), and six different ways(24,153,319,581,254,312,065,344). Such integers are named Taxicab numbers after the famous Ramanujan story. The smallest integers that can be expressed as the sum of cubes of integers in seven different ways
    is currently unknown. Write a program Taxicab.java that reads in a command line parameter N and prints out all nontrivial solutions of $$a^3+b^3=c^3+d^3$$.such the a, b, c, and d, are less than or equal to N.
 
+4. **Computational number theory**. Find all solutions to the equation a+2b^2=3c^3+4d^4 for which a, b, c, and d are less than 100,000.*Hint*: use one min heap and one max heap.
+
+**TODO**:
+
+5. **Interrupt handling**. When programming a real-time system that can be interrupted (e.g., by a mouse click or wireless connection), it is necessary to attend to the interrupts immediately, before proceeding with the current activity. If the inteerrupts should be handled in the same order they arrive, then a FIFO queue is the appropriate data structure. However, if different interrupts have different priorities(e.g.,), then we need a prioprity queue.
+
+6. **Simulation of queueing networks**. M/M/1 queue for double parallel queues, etc. Difficult to analyze complex queueing networks mathematically. Instead use simulation to plot distribution of waiting times, etc. Need priority queue to determine which event to process next.
+
+7. **Zipf distribution**. Use the result of the previous exercise(s) to sample from the Zipfian distribution with parameter s and n. The distribution can take on integer values from 1 to n, and takes on value k with probability$$1/k^s/sum_(i=1 to n)1/i^s. Example: words in Shakespeare's play Hamlet with s approximately equal to 1.
+
+
+
 
 
 

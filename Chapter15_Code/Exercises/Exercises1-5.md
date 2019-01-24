@@ -100,3 +100,5 @@ connections processed, and the ratio of the running time to the previous. Use yo
 
 1.5.26 *Amortized plot for Erdos-Renyi*. Develop a client that takes an int value N from the command line and does an amortized plot of the cost of all operations in the style of the plots in the text for the process of generating random pairs of integers between 0 and N-1, calling connected() to determine if they are connected and then union() if not (as in our development client), looping until all sites are connected.
 
+##web exercises
+
