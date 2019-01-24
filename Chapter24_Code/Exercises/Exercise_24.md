@@ -132,6 +132,37 @@ in its subtree. To generate a random index, pick a random number between 0 and T
 
 7. **Zipf distribution**. Use the result of the previous exercise(s) to sample from the Zipfian distribution with parameter s and n. The distribution can take on integer values from 1 to n, and takes on value k with probability$$1/k^s/sum_(i=1 to n)1/i^s. Example: words in Shakespeare's play Hamlet with s approximately equal to 1.
 
+8. **Random process**. Begin with n bins, each consisting one ball. Randomly select one of the n balls and move the ball to a bin at random such that the probability that a ball is placed in a bin with m balls is m/n. What is the distribution of balls that results after many iterations? Use the random sampling method described above to make the simulation efficient.
+
+9. **Nearest neightbors**. Given n vectors x1,x2,...,x_N of length m and another vector x of the same length, find the 20 vectors that are closest to x.
+
+10. **Circle drawn on a piece of graph paper**. Write a program to find the radius of a circle, centered on the origin, that touches 32 points with integer x- and y- coordinates.*Hint*: look for a number than can be expressed as the sum of two squares in several different ways.
+**Answer**: there are two Pythagorean triples with hypotenuse 25: 15^2+20^2=25^2, 7^2+24^2=25^2 yielding 20 such lattice points; there are 22 different Pythagorean triples with hypotenuse 5,525; this leads to 180 lattice points. 27,625 is smallest radius that touches more than 64. 154,136,450 has 36 Pythagorean triples.
+
+11. **Perfect powers**. Write a program PerfectPower.java to print out all perfect powers that can be represented as 64-bit long integers: 4,8,9,16,25,27,... A perfect power is a number that can be written as a^b for integers a and b>=2.
+
+12. **Floating point additions**. Add up n floating-point numbers, avoiding roundoff error. Delete smallest two: add two each other, and reinsert.
+
+13. **First-fit for bin packing**. 17/10 OPT + 2, 11/9 OPT + 4(decreasing). Use max tournament tree in which players are N bins and value = available capacity.
+
+*TODO*:
+
+14. **Stack with min/max**. Design a data type that supports push, pop, size, min, and max(where min and max are the minimum and maximum items on the stack). All operations should take constant time in the worst case.
+
+*Hint*: Associate with each stack entry the minimum and maximum items currently on the stack.
+
+15. **Queue with min/max**. Design a data type that supports enqueue, dequeue, size, min, and max (where min and max are the minimum and maximum items on the queue). All operations should take constant amortized time.
+
+*Hint*: do the previous exercise and simulate a queue with two stacks.
+
+16. *2^i+5^j*. Print numbers of the form 2^i*5^j in increasing order.
+
+17. **Min-Max heap**. Design a data structure that supports min and max in constant time, insert, delete min, and delete max in logarithmic time by putting the items in a single array of size n with the following properties:
+- The array represents a complete binary tree.
+- The key in a node at an even level is less than (or equal to) the keys in its subtree; the key in a node at an odd level is greater than (or equal to) the keys in its subtree.
+Note that the maximum value is stored at the root and the minimum value is stored at one of the root's children.
+
+*Solution*. Min-Max Heaps and Generalized Priority Queues.
 
 
 
