@@ -164,6 +164,8 @@ Note that the maximum value is stored at the root and the minimum value is store
 
 *Solution*. Min-Max Heaps and Generalized Priority Queues.
 
+18.
+
 
 
 

@@ -21,4 +21,5 @@
 - [Taxicab numbers](http://mathworld.wolfram.com/TaxicabNumber.html)
 - [M/M/1 queue](https://en.wikipedia.org/wiki/M/M/1_queue)
 - [Zipf's law](https://en.wikipedia.org/wiki/Zipf's_law)
+- [Min-max heap](http://cg.scs.carleton.ca/~morin/teaching/5408/refs/minmax.pdf)
 
