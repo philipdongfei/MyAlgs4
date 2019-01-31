@@ -8,12 +8,14 @@ public class Ex2_4_1 {
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
         int n = a.length;
-        MaxPQ<String> pg = new MaxPQ<String>(n);
+        MaxPQ<String> pq = new MaxPQ<String>(n);
         for (String s : a){
             if (s.compareTo("*") == 0)
-                StdOut.println(pg.delMax());
+                StdOut.println(pq.delMax());
             else
-                pg.insert(s);
+                pq.insert(s);
         }
+        pq.show();
+        StdOut.println("min:"+pq.min());
     }
 }

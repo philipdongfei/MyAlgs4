@@ -174,6 +174,55 @@ Note that the maximum value is stored at the root and the minimum value is store
 
 *Solution*: linear--the minimum key could be in any of the ceiling(n/2)leaf nodes.
 
+21. **Max-oriented priority queue with min**. Design a data type that supports insert and remove-the-maximum in logarithmic time along with both max an min in constant time.
+
+22. **kth largest item greater than x**. Given a maximum oriented binary heap, design an algorithm to determine whether the kth largest item is greater than or equal to x. Your algorithm should run in time proportional to k.
+
+*Solution*: if the key in the node is greater than or equal to x, recursively search both the left subtree and the right subtree. Stop when the number of node explored is equal to k (the answer is yes) or there are no more nodes to explore (no).
+
+23. **kth smallest item in a min-oriented binary heap**. Design a k log k algorithm to find the kth smallest item in a min-oriented heap H containing n items.
+
+*Solution*. Build a new min-oriented heap H'. We will not modify H. Insert the root of H into H' along with its heap index 1. Now, repeatedly delete the minimum item x in H' and insert into H' the two child of x from H. The kth item deleted from H' is the kth smallest item in H.
+
+24. **Randomized queue**. Implement a RandomQueue so that each opeation is guarateed to take at most logarithmic time. *Hint*: can't afford array doubling. No easy way with linked lists to locate a random element in O(1) time. Instead, use a complete binary tree with explicit links.
+
+25. **FIFO queue with random deletion**. Implement a data type that supports the following operations: insert an item, delete the item that was least recently added, and delete a random item. Each operation should take (at most) logarithmic time in the worst case.
+
+*Solution*: Use a complete binary tree with explicit links; assign the long integer priority i to the ith item added to the data structure.
+
+26. **Top k sums of two sorted arrays**. Given two sorted arrays a[] and b[], each of length n, find the largest k sums of the form a[i]+b[j].
+
+*Hint*: Using a priority queue (similar to the taxicab problem), you can achieve an O(klogn) algorithm. Surprisingly, it is possible to do it in O(k) time but the algorithm is complicated.
+
+27. **Empirical analysis of heap construction**. Empirically compare the linear-time bottom-up heap construction versus the naive linearithmic-time top-down heap construction. Be sure to compare it over a range of values of n. LaMarca and Ladner report the because of cache locality, the naive algorithm can perform better in practice than the more clever approach for large values of n (when the heap no longer fits in the cache) even though the latter performs many fewer compares and exchanges.
+
+28. **Empirical analysis of multiway heaps**. Empirically compare the performance of 2-4- and 8-way heaps. LaMarca and Ladner suggest several optimizations, taking into account caching effects.
+
+29, **Empirically analysis of heapsort**. Empirically compare the performance of 2-4- and 8-way heapsort. LaMarca and Ladner suggest several optimizations, taking into account caching effects. Their data indicates that an optimized (and memory-tuned) 8-way heapsort can be twice as fast as classic heapsort.
+
+*Solution*: 27,28,29 see LaMarca and Ladner paper.
+
+30. **Heapify by insertions**. Suppose that you build a binary heap on n keys by repeatedly inserting the next key into the binary heap. Show that the total number of compares is at most ~nlogn.
+
+*Answer*: the number of compares is at most lg1+lg2+...+lgn=lg(n!)~nlgn.
+
+31. **Heapify lower bound. (Gonnet and Munro)** Show that any compare-based algorithm for building a binary heap on n keys takes at least ~1.3644N in the worst case.
+*Answer*: use an information theoretic argument, ala sorting lower bound. There are n~ possible heaps (permutation of the N integers) on n distinct keys, but there are many heaps that correspond to the same ordering. For example, there are two heaps(c a b and c b a) that corerspond to the 3 elements a<b<c. For a perfect heap (with n=2^h-1), there are A(h)=n!/prod((2^k-1)^(2^(h-k)), k=1..h) heaps corresponding to the n elements a[0]<a[1]<...<a[n-1]. (See Sloane sequence A05697.)
+Thus, any algorithm must be able to output one of P(h)=prod((2^k-1)^(2^(h-k)),,k=1..h) possible answers. Using some fancy mathematics, you can argue that lg P(h)~1.3644n.
+*Note*: The lower bound can be improved to ~3/2n(Carlsson-Chen) using an adversary argument; the best-known algorithm for the problem takes ~1.625n compares in the worst case (Gonnet and Munro).
+
+32. **Stock exchange matching engine**. Continuous limit order book:traders continuously post bids to buy or sell stock. A limit order means that a buyer(seller) places an order to buy(sell) a specified amount of a given stock at or below) (at or above) a given price. The order book displays buy and sell orders, and ranks them by price and then by time. Matching engine matches compatible buyers and sellers; if there are multiple possible buyers, break ties by choosing
+    the buyer that placed the bid earliest. Use two priority queues for each stock, one of buyers and one for sellers.
+    
+TODO.
+
+33. **Random binary heap**. Suppose that you fill an array of length n with a random permutation of the integers 1 to n. What is the probability that resulting array is a minimum-oriented binary heap for n = 5 and 6?
+
+*Solution*: 1/15 and 1/36, respectively. Here is a nice discussion of the problem.
+
+
+
+
 
 
 

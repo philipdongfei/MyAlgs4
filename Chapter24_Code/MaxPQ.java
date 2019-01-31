@@ -54,7 +54,7 @@ public class MaxPQ<Key extends Comparable<Key>>
             int min = N-leafs+1;
             for (int i=(N-leafs+2); i <= N; i++){
                 if (less(i,min))
-                    mink = pq[i];
+                    min = i;
             }
             mink = pq[min];
         }
