@@ -164,7 +164,16 @@ Note that the maximum value is stored at the root and the minimum value is store
 
 *Solution*. Min-Max Heaps and Generalized Priority Queues.
 
-18.
+18. **Range minimum query**. Given a sequence of n items, a range minimum query from index i to j is the index of the minimum item between i and j. Design a data structure that preprocesses the sequence of n items in linear time to support range minimum queries in logarithmic tim.
+**TODO**
+*Solution*.[RMQ](https://zh.wikipedia.org/wiki/%E8%8C%83%E5%9B%B4%E6%9C%80%E5%80%BC%E6%9F%A5%E8%AF%A2)
+
+19. Prove that a complete binary tree with n codes has exactly ceiling(n/2) leaf nodes (nodes with no children).
+
+20. **Max-oriented priority queue with min**. What is the order of growth of the running time to find a minimum key in a maximum-oriented binary heap.
+
+*Solution*: linear--the minimum key could be in any of the ceiling(n/2)leaf nodes.
+
 
 
 

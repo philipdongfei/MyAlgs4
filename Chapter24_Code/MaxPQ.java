@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.lang.Math;
 
 public class MaxPQ<Key extends Comparable<Key>>
 {
@@ -41,6 +42,25 @@ public class MaxPQ<Key extends Comparable<Key>>
         Key key = pq[1];
         return key; 
     } 
+    // web exercise 20
+    public Key min(){
+        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
+
+        Key mink;
+        int leafs = (int)Math.ceil((double)(Math.log(N)/Math.log(2)));
+        if (leafs == 1)
+            mink = pq[N];
+        else {
+            int min = N-leafs+1;
+            for (int i=(N-leafs+2); i <= N; i++){
+                if (less(i,min))
+                    mink = pq[i];
+            }
+            mink = pq[min];
+        }
+        return mink;
+
+    }
     public Key delMax()
     {
         if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
