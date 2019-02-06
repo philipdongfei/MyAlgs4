@@ -23,3 +23,6 @@
 - [Zipf's law](https://en.wikipedia.org/wiki/Zipf's_law)
 - [Min-max heap](http://cg.scs.carleton.ca/~morin/teaching/5408/refs/minmax.pdf)
 - [Range minimum query](https://en.wikipedia.org/wiki/Range_Minimum_Query)
+
+## Chapter 2.5
+- [Kendall tau distance](https://en.wikipedia.org/wiki/Kendall_tau_distance)
