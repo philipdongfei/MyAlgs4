@@ -59,3 +59,16 @@ i   min 0   1   2
 
 2.5.9 Develop a data type that allows you to write a client that can sort a file such as the one shown at right.
 
+2.5.10 Create a data type Version that represents a software version number, such as 115.1.1, 115.10.1, 115.10.2. Implement the Comparable interface so that 115.1.1 is less than 115.10.1, and so forth.
+
+
+2.5.11 One way to describe the result of a sorting algorithm is to specify a permutation p[] of the numbers 0 to a.length-1, such that p[i] specifies where the key originally in a [i] ends up. Give the permutations that describe the results of insertion sort, selection sort, shellsort, mergesort, quicksort, and heapsort for an array of severn equal keys.
+
+2.5.12 *Scheduling*. Write a program SPT.java that reads job names and processing times from standard input and prints a schedule that minimizes average completion time using the shortest processing time frist rule, as described on page 349.
+
+2.5.13 *Load balancing*. Write a program LPT.java that takes an integer M as a command-line argument, reads job names and processing times from standard input and prints a schedule assigning the jobs to M processors that approximately minimizes the time when the last job completes using the longest processing time first rule, as described on page 349.
+
+*Remark*. The resulting solution is guarateed to be within 33% of the best possible (actually 4/3-1/(3N)).
+
+
+
