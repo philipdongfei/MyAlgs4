@@ -70,5 +70,24 @@ i   min 0   1   2
 
 *Remark*. The resulting solution is guarateed to be within 33% of the best possible (actually 4/3-1/(3N)).
 
+2.5.14 **Sort by reverse domain**. Write a data type Domain.java that represents domain names, including an approriate compareTo() method where the natural order is in order of the reverse domain name. For example, the reverse domain of cs.princeton.edu is edu.princeton.cs. This is useful for web log analysis. Write a client that reads domain names from standard input and prints the reverse domains in sorted order.
+
+2.5.15 **Spam campaign**. To initiate an illegal spam campaign, you have a list of email addresses from various domains (the part of the email address that follows the @ symbol). To better forge the return addresses, you want to send the email from another user at the same domain. For example, you might want to forge an email from wayne@princeton.edu to rs@princeton.edu. How would you process the email list to make this an efficient task?
+
+*Solution*. First sort by reverse domain. binary search the black domains list.
+
+2.5.16 **Unbiased election**. In order to thwart bias against candidates whose names appear toward the end of the alphabet, California sorted the candidates appearing on its 2003 gubernatorial ballot by using the following order:
+R W Q O J M V A H B S G Z X N T C I E K U P D Y F L
+Create a data type California.java where this is the natural order. Write a client that sorts strings according to this ordering. Assume that each string is comprised solely of uppercase letters.
+
+2.5.17 *Check stability*. Extend your check() method from EXERCISE 2.1.16 to call sort() for a given array and return true if sort() sorts the array in order in a stable manner, false otherwise. Do not assume that sort() is restricted to move data only with exch().
+
+2.5.18 *Force stability*. Write a wrapper method that makes any sort stable by creating a new key type that allows you to append each key's index to the key, call sort(), then restore the original key after the sort.
+
+2.5.19 **Kendall tau distance**. Write a program KendallTau.java that computes the Kendall tau distance between two permutations in linearithmic time.
+
+
+
+
 
 
