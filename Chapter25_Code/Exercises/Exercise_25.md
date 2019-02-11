@@ -86,6 +86,27 @@ Create a data type California.java where this is the natural order. Write a clie
 
 2.5.19 **Kendall tau distance**. Write a program KendallTau.java that computes the Kendall tau distance between two permutations in linearithmic time.
 
+2.5.20 *Idle time*. Suppose that a parallel machine processes N jobs. Write a program that, given the list of job start and finish times, finds the largest interval where the machine is idle and the largest interval where the machine is not idle.
+
+2.5.21 *Multidimensional sort*. Write a Vector data type for use in having the sorting methods sort multidimensional vectors of d integers, putting the vectors in order by first component, those with equal first component in order by second component, those with equal first and second components in order by third component, and so forth.
+
+2.5.22 *Stock market trading*. Investors place buy and sell orders for a particular stock on an electronic exchange, specifying a maximum buy or minimum sell price that they are willing to pay, and how many shares they wish to trade at that price. Develop a program that uses priority queues to match up buyers and sellers and test it through simulation. Maintain two priority queues, one for buyers and one for sellers, executing trades whenever a new order can be matched with an
+existing order or orders.
+
+TODO:
+relevance:2.4 web exericse 32.
+
+2.5.23 *Sampling for selection*. Investigate the idea of using sampling to improve selection. *Hint*: Using the median may not always be helpful.
+
+
+2.5.24 **Stable priority queue**. Develop a stable priority-queue implementation StableMinPQ.java (which returns duplicate keys in the same order in which they were inserted).
+
+
+
+2.5.25 **Points in the plane**. Write three static comparators for the Point2D.java data type, one that compares points by their x coordinate, one that compares them by their y coordinate, and one that compares them by their distance from the origin. Write two non-static comparators for the Point2D data type, one that compares them by their distance to a specified point and one that compares them by their polar angle with respect to a specified point.
+
+
+
 
 
 
