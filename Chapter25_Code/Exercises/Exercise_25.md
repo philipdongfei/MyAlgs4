@@ -1,5 +1,7 @@
 #EXERCISES
 
+##Book Exercises
+
 2.5.1 Consider the following implementation of the *compareTo()* method for *String*. How does the third line help with efficiency?
 
 ```
@@ -125,6 +127,9 @@ where alpha = N/M--print a table to help your confirm that your experiments vali
 
 
 
+##Web Exercises
+
+1.
 
 
 
