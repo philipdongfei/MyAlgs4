@@ -105,6 +105,27 @@ relevance:2.4 web exericse 32.
 
 2.5.25 **Points in the plane**. Write three static comparators for the Point2D.java data type, one that compares points by their x coordinate, one that compares them by their y coordinate, and one that compares them by their distance from the origin. Write two non-static comparators for the Point2D data type, one that compares them by their distance to a specified point and one that compares them by their polar angle with respect to a specified point.
 
+2.5.26 *Simple polygon*. Given N points in the plane, draw a simple polygon with N points as vertices. *Hint*: Find the point p with the smallest y coordinate, breaking ties with the smallest x coordinate. Connect the points in increasing order of the polar angle they make with p.
+
+2.5.27 (web)**Interval 1D data type**. Write three static comparators for Interval1D.java, one that compares intervals by their left endpoint, one that compares intervals by their right endpoint, and one that compares intervals by their length.
+
+
+2.5.27 (book) *Sorting parallel arrays*. When sorting parallel arrays, it is useful to have a version fo a sorting routine that returns a permutation, say index[], of the indices in sorted order. Add a method indirectSort() to Insertion that takes an array of Comparable objects a[] as argument, but instead of rearranging the entries of a[] returns an integer array index[] so that a[index[0]] through a[index[N-1]] are the items in ascending order.
+
+2.5.28 **Sort files by name**. Write a program FileSorter.java that takes the name of a directory as a command line input and prints out all of the files in the current directory, sorted by filename. *Hint*. use the java.io.File data type.
+
+2.5.29 *Sort files by size and date of last modification*. Write comparators for the type File to order by increasing/decreasing order of file size, ascending/descending order of file name, and ascending/descending order of last modification date. Use these comparators in a program LS that takes a command-line argument and lists the files in the current directory according to a specified order, e.g., "-t" to sort by timestamp. Support multiple flags to break ties.
+Be sure to use a stable sort.
+
+2.5.30 *Boerner's theorem*. True or false: If you sort each column of a matrix, then sort each row, the columns are still sorted. Justify your answer.
+*Answer*: True.
+
+2.5.31 (web) **Distinct values**. Write a program Distinct.java that takes integers M, N and T as command-line arguments, then uses the code given in the text to perform T trials of the following experiment: Generate N random int values between 0 and M-1 and count the number of distinct values generated. Run your program for T=10 and N = 10^3, 10^4, 10^5, and 10^6, with M=1/2N, N and 2N. Probalility theory says that the number of distinct values should be about M(1-e^e(-alpha)),
+where alpha = N/M--print a table to help your confirm that your experiments validate this formula.
+
+
+
+
 
 
 
