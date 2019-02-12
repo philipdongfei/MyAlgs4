@@ -26,3 +26,4 @@
 
 ## Chapter 2.5
 - [Kendall tau distance](https://en.wikipedia.org/wiki/Kendall_tau_distance)
+- [Bochner's theorem](https://en.wikipedia.org/wiki/Bochner%27s_theorem)

@@ -129,12 +129,35 @@ where alpha = N/M--print a table to help your confirm that your experiments vali
 
 ##Web Exercises
 
-1.
+1. **Counter data type**. Modify Counter.java so that it implements the Comparable interface, comparing counters by tally.
 
+2. **Grade data type**. Write a progarm Grade.java to represent a data type for grades(A, B+, etc.). It should implement the Comparable interface using the natural ordering on grades by GPA.
 
+3. **Student data type**. Write an data type Student.java that represents a student in a college course. Each student should have a login (String), a section number (integer), and a grade (Grade);
 
+4. **Case insensitive order**. Write a code fragment to read in a sequence of strings and sort them in ascending order, ignoring case.
 
+5. **Case insensitive comparator**. Implement your own version of the comparator String.CASE_INSENSITIVE_ORDER.
 
+```
+public class CaseInsensitive iimplements Comparator<String> {
+    public int compare(String a, String b) {
+        return a.compareToIgnoreCase(b);
+    }
+}
+
+```
+6. **Descending order string comparator**. implement a comparator that sorts string in descending order instead of ascending order.
+
+```
+public class Descending implements Comparator<String> {
+    public int compare(String a, String b) {
+        return b.compareToIgnoreCase(a);
+    }
+}
+
+```
+Alternatively, you can use Collections.reverseOrder(). It returns a Comparator that imposes the reverse of the natural ordering of objects that implement the Comparable interface.
 
 
 
