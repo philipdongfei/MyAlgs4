@@ -160,4 +160,105 @@ public class Descending implements Comparator<String> {
 Alternatively, you can use Collections.reverseOrder(). It returns a Comparator that imposes the reverse of the natural ordering of objects that implement the Comparable interface.
 
 
+7. **Sorting strings from non-English alphabets**. Write a program to sort strings according to non-English alphabets, for accents, umlauts and pre-composed character like ch in Spanish.
+*Hint*: Use Java's java.text.Collator API. For example in UNICODE, Rico occurs lexicographically before Real, but in French, Real occurs first.
+
+```
+
+import java.util.Arrays;
+import java.text.Collator;
+...
+Arrays.sort(words, Collator.getInstance(Locale.FRENCH));
+
+```
+
+8. **Smith's rule**. The following problem arises in supply chain management. You have a bunch of jobs to schedule on a single machine. (Give example.) Job j requires p[j] units of processing time. Job j has a positive weight w[j] which represents its relative importance - think of it as the inventory cost of storing the raw materials for job j for 1 unit of time. If job j finishes being processed at time t, then it costs t*w[j] dollars. The goal is to sequence the jobs so as to
+   minimize the sum of the weighted completion times of each job. Write a program SmithsRule.java that reads in a command line parameter N and a list of N jobs specified by their processing time p[j] and their weight w[j], and output an optimal sequence in which to process their jobs. *Hint*: Use Smith's rule: Schedule the jobs in order of their ratio of processing time to weight. This greedy rule turns out to be optimal.
+
+TODO: Smith's rule (greedy rule).
+
+9. **Rhyming words**. For your poetry class, you would like to tabulate a list of rhyming words. A crude way to accomplish this task is as follows: 
+- Read in a dictionary of words into an array of strings.
+- Reverse the letters in each word, e.g., confound becomes dnuofnoc.
+- Sort the resulting array of words.
+- Reverse the letters in each word back to their original state.
+Now the word confound will be next to words like astound and compound. Write a program Rhymer.java that reads in a sequence of words from standard input and prints them out in the order specified above.
+Now repeat, but use a customized Comparator that sorts lexicographically from right-to-left.
+
+10. **Mode**. Give an O(N log N) algorithm of computing the mode (value that occurs most frequently) of a sequence of N integers.
+TODO
+11. **Closest 1d pair**. Given a sequence of N real numbers, find the pair of integers that are closest in value. Give a O(N log N) algorithm.
+TODO
+
+12. **Farthest 1d pair**. Given a sequence of N real numbers, find the pair of integers that are farthest apart in value. Give a O(N) algorithm.
+
+TODO
+13. **Sorting with many duplicates**. Suppose you have a sequence of N elements, with at most log N distinct ones. Describe how to sort them in O(N log log N) time.
+
+TODO
+
+14. **Nearly sorted**. Given an array of N elements, each which is at most k positions from its target position, devise an algorithm that sorts in O(N log k) time.
+
+TODO
+
+15. **Sorting a linked list**. Given a singly linked list of N elements, how could you sort it in guaranteed O(N log N) time, stably, and with O(1) extra space?
+
+TODO
+
+16. **Goofysort (Jim Huggins)**. Argue that Goofy.java sorts the array in ascending order. What is the best-case running time of as a function of the number of items to be sorted N? What is the worst-case running time of as a function of the number of items to be sorted N?
+
+17. **Feel-good interval**. Given an array of N nongegative integers (representing a person's emotional value on each day), the happiness in an interval is the sum of the values in that interval multiplied by the samllest integer in that interval. Design an O(N log N) divide-and-conquer algorithm to find the happiest interval.
+
+*Solution*. Here's amergesort style solution.
+- Divide the elements in the middle: a[1..m-1], a[m], a[m+1..r]
+- Recursively compute the optimal interval entirely in the left half
+- Recursively compute the optimal interval entirely in the right half
+- Compute the optimal interval containing a[m]
+- Return the best of the three intervals
+The key step for efficiency is computing the optimal interval containing a[m] in linear time. Here's a greedy solution: If the optimal interval containing a[m] contains one element, it is simply a[m]. If it contains more than one element, it must contain the larger of a[m-1] and a[m+1], so add this to the interval. Repeat, etc. Return the best interval of any size constructed by this process.
+
+TODO:
+
+18. **Equality detector**. Suppose that you have N elements and you want to determine if at least N/2 are equal. Assume the only operation on the elements you can perform is equality testing. Design an algorithm that performs O(N log N) equality tests to find a representative element if it exists. *Hint*: divide-and-conquer. Note: can also do in O(N) tests.
+
+TODO:
+
+19. **Maxima**. Given a set of n points in the plane, point(xi, yi) dominates (xj, yj) if xi > xj and yi > yj. A maxima is a point that is not dominated by any other point in the set. Devise an O(n log n) algorithm to find all maxima. Application: on x-axis is space efficiency, on y-axis is time efficiency. Maxima are useful algorithms. Hint: sort in ascending order according to x-coordinate; scan from right to left, recording the highest y-value seen so far and mark these as maxima.
+
+TODO:
+
+20. **Min and max**. Given an array of N elements, find the min and max using as few compares as possible. Brute force: find the max(N-1 compares),  then find the min of the remaining elements (N-2 compares).
+
+*Solution 1*. Divide and conquer: find min and max in each half(2T(N/2) compares), return min of 2 and max of 2 (2 compares). T(1) = 0, T(2) = 1, T(N)=2T(N/2)+2. Recurrence solution: T(N) = ceil(3N/2)-2.
+
+*Solution 2*. Divide the elements into pairs and compare two elements in each pair. Put the smallest elements in A and the largest in B. If n is odd, put element n in both A and B. This requires floor(n/2) comparisions. Now directly compute the minimum in A(ceil(n/2)-1 comparisons) and the maximum in B (ceil(N/2)-1) comparisons. [In fact, this is best possible.] 
+
+21. **Sorting by reversals**.[Mihai Patrascu](http://people.csail.mit.edu/mip/probs.html) Given an arraya[1..n], sort using the following type operation: pick two indices i and j and reverse the elements in a[i..j]. This operation costs j-i+1. Goal: O(nlog^2 n).
+
+TODO:
+
+22. **L1 norm**. There are N circuit elements in the plane. You need to run a special wire (parallel to the x-axis) across the circuit. Each circuit element must be connected to the special wire. Where should you put the special wire? *Hint*: median minimizes L1 norm.
+
+TODO:
+
+23. **Median given two sorted arrays**. Given two sorted arrays of size N1 and N2, find the meidan of all elements in O(log N) time where N = N1+N2. or find the kth overall largest in O(log k).
+
+24. **Three nearby numbers in an arrays**. Given a floating-point array a[], design a linearithmic algorithm to find three distinct integers i, j, and k such that |a[i]-a[j]|+|a[j]-a[k]|+|a[k]-a[i]| is minimum.
+*Hint*: if a[i]<=a[j]<=a[k], then |a[i]-a[j]|+|a[j]-a[k]|+|a[k]-a[i]| = 2(a[k]-a[i]).
+
+TODO:
+
+25. **Three nearby numbers in three arrays**. Given three floating-point arrays a[], b[], and c[], design a linearithmic algorithm to find three integers i, j, and k such that |a[i]-b[j]|+|b[j]-c[k]|+|c[k]-a[i]| is minimum.
+
+TODO:
+
+26. **Minimum dot product**. Given two vectors of the same length, find a permutation of the two vectors such that the dot product of the two vectors is as small as possible.
+
+27. **Two-sum**. Given an array of N integers, design a linearithmic algorithm to find a pair of integers whose sum is closest to zero.
+*Solution*: sort by absolute value--the best pair is now adjacent.
+
+
+28. **3-sum in quadratic time**. The 3-sum problem is to find, in an array of integers, the triple whose sum is closest to zero. Describe an algorithm for this problem that uses linear space and quadratic time.
+
+*Hint*: solve the following subproblem. Given a sorted list of N integers and a target integer x, determine in linear time the two whose sum is closest to x.
 

@@ -25,5 +25,10 @@ public class FileSorter {
         Arrays.sort(files);
         for (int i = 0; i < files.length; i++)
             StdOut.println(files[i].getName());
+        StdOut.println();
+        // sort by date of last modification java.
+        Arrays.sort(files, Comparator.comparingLong(File::lastModified));
+        for (int i = 0; i < files.length; i++)
+            StdOut.println(files[i].getName());
     }
 }
