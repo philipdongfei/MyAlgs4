@@ -262,3 +262,38 @@ TODO:
 
 *Hint*: solve the following subproblem. Given a sorted list of N integers and a target integer x, determine in linear time the two whose sum is closest to x.
 
+29. **Bandwidth**. Given intervals with bandwidth requirements, find the maximum bandwidth requirement (and the interval for which that maximum is reuqired).
+
+*Solution*. Sort the intervals by start time; insert the intervals into PQ in this order, but using the ending time as the key. Before inserting the next interval, compare its start time to ending time of the minimum interval on the PQ: if it is greater, delete the minimum interval on the PQ. Always keep track of the cumulative bandwidth on the PQ.
+
+30. **Time stamps**. Given N time stamps when file is reuqested from web server, find largest interval of time at which no file arrives.
+*Solution*: sort by time stamp. Scan sorted list to identify maximum gap. (Same as idle time.)
+
+31. **Ticket ranges**. Given a list of ticket seats of the form A1, A2, A11, A10, B7, B9, B8, B3, find the largest non-empty block of adjacent seats, e.g., A3-A9.(Same as idle time.)
+
+*Solution*: sort by seat's NO.
+
+32. **Decimal dominant**. Given an array with N comparable keys, design an algorithm to check if there is a value that appears more than N/10 times. Your algorithm should run in expected linear time.
+
+*Solution*: Use quickselect to find the N/10th largest value; check if it is a dominant; check if it is a dominant; if not, recur in the subarray with 9N/10 values. Alternatively, use 9 counters.
+
+33. **Local min and max**. Given N distinct comparable items, rearrange them so that each internal item is either greater than both items right before and after it or less than both items right before and after it .
+
+*Hint*: sort and interleave the first and second halves.
+
+34. **h-index**. Given an array of N positive integers, its h-index is the largest integer h such that there are at least h entries in the array greater than or equal to h. Design an algorithm to compute the h-index of an array.
+
+*Hint*: median or quicksort-like partitioning and ivide-and-conquer.
+
+35. **Software version number**. Define a comparator that compares two version numbers (Such as 1.2.32 and 1.2.5) chronologically. Assume that the version number is a string composed of only decimal digits and . character. The. character separates fields; it is not a decimal point.
+
+36. **Stable selection sort**. What modifications do you need to do make selection sort stable?
+
+*Solution*: first, when finding the minimum remaining key, always choose the leftmost entry; second, instead of moving the minimum key to the front with one exchange, move all elements to its left that are large one position to the right.
+
+37. **Largest number**. Given n positive integers, concatenate them so that they form the largest number. For example, if the numbers are 123, 12, 96, and 921, then result should be 9692112312.
+
+*Solution*: Define a comparator that compares two numbers by concatenating them together in either order (e.g. for 96 and 921, compare 96921 vs. 92196) and seeing which string is lexcographically largest.
+
+38. **Largest number**. Given three arrays A, B, and C, each of length n, determine ther number of triples with a in A, b in B, and c in C are there such that a < b < c?
+
