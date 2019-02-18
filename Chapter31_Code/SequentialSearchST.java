@@ -5,6 +5,7 @@ public class SequentialSearchST<Key, Value>
 {
     private Node first;    // first node in the linked list
     private int n;
+    private int Compares_N = 0;
 
     private class Node
     {// linked-list node
@@ -18,6 +19,9 @@ public class SequentialSearchST<Key, Value>
             this.next = next;
         }
     }
+    public int getCompares(){
+        return Compares_N;
+    }
     public int size() {
         return n;
     }
@@ -27,15 +31,21 @@ public class SequentialSearchST<Key, Value>
     public Value get(Key key)
     {// Search for key, return associated value.
         for (Node x = first; x != null; x = x.next)
+        {
+            Compares_N++;
             if (key.equals(x.key))
                 return x.val;    //search hit
+        }
         return null;             // search miss
     }
     public void put(Key key, Value val)
     {// Search for key. Update value if found; grow table if new.
         for (Node x = first; x != null; x = x.next)
+        {
+            Compares_N++;
             if (key.equals(x.key))
             { x.val = val; return; }    // Search hit: update val.
+        }
         first = new Node(key, val, first); // Search miss: add new node.
     }
     boolean contains(Key key) {
