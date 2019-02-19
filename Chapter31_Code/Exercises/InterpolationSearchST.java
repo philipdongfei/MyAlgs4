@@ -1,40 +1,51 @@
-import java.util.NoSuchElementException;
+import java.lang.Math;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
 
-public class BinarySearchST<Key extends Comparable<Key>, Value>
+public class InterpolationSearchST<Value>
 {
-    private static final int INIT_CAPACITY = 2;
-    private Key[] keys;
+    private Integer[] keys;
     private Value[] vals;
     private int N;
     private int Compares_N = 0;
+    private static final int INIT_CAPACITY = 16;
 
-    public BinarySearchST(){
+    public InterpolationSearchST() {
         this(INIT_CAPACITY);
     }
-
-    public BinarySearchST(int capacity) 
+    public InterpolationSearchST(int capacity) 
     {
         // See Algorithm 1.1 for standard array-resizing code.
-        keys = (Key[]) new Comparable[capacity];
+        keys = (Integer[]) new Integer[capacity];
         vals = (Value[]) new Object[capacity];
+        for (int i = 0; i < capacity; i++) {
+            keys[i] = i;
+        }
         Compares_N  = 0;
     }
     public int getCompares(){
         return Compares_N;
     }
 
+    private void resize(int capacity) {
+        assert capacity >= N;
+        Integer[] tempk = (Integer[]) new Integer[capacity];
+        Value[] tempv = (Value[]) new Object[capacity];
+        for (int i = 0; i < N; i++) {
+            tempk[i] = keys[i];
+            tempv[i] = vals[i];
+        }
+        for (int j = N; j < capacity; j++)
+            tempk[j] = j;
+        vals = tempv;
+        keys = tempk;
+    }
     public int size() 
     { return N; }
-    public int size(Key lo, Key hi) {
-        if (lo.compareTo(hi) > 0) return 0;
-        if (contains(hi)) return rank(hi) - rank(lo) + 1;
-        else              return rank(hi) - rank(lo);
-    }
     public boolean isEmpty()
     { return N == 0; }
 
-    public Value get(Key key)
+    public Value get(Integer key)
     {
         if (isEmpty()) return null;
         int i = rank(key);
@@ -42,12 +53,19 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
         if (i < N && keys[i].compareTo(key) == 0) return vals[i];
         else                                      return null;
     }
-    public int rank(Key key)
+    public int rank(Integer key)
     {
         int lo = 0, hi = N-1;
-        while (lo <= hi) 
+        //StdOut.println("lo:"+lo);
+        //StdOut.println("hi:"+hi);
+        
+        while ((lo <= hi) && (keys[lo] != keys[hi]) && (key >= keys[lo]) &&
+                (key <= keys[hi])) 
         {
-            int mid = lo + (hi - lo)/2;
+            //StdOut.println("key[lo]:"+keys[lo]);
+            //StdOut.println("key[hi]:"+keys[hi]);
+            int mid; 
+            mid  = lo + (int)Math.floor(((Integer)key - (Integer)keys[lo])/((Integer)keys[hi] - (Integer)keys[lo])); 
             Compares_N++;
             int cmp = key.compareTo(keys[mid]);
             if (cmp < 0) hi = mid - 1;
@@ -56,7 +74,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
         }
         return lo;
     }
-    public void put(Key key, Value val)
+    public void put(Integer key, Value val)
     { // Search for key. Update value if found; grow table if new.
         int i = rank(key);
         Compares_N++;
@@ -66,6 +84,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
             return;
         }
         if (N == keys.length) resize(2*keys.length);
+
         for (int j = N; j > i; j--)
         {
             keys[j] = keys[j-1];
@@ -75,13 +94,13 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
         vals[i] = val;
         N++;
     }
-    public Key delete(Key key)
+    public Integer delete(Integer key)
     {
         int i = rank(key);
         Compares_N++;
         if (i < N && keys[i].compareTo(key) == 0)
         { // the key is found.
-            Key k = keys[i];
+            Integer k = keys[i];
             for (int j = i; j < N-2; j++)
             {
                 keys[j] = keys[j+1];
@@ -96,26 +115,24 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
         return null;
 
     }
-    public Key min()
+    public Integer min()
     {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
         return keys[0]; 
     }
-    public Key max()
+    public Integer max()
     {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
         return keys[N-1];
     }
-    public Key select(int k)
+    public Integer select(int k)
     {
         return keys[k];
     }
-    public Key ceiling(Key key)
+    public Integer ceiling(Integer key)
     {
         int i = rank(key);
         return keys[i];
     }
-    public Key floor(Key key)
+    public Integer floor(Integer key)
     {
         int i = rank(key);
         Compares_N++;
@@ -125,43 +142,25 @@ public class BinarySearchST<Key extends Comparable<Key>, Value>
             return keys[i-1];
 
     }
-    public boolean contains(Key key) 
+    public boolean contains(Integer key) 
     {
         return get(key) != null;
     }
     void deleteMin()
     {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
         delete(min());
     }
     void deleteMax()
     {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
         delete(max());
     }
-    private void resize(int capacity) {
-        assert capacity >= N;
-        Key[] tempk = (Key[]) new Comparable[capacity];
-        Value[] tempv = (Value[]) new Object[capacity];
-        for (int i = 0; i < N; i++) {
-            tempk[i] = keys[i];
-            tempv[i] = vals[i];
-        }
-        //for (int j = N; j < capacity; j++)
-        //    tempk[j] = j;
-        vals = tempv;
-        keys = tempk;
-    }
-    public Iterable<Key> keys() {
+    public Iterable<Integer> keys() {
         return keys(min(), max());
     }
 
-    public Iterable<Key> keys(Key lo, Key hi)
+    public Iterable<Integer> keys(Integer lo, Integer hi)
     {
-        if (lo == null) throw new IllegalArgumentException("first arguement to keys() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
-        Queue<Key> q = new Queue<Key>();
-        if (lo.compareTo(hi) > 0) return q;
+        Queue<Integer> q = new Queue<Integer>();
         for (int i = rank(lo); i < rank(hi); i++)
             q.enqueue(keys[i]);
         if (contains(hi))
