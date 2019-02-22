@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Queue;
 import java.util.Arrays;
 
 
@@ -163,12 +164,42 @@ public class BST<Key extends Comparable<Key>, Value>
             if (x.right == null) return x.left;
             if (x.left == null) return x.right;
             Node t = x;
-            x = min(t.right); 
-            x.right = deleteMin(t.right);
-            x.left = t.left;
+            x = min(t.right); // set x to point to its successor min(t.right) 
+            x.right = deleteMin(t.right); //x.right containing all the keys that are larger than x.key
+            x.left = t.left; //set x.left to t.left.
         }
         x.N = size(x.left) + size(x.right) + 1;
         return x;
+    }
+    private void print(Node x)
+    {
+        if (x == null) return;
+        print(x.left);
+        StdOut.println(x.key);
+        print(x.right);
+    }
+    public void print()
+    {
+        print(root);
+    }
+    public Iterable<Key> keys()
+    {
+        return keys(min(), max());
+    }
+    public Iterable<Key> keys(Key lo, Key hi)
+    {
+        Queue<Key> queue = new Queue<Key>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
+    private void keys(Node x, Queue<Key> queue, Key lo, Key hi)
+    {
+        if (x == null) return;
+        int cmplo = lo.compareTo(x.key);
+        int cmphi = hi.compareTo(x.key);
+        if (cmplo < 0) keys(x.left, queue, lo, hi);
+        if (cmplo <= 0 && cmphi >= 0) queue.enqueue(x.key);
+        if (cmphi > 0) keys(x.right, queue, lo, hi);
     }
 
 
@@ -182,9 +213,10 @@ public class BST<Key extends Comparable<Key>, Value>
         {
             bst.put(a[i], i);
         }
-        for (int i = 0; i < a.length; i++)
+        //bst.print();
+        for (String k : bst.keys())
         {
-            StdOut.println(a[i] + " " + bst.get(a[i]));
+            StdOut.println(k + " " + bst.get(k));
         }
     }
 
