@@ -5,7 +5,9 @@ import edu.princeton.cs.algs4.Queue;
 import java.util.Arrays;
 
 
-public class BST<Key extends Comparable<Key>, Value> 
+public class Ex3_2_7 {
+
+public static class BST<Key extends Comparable<Key>, Value> 
 {
     private Node root;     // root of BST
     private int Compares = 0;
@@ -32,9 +34,6 @@ public class BST<Key extends Comparable<Key>, Value>
     public int getCompares()
     { return Compares; }
 
-    public boolean isEmpty() {
-        return size() == 0;
-    }
     public int size()
     { return size(root); }
 
@@ -43,14 +42,6 @@ public class BST<Key extends Comparable<Key>, Value>
         if (x == null) return 0;
         else           return x.N;
     }
-    public int size(Key lo, Key hi) {
-        if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
-        if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
-
-        if (lo.compareTo(hi) > 0) return 0;
-        if (contains(hi)) return rank(hi) - rank(lo) + 1;
-        else              return rank(hi) - rank(lo);
-    }
     public int height()
     {
         return height(root);
@@ -58,10 +49,6 @@ public class BST<Key extends Comparable<Key>, Value>
     private int height(Node x) {
         if (x == null) return -1;
         return 1 + Math.max(height(x.left), height(x.right));
-    }
-    public boolean contains(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to contains is null");
-        return get(key) != null;
     }
     public Value get(Key key)
     {
@@ -81,19 +68,22 @@ public class BST<Key extends Comparable<Key>, Value>
     public void put(Key key, Value val)
     {
         //Search for key, Update value if found; grow table if new.
-        root = put(root, key, val);
+        root = put(root, key, val, 1);
     }
-    private Node put(Node x, Key key, Value val)
+    private Node put(Node x, Key key, Value val, int NumberOfComparesRequiredToReachNode)
     {
         // Change key's value to val if key in subtree rooted at x.
         // Otherwise, add new node to subtree associating key with val.
-        if (x == null) return new Node(key, val, 1);
+        if (x == null) return new Node(key, val, 1, NumberOfComparesRequiredToReachNode);
         Compares++; 
         int cmp = key.compareTo(x.key);
-        if (cmp < 0) x.left = put(x.left, key, val);
-        else if (cmp > 0) x.right = put(x.right, key, val);
+        if (cmp < 0) x.left = put(x.left, key, val, NumberOfComparesRequiredToReachNode+1);
+        else if (cmp > 0) x.right = put(x.right, key, val, NumberOfComparesRequiredToReachNode+1);
         else x.val = val;
         x.N = size(x.left) + size(x.right) + 1;
+        x.TotalOfCompares = avgCompares(x.left) + x.NumberOfCompares
+            + avgCompares(x.right);
+
         return x;
     }
     public Key min()
@@ -131,17 +121,6 @@ public class BST<Key extends Comparable<Key>, Value>
         if (t != null) return t;
         else           return x;
     }
-    public Key floor2(Key key) {
-        return floor2(root, key, null);
-    }
-    private Key floor2(Node x, Key key, Key best) {
-        if (x == null) return best;
-        int cmp = key.compareTo(x.key);
-        if (cmp < 0) return floor2(x.left, key, best);
-        else if (cmp > 0) return floor2(x.right, key, x.key);
-        else        return x.key;
-    }
-
     public Key ceiling(Key key)
     {
         Node x = ceiling(root, key);
@@ -198,6 +177,8 @@ public class BST<Key extends Comparable<Key>, Value>
         if (x.left == null) return x.right;
         x.left = deleteMin(x.left);
         x.N = size(x.left) + size(x.right) + 1;
+        x.TotalOfCompares = avgCompares(x.left) + x.NumberOfCompares
+            + avgCompares(x.right);
         return x;
     }
     public void delete(Key key)
@@ -221,6 +202,8 @@ public class BST<Key extends Comparable<Key>, Value>
             x.left = t.left; //set x.left to t.left.
         }
         x.N = size(x.left) + size(x.right) + 1;
+        x.TotalOfCompares = avgCompares(x.left) + x.NumberOfCompares
+            + avgCompares(x.right);
         return x;
     }
     private void print(Node x)
@@ -236,7 +219,6 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     public Iterable<Key> keys()
     {
-        if (isEmpty()) return new Queue<Key>();
         return keys(min(), max());
     }
     public Iterable<Key> keys(Key lo, Key hi)
@@ -283,9 +265,11 @@ public class BST<Key extends Comparable<Key>, Value>
         //todo
         if (x == null) return 0;
 
-        return 0; 
+        return x.TotalOfCompares; 
     }
 
+
+}
     public static void main(String[] args) 
     {
         String[] a = StdIn.readAllStrings();
@@ -298,12 +282,11 @@ public class BST<Key extends Comparable<Key>, Value>
         }
         StdOut.println("Compares: " + bst.getCompares());
         StdOut.println("Height: " + bst.height());
-        StdOut.println("avgCompres: "+bst.avgComparesRecursive());
+        StdOut.println("avgCompres: "+bst.avgCompares());
         //bst.print();
         for (String k : bst.keys())
         {
             StdOut.println(k + " " + bst.get(k));
         }
     }
-
 }
