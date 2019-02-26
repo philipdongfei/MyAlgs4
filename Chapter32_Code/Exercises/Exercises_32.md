@@ -62,4 +62,27 @@ The implementation of put() is more complicated because of the need to save a po
 
 3.2.14 Give nonrecursive implementaions of min(), max(), floor(), ceiling(), rank(), and select().
 
+3.2.15 Give the sequences of nodes examined when the methods in BST are used to compute each of the following quantities for the tree drawn at right;
+
+a. floor("Q")  
+b. select(5)
+c. ceiling("Q")
+d. rank("J")
+e. size("D", "T")
+f. keys("D", "T")
+
+3.2.16 Define the *external path length* of a tree to be the sum of the number of nodes on the paths from the root to all null links. Prove that the difference between the external and internal path lengths in any binary tree with N nodes is 2N (see PROPOSITION C).
+[Internal Path Length](http://mathworld.wolfram.com/InternalPathLength.html)
+[External Path Length](http://mathworld.wolfram.com/ExternalPathLength.html)
+
+E = I + 2N 
+where N is the number of internal nodes.
+
+3.2.17 Draw the sequence of BSTs that results when you delete the keys from the tree of EXERCISE 3.2.1, one by one, in the order they were inserted.
+
+3.2.18 Draw the sequence of BSTs that results when you delete the keys from the tree of EXERCISE 3.2.1, one by one, in alphabetical order.
+
+3.2.19 Draw the sequence of BSTs that results when you delete the keys from the tree of EXERCISE 3.2.1, one by one, by successively deleting the key at the root.
+
+3.2.20 Prove that the running time of the two-argument keys() in a BST with N nodes is at most proportional to the tree height plus the number of keys in the range.
 

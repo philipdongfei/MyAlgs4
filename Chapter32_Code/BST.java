@@ -300,7 +300,7 @@ public class BST<Key extends Comparable<Key>, Value>
         StdOut.println("Height: " + bst.height());
         StdOut.println("avgCompres: "+bst.avgComparesRecursive());
         //bst.print();
-        for (String k : bst.keys())
+        for (String k : bst.keys("D", "T"))
         {
             StdOut.println(k + " " + bst.get(k));
         }
