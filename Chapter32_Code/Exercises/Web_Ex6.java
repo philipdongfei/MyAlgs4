@@ -2,14 +2,19 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.Queue;
 import java.util.Arrays;
 
 
-public class BST<Key extends Comparable<Key>, Value> 
+public class Web_Ex6{
+
+public static class BST<Key extends Comparable<Key>, Value> 
 {
     private Node root;     // root of BST
+    private Node cacheItem; // software caching.
     private int Compares = 0;
+    private int treeLevel;
 
     private class Node
     {
@@ -19,6 +24,7 @@ public class BST<Key extends Comparable<Key>, Value>
         private int N;      // # nodes in subtree rooted here
         private int TotalOfCompares;//number of compares required to reach all nodes in the subtree rooted here.
         private int NumberOfCompares;//number of compares required to reach this node
+        private double xCoord, yCoord;
 
         public Node(Key key, Value val, int N)
         { this.key = key; this.val = val; this.N = N; }
@@ -29,6 +35,224 @@ public class BST<Key extends Comparable<Key>, Value>
             this.TotalOfCompares = NumberOfCompares;
 
         }
+    }
+    public void ReverseBST() {
+        printTree(root);
+        root = ReverseBST(root);
+        StdOut.println();
+        printTree(root);
+        StdOut.println();
+    }
+    private Node ReverseBST(Node x)
+    {
+        if (x == null) return null;
+        if (x.left != null)
+        {
+            x.left = ReverseBST(x.left);
+        }
+        if (x.right != null)
+        {
+            x.right = ReverseBST(x.right);
+        }
+        Node t_right = x.right;
+        x.right = x.left;
+        x.left = t_right;
+        
+        return x;
+
+    }
+    public void join(Node a, Node b) {
+        a.right = b;
+        b.left = a;
+    }
+
+    public Node append(Node a, Node b) {
+        if (a == null) return b;
+        if (b == null) return a;
+
+        // find the last node in each using the .previous pointer
+        Node aLast = a.left;
+        Node bLast = b.left;
+
+        // join the two together to make it connected and circular
+        join(aLast, b);
+        join(bLast, a);
+
+        return a;
+    }
+    // web exercise 1
+    public void treeToList() {
+        //printTree(root);
+        //StdOut.println();
+        Node head = treeToList(root);
+        printList(head);
+        StdOut.println();
+    }
+
+    public Node treeToList(Node r) {
+        if (r== null) return null;
+
+        // Recursively do the subtree (leap of faith)
+        Node aList = treeToList(r.left);
+        Node bList = treeToList(r.right);
+
+        // make the single root node into a list length-1
+        // in preparation for the appending
+        r.left = r;
+        r.right = r;
+
+        // At this point we have three lists, and it's
+        // just a matter of appending them together
+        // in the right order (aList, root, bList)
+        aList = append(aList, r);
+        aList = append(aList, bList);
+
+        return aList;
+    }
+
+    public void printTree(Node r) {
+        if (r == null) return;
+        printTree(r.left);
+        StdOut.print(r.key + " ");
+        printTree(r.right);
+    }
+    public void printList(Node head) {
+        Node current = head;
+
+        while (current != null) {
+            StdOut.print(current.key + " ");
+            current = current.right;
+            if (current == head) break;
+        }
+        StdOut.println();
+    }
+
+    public void draw() {
+        treeLevel = 0;
+        setCoordinates(root, 0.9);
+
+        StdDraw.setPenColor(StdDraw.BLACK);
+        drawLines(root);
+        drawNodes(root);
+    }
+    private void setCoordinates(Node x, double distance) {
+        if (x == null)
+            return;
+        setCoordinates(x.left, distance - 0.05);
+        x.xCoord = (0.5 + treeLevel++) / size();
+        x.yCoord = distance - 0.05;
+        setCoordinates(x.right, distance - 0.05);
+    }
+    private void drawLines(Node x) {
+        if (x == null)
+            return;
+        drawLines(x.left);
+        if (x.left != null) {
+            StdDraw.line(x.xCoord, x.yCoord, x.left.xCoord, x.left.yCoord);
+        }
+        if (x.right != null){
+            StdDraw.line(x.xCoord, x.yCoord, x.right.xCoord, x.right.yCoord);
+        }
+        drawLines(x.right);
+    }
+    private void drawNodes(Node x) {
+        if (x == null)
+            return;
+        double nodeRadius = 0.032;
+
+        drawNodes(x.left);
+
+        StdDraw.setPenColor(StdDraw.RED);
+        StdDraw.filledCircle(x.xCoord, x.yCoord, nodeRadius);
+
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.circle(x.xCoord, x.yCoord, nodeRadius);
+        StdDraw.text(x.xCoord, x.yCoord, String.valueOf(x.key));
+
+        drawNodes(x.right);
+    }
+
+    public void printLevel(){
+        printLevel(root);
+    }
+    private void printLevel(Node x) {
+        if (x == null) return;
+        Queue<Node> q = new Queue<Node>();
+        q.enqueue(x);
+        StdOut.println(x.key);
+        while(!q.isEmpty()) {
+            Node t = q.dequeue();
+            if (t.left != null) {
+                StdOut.print(t.left.key + " ");
+                q.enqueue(t.left);
+            }
+            if (t.right != null) {
+                StdOut.print(t.right.key + " ");
+                q.enqueue(t.right);
+            }
+            StdOut.println();
+        }
+    }
+    public boolean hasNoDuplicates() {
+        return hasNoDuplicates(root);
+    }
+    public boolean hasNoDuplicates(Node x) {
+        if (x == null) return true;
+        if (x.left != null && x.left.key.compareTo(x.key) == 0)
+            return false;
+        if (x.right != null && x.right.key.compareTo(x.key) == 0)
+            return false;
+        if (hasNoDuplicates(x.left) == true)
+        {
+            if (hasNoDuplicates(x.right) == true)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+    public boolean isOrdered()
+    {
+        return isOrdered(root, min(), max());
+    }
+    private boolean isOrdered(Node x, Key min, Key max) {
+        if (x == null) return true;
+        if (x.key.compareTo(min) < 0 || x.key.compareTo(max) > 0)
+            return false;
+        if (x.left != null){
+            if (x.left.key.compareTo(x.key) > 0)
+                return false;
+        }
+        if (x.right != null) {
+            if (x.right.key.compareTo(x.key) < 0)
+                return false;
+        }
+        if (isOrdered(x.left, min, max) == true){
+            if (isOrdered(x.right, min, max) == true)
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
+
+    }
+    public boolean isBinaryTree() {
+        return isBinaryTree(root);
+    }
+    private boolean isBinaryTree(Node x) {
+        int count = size(x.left) + size(x.right) + 1;
+        StdOut.println("size: " + count );
+        StdOut.println("iBT: " + isBinaryTree(x, 1));
+        return x.N == count;
+    }
+    private int isBinaryTree(Node x, int n) {
+        if (x == null) return 0;
+        int count = n;
+        count += isBinaryTree(x.left, 1);
+        count += isBinaryTree(x.right, 1);
+        return count;
     }
     public int getCompares()
     { return Compares; }
@@ -66,6 +290,11 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     public Value get(Key key)
     {
+        // cache hit?
+        if (cacheItem != null && cacheItem.key == key) {
+            StdOut.println("get Cache hit");
+            return cacheItem.val;
+        }
         return get(root, key);
     }
     private Value get(Node x, Key key)
@@ -76,32 +305,42 @@ public class BST<Key extends Comparable<Key>, Value>
       int cmp = key.compareTo(x.key);
       if (cmp < 0) return get(x.left, key);
       else if (cmp > 0) return get(x.right, key);
-      else return x.val;
+      else {
+          cacheItem = x;
+        return x.val;
+
+      }
 
     }
     public void put(Key key, Value val)
     {
-        if (key == null) 
-            throw new IllegalArgumentException("calls put() with a null key");
-        if (val == null) {
-            delete(key);
+        if (cacheItem != null && cacheItem.key == key) {
+            cacheItem.val = val;
+            StdOut.println("put Cache hit");
             return;
         }
         //Search for key, Update value if found; grow table if new.
         root = put(root, key, val);
-        assert check();
-        //StdOut.println("check: " + check());
     }
     private Node put(Node x, Key key, Value val)
     {
         // Change key's value to val if key in subtree rooted at x.
         // Otherwise, add new node to subtree associating key with val.
-        if (x == null) return new Node(key, val, 1);
+        if (x == null) {
+            Node newNode = new Node(key, val, 1);
+            cacheItem = newNode;
+            return newNode;
+
+        }
         Compares++; 
         int cmp = key.compareTo(x.key);
         if (cmp < 0) x.left = put(x.left, key, val);
         else if (cmp > 0) x.right = put(x.right, key, val);
-        else x.val = val;
+        else {
+            x.val = val;
+            cacheItem = x;
+
+        }
         x.N = size(x.left) + size(x.right) + 1;
         return x;
     }
@@ -111,7 +350,10 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     private Node min(Node x)
     {
-        if (x.left == null) return x;
+        if (x.left == null) {
+            cacheItem = x;
+            return x;
+        }
         return min(x.left);
     }
     public Key max()
@@ -120,13 +362,18 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     private Node max(Node x)
     {
-        if (x.right == null) return x;
+        if (x.right == null) 
+        {
+            cacheItem = x;
+            return x;
+        }
         return max(x.right);
     }
     public Key floor(Key key)
     {
         Node x = floor(root, key);
         if (x == null) return null;
+        cacheItem = x;
         return x.key;
     }
     private Node floor(Node x, Key key) 
@@ -138,7 +385,11 @@ public class BST<Key extends Comparable<Key>, Value>
         if (cmp < 0) return floor(x.left, key);
         Node t = floor(x.right, key);
         if (t != null) return t;
-        else           return x;
+        else         
+        {
+            return x;
+
+        }
     }
     public Key floor2(Key key) {
         return floor2(root, key, null);
@@ -155,6 +406,7 @@ public class BST<Key extends Comparable<Key>, Value>
     {
         Node x = ceiling(root, key);
         if (x == null) return null;
+        cacheItem = x;
         return x.key;
     }
     private Node ceiling(Node x, Key key)
@@ -300,48 +552,8 @@ public class BST<Key extends Comparable<Key>, Value>
         int randomIndex = StdRandom.uniform(size());
         return select(randomIndex);
     }
-    private boolean check() {
-        if (!isBST())  StdOut.println("Not in symmetric order");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
-        return isBST() && isSizeConsistent() && isRankConsistent();
-    }
-    /*
-     * does this binary tree satisfy symmetric order?
-     * Note: this test also ensures that data structure is a binary tree since order is strict
-     */
-    private boolean isBST() {
-        return isBST(root, null, null);
-    }
-    /*
-     * is the tree rooted at x a BST with all keys strictly between min and max
-     * (if min or max is null, treat as empty constraint)
-     * Credit: Bob Dondero's elegant solution.
-     */
-    private boolean isBST(Node x, Key min, Key max) {
-        if (x == null) return true;
-        if (min != null && x.key.compareTo(min) <= 0) return false;
-        if (max != null && x.key.compareTo(max) >= 0) return false;
-        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
-    }
-    // are the size fields correct?
-    private boolean isSizeConsistent()
-    { return isSizeConsistent(root); }
-    private boolean isSizeConsistent(Node x) {
-        if (x == null) return true;
-        if (x.N != size(x.left) + size(x.right) + 1) return false;
-        return isSizeConsistent(x.left) && isSizeConsistent(x.right);
-    }
 
-    // check that ranks are consistent;
-    private boolean isRankConsistent() {
-        for (int i = 0; i < size(); i++)
-            if (i != rank(select(i))) return false;
-        for (Key key: keys())
-            if (key.compareTo(select(rank(key))) != 0) return false;
-        return true;
-    }
-
+}
     public static void main(String[] args) 
     {
         String[] a = StdIn.readAllStrings();
@@ -356,11 +568,23 @@ public class BST<Key extends Comparable<Key>, Value>
         StdOut.println("Height: " + bst.height());
         StdOut.println("avgCompres: "+bst.avgComparesRecursive());
         StdOut.println("randomKey: "+bst.randomKey());
+        StdOut.println("isBinaryTree: " + bst.isBinaryTree());
+        StdOut.println("isOrdered: " + bst.isOrdered());
+        StdOut.println("hasNoDuplicates: " + bst.hasNoDuplicates());
+        StdOut.println("printLevel: " );
+        bst.printLevel();
+        StdOut.println("Reverse BST: ");
+        bst.ReverseBST();
         //bst.print();
         for (String k : bst.keys("D", "T"))
         {
             StdOut.println(k + " " + bst.get(k));
         }
+        
+        //StdDraw.clear(StdDraw.WHITE);
+        //bst.draw();
+        bst.treeToList();
+        
     }
 
 }

@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.Queue;
 import java.util.Arrays;
 
 
-public class BST<Key extends Comparable<Key>, Value> 
+public class ThreadedST<Key extends Comparable<Key>, Value> 
 {
     private Node root;     // root of BST
     private int Compares = 0;
@@ -20,6 +20,8 @@ public class BST<Key extends Comparable<Key>, Value>
         private int TotalOfCompares;//number of compares required to reach all nodes in the subtree rooted here.
         private int NumberOfCompares;//number of compares required to reach this node
 
+        private Node pred; // links to the predecessor
+        private Node succ; // links to the successor
         public Node(Key key, Value val, int N)
         { this.key = key; this.val = val; this.N = N; }
         public Node(Key key, Value val, int N, int NumberOfCompares)
@@ -29,6 +31,45 @@ public class BST<Key extends Comparable<Key>, Value>
             this.TotalOfCompares = NumberOfCompares;
 
         }
+    }
+    public Key next(Key key) {
+        if (key == null)
+            return null;
+
+        Node current = root;
+        while (current != null) {
+            int cmp = key.compareTo(current.key);
+            if (cmp < 0)
+                current = current.left;
+            else if (cmp > 0)
+                current = current.right;
+            else {
+                if (current.succ != null)
+                    return current.succ.key;
+                else 
+                    return null;
+            }
+        }
+        return null;
+    }
+    public Key prev(Key key) {
+        if (key == null)
+            return null;
+        Node current = root;
+        while (current != null) {
+            int cmp = key.compareTo(current.key);
+            if (cmp < 0)
+                current = current.left;
+            else if (cmp > 0)
+                current = current.right;
+            else {
+                if (current.pred != null)
+                    return current.pred.key;
+                else
+                    return null;
+            }
+        }
+        return null;
     }
     public int getCompares()
     { return Compares; }
@@ -88,19 +129,32 @@ public class BST<Key extends Comparable<Key>, Value>
             return;
         }
         //Search for key, Update value if found; grow table if new.
-        root = put(root, key, val);
+        root = put(root, key, val, null, null);
         assert check();
         //StdOut.println("check: " + check());
     }
-    private Node put(Node x, Key key, Value val)
+    private Node put(Node x, Key key, Value val, Node predecessor, Node successor)
     {
         // Change key's value to val if key in subtree rooted at x.
         // Otherwise, add new node to subtree associating key with val.
-        if (x == null) return new Node(key, val, 1);
+        if (x == null)
+        {
+            Node newNode = new Node(key, val, 1);
+            if (predecessor != null) {
+                predecessor.succ = newNode;
+                newNode.pred = predecessor;
+            }
+            if (successor != null) {
+                newNode.succ = successor;
+                successor.pred = newNode;
+            }
+            return newNode;
+
+        }
         Compares++; 
         int cmp = key.compareTo(x.key);
-        if (cmp < 0) x.left = put(x.left, key, val);
-        else if (cmp > 0) x.right = put(x.right, key, val);
+        if (cmp < 0) x.left = put(x.left, key, val, predecessor, x);
+        else if (cmp > 0) x.right = put(x.right, key, val, x, successor);
         else x.val = val;
         x.N = size(x.left) + size(x.right) + 1;
         return x;
@@ -200,14 +254,36 @@ public class BST<Key extends Comparable<Key>, Value>
 
     public void deleteMin()
     {
-        root = deleteMin(root);
+        root = deleteMin(root, true);
     }
-    private Node deleteMin(Node x)
+    private Node deleteMin(Node x, boolean updatePreAndSucc)
     {
-        if (x.left == null) return x.right;
-        x.left = deleteMin(x.left);
+        if (x == null) return null;
+        if (x.left == null) {
+            if (updatePreAndSucc && x.succ != null)
+                x.succ.pred = null;
+
+            return x.right;
+        }
+        x.left = deleteMin(x.left, updatePreAndSucc);
         x.N = size(x.left) + size(x.right) + 1;
         return x;
+    }
+    public void deleteMax() {
+        root = deleteMax(root);
+    }
+    private Node deleteMax(Node x) {
+        if (x == null)
+            return null;
+        if (x.right == null) {
+            if (x.pred != null)
+                x.pred.succ = null;
+            return x.left;
+        }
+        x.right = deleteMax(x.right);
+        x.N = size(x.left) + size(x.right) + 1;
+        return x;
+
     }
     public void delete(Key key)
     {
@@ -222,12 +298,25 @@ public class BST<Key extends Comparable<Key>, Value>
         else if (cmp > 0) x.right = delete(x.right, key);
         else
         {
-            if (x.right == null) return x.left;
-            if (x.left == null) return x.right;
+            if (x.left == null || x.right == null) {
+                if (x.pred != null)
+                    x.pred.succ = x.succ;
+                if (x.succ != null)
+                    x.succ.pred = x.pred;
+
+                if (x.right == null) return x.left;
+                if (x.left == null) return x.right;
+
+            } else {
+
             Node t = x;
             x = min(t.right); // set x to point to its successor min(t.right) 
-            x.right = deleteMin(t.right); //x.right containing all the keys that are larger than x.key
+            x.right = deleteMin(t.right, false); //x.right containing all the keys that are larger than x.key
             x.left = t.left; //set x.left to t.left.
+            x.pred = t.pred;
+            if (x.pred != null)
+                x.pred.succ = x;
+            }
         }
         x.N = size(x.left) + size(x.right) + 1;
         return x;
@@ -346,7 +435,7 @@ public class BST<Key extends Comparable<Key>, Value>
     {
         String[] a = StdIn.readAllStrings();
 
-        BST<String, Integer> bst = new BST<String, Integer>();
+        ThreadedST<String, Integer> bst = new ThreadedST<String, Integer>();
 
         for (int i = 0; i < a.length; i++)
         {
@@ -361,6 +450,19 @@ public class BST<Key extends Comparable<Key>, Value>
         {
             StdOut.println(k + " " + bst.get(k));
         }
+
+        StdOut.println("Predecessor of D: " + bst.prev("D") + " Expected: 1");
+        bst.deleteMin();
+        StdOut.println("Predecessor of D after deleteMin(): " + bst.prev("D") + " Expected: null");
+
+        StdOut.println();
+        StdOut.println("Successor of S: " + bst.next("S"));
+        bst.deleteMax();
+        StdOut.println("Successor of S after deleteMax(): " + bst.next("S"));
+
+        
+
+
     }
 
 }

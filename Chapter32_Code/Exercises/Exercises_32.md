@@ -86,3 +86,133 @@ where N is the number of internal nodes.
 
 3.2.20 Prove that the running time of the two-argument keys() in a BST with N nodes is at most proportional to the tree height plus the number of keys in the range.
 
+*Answer*: TODO
+
+3.2.21 Add a BST method randomKey() that returns a random key from the symbol table in time proportional to the tree height, in the worst case.
+
+3.2.22 Prove that if a node in a BST has two children, its successor has no left child and its predecessor has no right child.
+
+*Solution*: [Predecessor & Successor](https://algorithms.tutorialhorizon.com/inorder-predecessor-and-successor-in-binary-search-tree/)
+When you do the inorder traversal of a binary tree, the neighbors of given node are called **Predecessor**(the node lies behind of given node) and **Successor** (the node lies ahead of given node).
+
+3.2.23 Is delete() commutative? (Does deleting x, then y give the same result as deleting y, then x?).
+
+*Answer*: No.
+   A
+B     D
+     C
+delete A B and B A is different result.
+
+3.2.24 Prove that no compare-based algorithm can build a BST using fewer than lg(N!)~NlgN compares.
+
+*Answer*: one insert, compares lg1, lg2,... lgN = lg(N!).
+          one insert, ~ lgN, N * lgN ~ NlgN.
+
+
+3.2.25 Write a program PerfectBalance.java that inserts a set of keys into an initially empty BST such that the tree produced is equivalent to binary search, in the sense that the sequence of compares done in the search for any key in the BST is the same as the sequence of compares used by binary search for the same set of keys.
+
+*Hint*: Put the median at the root and recursively build the left and right subtree.
+
+3.2.26 *Exact probabilities*. Find the probability that each of the trees in EXERCISE 3.2.9 is the result of inserting N random distinct elements into an initially empty tree.
+
+3.2.27 *Memory usage*. Compare the memory usage of BST with the memory usage of BinarySearchST and SequentialSearchST for N key-value pairs, under the assumptions described in SECTION 1.4 (see EXERCISE 3.1.21). Do not count the memory for the keys and values themselves, but do count references to them. Then draw a diagram that depicts the precise memory usage of a BST with String keys and Integer values (such as the ones built by FrequencyCounter), and then estimate the
+memory usage (in bytes) for the BST build when FrequencyCounter uses BST for *Tale of Two Cites*.
+
+3.2.28 *Software caching*. Modify BST to keep the most recently accessed Node in an instance variable so that it can be accessed in constant time if the next put() or get() uses the same key (see EXERCISE 3.1.25).
+
+3.2.29 *Binary tree check*. Write a recursive method isBinaryTree() that takes a Node as argument and returns true if the subtree count field N is consistent in the data structure rooted at that node, false otherwise. *Note*: This check also ensures that the data structure has no cycles and is therefore a binary tree(!).
+
+3.2.30 *Order check*. Write a recursive method isOrdered() that takes a Node and two keys min and max as arguments and return true if all the keys in the tree are between min and max; min and max are indeed the smallest and largest keys in the tree, respectively; and the BST ordering property holds for all keys in the tree; false otherwise.
+
+3.2.31 *Equal key check*. Write a method hasNoDuplicates() that takes a Node as argument and returns true if there are no equal keys in the binary tree rooted at the argument node, false otherwise. Assume that the test of the previous exercise has passed.
+
+3.2.32 **Certification**. Write a method isBST() in BST.java that takes a Node as argument and returns true if the argument node is the root of a binary search tree, false otherwise.
+*Hint*: This task is also more difficult than it might seem, because the order in which you call the methods in the previous three exercises is important.
+```
+private boolean isBST()
+{
+    if (!isBinaryTree(root)) return false;
+    if (!isOrdered(root, min(), max())) return false;
+    if (!hasNoDuplicates(root)) return false;
+    return true;
+}
+
+```
+3.2.32 **Subtree count check**. Write a recursive method isSizeConsistent() in BST.java that takes a Node as argument and returns true if the subtree count field N is consistent in the data structure rooted at that node, false otherwise.
+
+3.2.33 **Select/rank check**. Write a method isRankConsistent() in BST.java that checks, for all i from 0 to size()-1, whether i is equal to rank(select(i)) and, for all keys in the BST, whether key is equal to select(rank(key)).
+
+3.2.34 *Threading*. Your goal is to support an extended API ThreadedST that supports the following additional operations in constant time:
+```
+    Key next(Key key)   // key that follows key (null if key is the max)
+    Key prev(Key key)   // key that precedes key (null if key is the min)
+```
+
+To do so, add fields pred and succ to Node that contain links to the predecessor and successor nodes, and modify put(), deleteMin(), deleteMax(), and delete() to maintain these fields.
+
+3.2.35 *Refined analysis*. Refine the mathematical model to better explain the experimental results in the table given in the text. Specifically, show that the average number of compares for a successful search in a tree built from random keys approaches the limit 2 ln N + 2y - 3 = 1.39 lg N - 1.85 as N increases, where y = .57721... is Euler's constant. *Hint*: Referring to the quicksort analysis in SECTION 2.3, use the fact that the integral of 1/x approaches ln N + y.
+
+3.2.36 *Iterator*. Is it possible to write a nonrecursive version of keys() that uses space proportional to the tree height (independent of the number of keys in the range)?
+
+3.2.37 *Level-order traversal*. Write a method printLevel() that takes a Node as argument and prints the keys in the subtree rooted at that node in level order (in order of their distance from the root, with nodes on each level in order from left to right). *Hint*: Use a Queue. 
+
+3.2.38 *Tree drawing*. Add a method draw() to BST that draws BST figures in the style of the text. *Hint*: Use instance variables to hold node coordinates, and use a recursive method to set the values of these variables.
+
+
+## Web Exercises
+
+1. **The great tree-list recursion problem**. A binary search tree and a circular doubly linked list are conceptually built from the same type of nodes - a data field and two references to other nodes. Given a binary search tree, rearrange the references so that it becomes a circular doubly-linked list (in sorted order). Nick Parlante describles this as [one of the neatest recursive pointer problems ever devised](http://cslibrary.stanford.edu/109/TreeListRecursion.html). *Hint*: create a circularly linked list A from the left subtree, a circularly linked list B from the right subtree, and make the root a one node circularly linked list. Them merge the three lists.
+
+
+2. **BST reconstruction**. Given the preorder traversal of a BST (not include null nodes), reconstruct the tree.
+
+*Hint*: Preorder(Root, Left, Right).
+Inorder(Left, Root, Right).
+Postorder(Left, Right, Root).
+
+TODO: ??? no Inorder traversal.
+
+
+3. True or false. Given a BST, let x be a leaf node, and let y be its parent. Then either(i) the key of y is the smallest key in the BST larger than the key of x or (ii) the key of y is the largest key in the BST smaller than the key of x.
+*Answer*: true.
+
+4. True or false. Let x be a BST node. The next largest key (successor of x) can be found by traversing up the tree toward the root until encountering a n ode with a nonempty right subtree (possibly x itself); then finding the minimum key in the right subtree (by following its rightmost path).
+*Answer*: true.
+
+5. **Tree traversal with constant extra memory**. Describe how to perform an inorder tree traversal with constant extra memory (e.g., no function call stack). *Hint*: on the way down the tree, make the child node point back to the parent (and reverse it on the way up the tree).
+
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+6. **Reverse a BST**. Given a standard BST (where each key is greater than the keys in its left subtree and smaller than the keys in its right subtree), design a linear-time algorithm to transform it into a reverse BST (where each key is smaller than the keys in its left subtree and greater than the keys in its right subtree). The resulting tree shape should be symmetric to the original one.
+
+```
+void reverseBST(Node x) 
+{
+    if (x == null) return;
+    if (x.left != null)
+    {
+        reverseBST(x.left);
+    }
+    if (x.right != null)
+    {
+        reverseBST(x.right);
+    }
+    Node t_right = x.right;
+    x.right = x.left;
+    x.left = t_right;
+    
+}
+```
+
+7. **Level-order traversal reconstruction of a BST**. Give a sequence of keys, design a linear-time algorithm to determine whether it is the level-order traversal of some BST (and construct the BST itself).
+
+TODO: 
+
+
+8. **Find two swapped keys in a BST**. Give a BST in which two keys in two nodes have been swapped, find the two keys.
+*Solution*. Consider the inorder traversal a[] of the BST. There are two cases to consider. Suppose there is only one index p such that a[p] > a[p+1]. Then swap the keys a[p] and a[p+1]. Otherwise, there are two indices p and q such a[p] > a[p+1] and a[q] > a[q+1]. Let's assume p < q. Then, swap the keys a[p] and a[q+1].
+
+

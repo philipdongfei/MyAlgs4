@@ -6,9 +6,12 @@ import edu.princeton.cs.algs4.Queue;
 import java.util.Arrays;
 
 
-public class BST<Key extends Comparable<Key>, Value> 
+public class Ex3_2_30 {
+
+public static class BST<Key extends Comparable<Key>, Value> 
 {
     private Node root;     // root of BST
+    private Node cacheItem; // software caching.
     private int Compares = 0;
 
     private class Node
@@ -29,6 +32,48 @@ public class BST<Key extends Comparable<Key>, Value>
             this.TotalOfCompares = NumberOfCompares;
 
         }
+    }
+    public boolean isOrdered()
+    {
+        return isOrdered(root, min(), max());
+    }
+    private boolean isOrdered(Node x, Key min, Key max) {
+        if (x == null) return true;
+        if (x.key.compareTo(min) < 0 || x.key.compareTo(max) > 0)
+            return false;
+        if (x.left != null){
+            if (x.left.key.compareTo(x.key) > 0)
+                return false;
+        }
+        if (x.right != null) {
+            if (x.right.key.compareTo(x.key) < 0)
+                return false;
+        }
+        if (isOrdered(x.left, min, max) == true){
+            if (isOrdered(x.right, min, max) == true)
+                return true;
+            else
+                return false;
+        } else {
+            return false;
+        }
+
+    }
+    public boolean isBinaryTree() {
+        return isBinaryTree(root);
+    }
+    private boolean isBinaryTree(Node x) {
+        int count = size(x.left) + size(x.right) + 1;
+        StdOut.println("size: " + count );
+        StdOut.println("iBT: " + isBinaryTree(x, 1));
+        return x.N == count;
+    }
+    private int isBinaryTree(Node x, int n) {
+        if (x == null) return 0;
+        int count = n;
+        count += isBinaryTree(x.left, 1);
+        count += isBinaryTree(x.right, 1);
+        return count;
     }
     public int getCompares()
     { return Compares; }
@@ -66,6 +111,11 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     public Value get(Key key)
     {
+        // cache hit?
+        if (cacheItem != null && cacheItem.key == key) {
+            StdOut.println("get Cache hit");
+            return cacheItem.val;
+        }
         return get(root, key);
     }
     private Value get(Node x, Key key)
@@ -76,32 +126,42 @@ public class BST<Key extends Comparable<Key>, Value>
       int cmp = key.compareTo(x.key);
       if (cmp < 0) return get(x.left, key);
       else if (cmp > 0) return get(x.right, key);
-      else return x.val;
+      else {
+          cacheItem = x;
+        return x.val;
+
+      }
 
     }
     public void put(Key key, Value val)
     {
-        if (key == null) 
-            throw new IllegalArgumentException("calls put() with a null key");
-        if (val == null) {
-            delete(key);
+        if (cacheItem != null && cacheItem.key == key) {
+            cacheItem.val = val;
+            StdOut.println("put Cache hit");
             return;
         }
         //Search for key, Update value if found; grow table if new.
         root = put(root, key, val);
-        assert check();
-        //StdOut.println("check: " + check());
     }
     private Node put(Node x, Key key, Value val)
     {
         // Change key's value to val if key in subtree rooted at x.
         // Otherwise, add new node to subtree associating key with val.
-        if (x == null) return new Node(key, val, 1);
+        if (x == null) {
+            Node newNode = new Node(key, val, 1);
+            cacheItem = newNode;
+            return newNode;
+
+        }
         Compares++; 
         int cmp = key.compareTo(x.key);
         if (cmp < 0) x.left = put(x.left, key, val);
         else if (cmp > 0) x.right = put(x.right, key, val);
-        else x.val = val;
+        else {
+            x.val = val;
+            cacheItem = x;
+
+        }
         x.N = size(x.left) + size(x.right) + 1;
         return x;
     }
@@ -111,7 +171,10 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     private Node min(Node x)
     {
-        if (x.left == null) return x;
+        if (x.left == null) {
+            cacheItem = x;
+            return x;
+        }
         return min(x.left);
     }
     public Key max()
@@ -120,13 +183,18 @@ public class BST<Key extends Comparable<Key>, Value>
     }
     private Node max(Node x)
     {
-        if (x.right == null) return x;
+        if (x.right == null) 
+        {
+            cacheItem = x;
+            return x;
+        }
         return max(x.right);
     }
     public Key floor(Key key)
     {
         Node x = floor(root, key);
         if (x == null) return null;
+        cacheItem = x;
         return x.key;
     }
     private Node floor(Node x, Key key) 
@@ -138,7 +206,11 @@ public class BST<Key extends Comparable<Key>, Value>
         if (cmp < 0) return floor(x.left, key);
         Node t = floor(x.right, key);
         if (t != null) return t;
-        else           return x;
+        else         
+        {
+            return x;
+
+        }
     }
     public Key floor2(Key key) {
         return floor2(root, key, null);
@@ -155,6 +227,7 @@ public class BST<Key extends Comparable<Key>, Value>
     {
         Node x = ceiling(root, key);
         if (x == null) return null;
+        cacheItem = x;
         return x.key;
     }
     private Node ceiling(Node x, Key key)
@@ -300,48 +373,8 @@ public class BST<Key extends Comparable<Key>, Value>
         int randomIndex = StdRandom.uniform(size());
         return select(randomIndex);
     }
-    private boolean check() {
-        if (!isBST())  StdOut.println("Not in symmetric order");
-        if (!isSizeConsistent()) StdOut.println("Subtree counts not consistent");
-        if (!isRankConsistent()) StdOut.println("Ranks not consistent");
-        return isBST() && isSizeConsistent() && isRankConsistent();
-    }
-    /*
-     * does this binary tree satisfy symmetric order?
-     * Note: this test also ensures that data structure is a binary tree since order is strict
-     */
-    private boolean isBST() {
-        return isBST(root, null, null);
-    }
-    /*
-     * is the tree rooted at x a BST with all keys strictly between min and max
-     * (if min or max is null, treat as empty constraint)
-     * Credit: Bob Dondero's elegant solution.
-     */
-    private boolean isBST(Node x, Key min, Key max) {
-        if (x == null) return true;
-        if (min != null && x.key.compareTo(min) <= 0) return false;
-        if (max != null && x.key.compareTo(max) >= 0) return false;
-        return isBST(x.left, min, x.key) && isBST(x.right, x.key, max);
-    }
-    // are the size fields correct?
-    private boolean isSizeConsistent()
-    { return isSizeConsistent(root); }
-    private boolean isSizeConsistent(Node x) {
-        if (x == null) return true;
-        if (x.N != size(x.left) + size(x.right) + 1) return false;
-        return isSizeConsistent(x.left) && isSizeConsistent(x.right);
-    }
 
-    // check that ranks are consistent;
-    private boolean isRankConsistent() {
-        for (int i = 0; i < size(); i++)
-            if (i != rank(select(i))) return false;
-        for (Key key: keys())
-            if (key.compareTo(select(rank(key))) != 0) return false;
-        return true;
-    }
-
+}
     public static void main(String[] args) 
     {
         String[] a = StdIn.readAllStrings();
@@ -356,6 +389,8 @@ public class BST<Key extends Comparable<Key>, Value>
         StdOut.println("Height: " + bst.height());
         StdOut.println("avgCompres: "+bst.avgComparesRecursive());
         StdOut.println("randomKey: "+bst.randomKey());
+        StdOut.println("isBinaryTree: " + bst.isBinaryTree());
+        StdOut.println("isOrdered: " + bst.isOrdered());
         //bst.print();
         for (String k : bst.keys("D", "T"))
         {
