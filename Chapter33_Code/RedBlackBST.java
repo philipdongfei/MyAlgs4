@@ -91,4 +91,60 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         return h;
     }
 
+    // the same of BST
+    public Key min()
+    {
+        return min(root).key;
+    }
+
+    private Node min(Node x)
+    {
+        if (x.left == null) return x;
+        return min(x.left);
+    }
+    public Key floor(Key key)
+    {
+        Node x = floor(root, key);
+        if (x == null) return null;
+        return x.key;
+    }
+    private Node floor(Node x, Key key)
+    {
+        if (x == null) return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0) return x;
+        if (cmp < 0) return floor(x.left, key);
+        Node t = floor(x.right, key);
+        if (t != null) return t;
+        else           return x;
+    }
+    public Key select(int k)
+    {
+        return select(root, k).key;
+    }
+    private Node select(Node x, int k)
+    {
+        // Return Node containing key of rank k
+        if (x == null) return null;
+        int t = size(x.left);
+        if (t > k) return select(x.left, k);
+        else if (t < k) return select(x.right, k-t-1);
+        else        return x;
+    }
+    public int rank(Key key)
+    {
+        return rank(key, root);
+    }
+    private int rank(Key key, Node x)
+    {
+        // Return number of keys less than x.key in the subtree rooted at x.
+        if (x == null) return 0;
+        int cmp = key.compareTo(x.key);
+        if  (cmp < 0) return rank(key, x.left);
+        else if (cmp > 0) return 1 + size(x.left) + rank(key, x.right);
+        else          return size(x.left);
+    }
+
+    ///
+    
 }
