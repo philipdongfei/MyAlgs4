@@ -60,6 +60,9 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
         h.right.color = BLACK;
     }
 
+    public int size() {
+        return size(root);
+    }
     private int size(Node x)
     {
         if (x == null) return 0;
@@ -101,6 +104,15 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
     {
         if (x.left == null) return x;
         return min(x.left);
+    }
+    public Key max()
+    {
+        return max(root).key;
+    }
+    private Node max(Node x)
+    {
+        if (x.right == null) return x;
+        return max(x.right);
     }
     public Key floor(Key key)
     {
