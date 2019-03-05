@@ -60,6 +60,27 @@ TODO:
 
 *Answer*: 5 1 10 15 6 0.
 
+3.3.23 *2-3 trees without balance restriction*. Develop an implementation of the basic symbol-table API that uses 2-3 trees that are not necessarily balanced as the underlying data structure. Allow 3-nodes to lean either way. Hook the new node onto the bottom with a black link when inserting into a 3-node at the bottom. Run experiments to develop a hypothesis estimating the average path length in a tree build from N random insertions.
+
+3.3.24 *Worst case for red-black BSTs*. Show how to construct a red-black BST demonstrating that, in the worst case, almost all the paths from the root to a null link in a red-black BST of N nodes are a length 2 lg N.
+
+*Answer*: insert order: root, left, right, left.left, right.left, left.right, right.right....etc.
+
+3.3.25 *Top-down 2-3-4 trees*. Develop an implementation of the basic symbol-table API that uses balanced 2-3-4 trees as the underlying data structure, using the red-black representation and the insertion method described in the text, where 4-nodes are split by flipping colors on the way down the search path and balancing on the way up.
+
+3.3.26 *Single top-down pass*. Develop a modified version of your solution to EXERCISE 3.3.25 that does not use recursion. Complete all the work splitting and balancing 4-nodes (and balanceing 3-nodes) on the way down the tree, finishing with an insertion at the bottom.
+
+TODO:
+
+3.3.27 *Allow right-leaning red links*. Develop a modified version of your solution to EXERCISE 3.3.25 that allows right-leaning red links in the tree.
+
+3.3.28 *Bottom-up 2-3-4 trees*. Develop an implementation of the basic symbol-table API that uses balanced 2-3-4 trees as the underlying data structure, using the red-black representation and a bottom-up insertion method based on the same recursive approach as ALGORITHM 3.4. Your insertion method should split only the sequence of 4-nodes (if any) on the bottom of the search path.
+
+
+
+
+
+
 
 
 
