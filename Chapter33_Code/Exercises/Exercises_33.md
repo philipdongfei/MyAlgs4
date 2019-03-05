@@ -56,5 +56,10 @@ TODO:
 
 3.3.21 Create a test client TestRB.java, based on your solution to EXERCISE 3.2.10.
 
+3.3.22 Find a sequence of keys to insert into a BST and into a red-black BST such that the height of the BST is less than the height of the red-black BST, or prove that no such sequence is possible.
+
+*Answer*: 5 1 10 15 6 0.
+
+
 
 
