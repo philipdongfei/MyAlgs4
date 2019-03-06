@@ -90,6 +90,8 @@ TODO:
 
 3.3.33 **Certification**. Add to RedBlackBST.java a method is23() to check that no node is connected two red links and that there are no right-leaning red links. Add a method isBalanced() to check that all paths from the root to a null link have the same number of black links. Combine these methods with isBST() to create a method isRedBlackBST() that checks that the tree is a BST and that it satisfies these two conditions.
 
+3.3.34 *All 2-3 tree*. Write code to generate all structurally different 2-3 trees of height 2, 3, and 4. There are 2,7,and 122 such trees, respectively. (Hint: Use a symbol table)
+
 
 
 

@@ -79,8 +79,8 @@ public class TestRedBlackBST{
 
         StdOut.println("After adding back n keys");
         StdOut.println("------------------------");
-        for (int i = 0; i < keys.length; i++)
-            st.put(keys[i], i);
+        for (int i = 0; i < a.length; i++)
+            st.put(a[i], i);
         for (String s : st.keys())
             StdOut.println(s + " " + st.get(s));
         StdOut.println();
