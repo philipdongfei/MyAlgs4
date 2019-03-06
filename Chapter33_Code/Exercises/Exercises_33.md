@@ -76,6 +76,22 @@ TODO:
 
 3.3.28 *Bottom-up 2-3-4 trees*. Develop an implementation of the basic symbol-table API that uses balanced 2-3-4 trees as the underlying data structure, using the red-black representation and a bottom-up insertion method based on the same recursive approach as ALGORITHM 3.4. Your insertion method should split only the sequence of 4-nodes (if any) on the bottom of the search path.
 
+3.3.29 *Optimal storage*. Modify RedBlackBST so that it does not use any extra storage for the color bit, based on the following trick: To color a node red, swap its two links. Then, to test whether a node is red, test whether its left child is larger than its right child. You have to modify the compares to accommodate the possible link swap, and this trick replaces bit compares with key compares that are presumably more expensive, but it shows that the bit in the nodes
+can be eliminated, if necessary.
+
+3.3.30 *Software caching*. Modify RedBlackBST to keep the most recently accessed Node in an instance variable so that it can be accessed in constant time if the next put() or get() uses the same key (see EXERCISES 3.1.25).
+
+3.3.31 *Tree drawing*. Add a method draw() to RedBlackBST that draws red-black BST figures in the style of the text (see EXERCISE 3.2.38)
+
+3.3.32 *AVL trees*. An AVL tree is a BST where the height of every node and that of its sibling differ by at most 1. (The oldest balanced tree algorithms are based on using rotations to maintain height balance in AVL trees.) Show that coloring red links that go from nodes of even height to nodes of odd height in an AVL tree gives a (perfectly balanced) 2-3-4 tree, where red links are not necessarilyleft-leaning. *Extra credit*: Develop an implementation of the symbol-table API
+that uses this as the underlying data structure. One approach is to keep a height field in each node, using rotations after the recursive calls to adjust the height as necessary; another is to use the red-black representation and use methods like moveRedLeft() and moveRedRight() in EXERCISE 3.3.39 and EXERCISE 3.3.40.
+
+TODO:
+
+3.3.33 **Certification**. Add to RedBlackBST.java a method is23() to check that no node is connected two red links and that there are no right-leaning red links. Add a method isBalanced() to check that all paths from the root to a null link have the same number of black links. Combine these methods with isBST() to create a method isRedBlackBST() that checks that the tree is a BST and that it satisfies these two conditions.
+
+
+
 
 
 
