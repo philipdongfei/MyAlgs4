@@ -92,6 +92,57 @@ TODO:
 
 3.3.34 *All 2-3 tree*. Write code to generate all structurally different 2-3 trees of height 2, 3, and 4. There are 2,7,and 122 such trees, respectively. (Hint: Use a symbol table)
 
+TODO:
+
+3.3.35 *2-3 trees*. Write a program TwoThreeST.java that uses two node types to implement 2-3 search trees directly.
+
+TODO:
+
+3.3.36 *2-3-4-5-6-7-8 trees*. Describe algorithms for search and insertion in balanced 2-3-4-5-6-7-8 search trees.
+
+TODO:
+
+3.3.37 *Memoryless*. Show that red-black BSTs are not memoryless: for example, if you insert a key that is smaller than all the keys in the tree and then immediately delete the minimum, you may get a different tree.
+
+*Answer*: 
+
+3.3.38 *Fundamental theorem of rotations*. Show that any BST can be transformed into any other BST on the same set of keys by a sequence of left and right rotation.
+
+*Solution sketch*: rotate the smallest key in the first BST to the root along the leftward spine; then recur with the resulting right subtree until you have a tree of height N (with every left link null). Do the same with the second BST. Remark: it is unknown whether there exists a polynomial-time algorithm for determining the minimum number of rotations needed to transform one BST into the other (even though the rotation distance is at most 2N-6 for BSTs with at least 11
+nodes).
+
+3.3.39 **Delete the minimum**. Implement the deleteMin() operation for RedBlackBST.java by maintaining the correspondence with the transformations given in the text for moving down the left spine of the tree while maintaining the invariant that current node is not a 2-node.
+
+3.3.40 **Delete the maximum**. Implement the deleteMax() operation for RedBlackBST.java. Note that the transformations involved differ slightly from those in the previous exercise because red links are left-leaning.
+
+3.3.41. **Delete**. Implement the delete() operation for RedBlackBST.java, combining the methods of the previous two exercises with the delete() operation for BSTs.
+
+##WEB EXERCISES
+1. Given a sorted sequence of keys, describe how to construct a red-black BST that contains them in linear time.
+
+2. Supose that you do a search in a red-black BST that terminates unsuccessfully after following 20 links from the root. Fill in the blanks below with the best (integer) bounds that you can infer from this fact about any unsuccessful search
+- Must follow at least    links from the root
+- Need follow at most     links from the root
+
+3. With 1 bit per node we can represent 2-, 3-, and 4-nodes. How many bits would we need to represent 5-,6-,7-,and 8-nodes.
+
+2 bits
+
+4. **Substring reversing**. Given a string of length N, support the following operations: select(i) = get the ith character, and reverse(i, j) = reverse the substring from i to j.
+
+*Solution sketch*. Maintain the string in a balanced search tree, where each node records the subtree count and a reverse bit (that interchanges the role of the left and right children if there are an odd number of reverse bits on the path from the root to the node). To implement select(i), do a binary search starting at the root, using the subtree counts and reverse bits. To implement reverse(i, j), split the BST at select(i) and select(j) to from three BSTs,
+reverse the bit of the middle BST, and join them back together using a join operation. Maintain the subtree counts and reverse bits when rotating.
+
+5. **Memory of a BST**. What is the memory usage of a BST and RedBlackBST and TreeMap?
+
+*Problem*: don't use classmexer.jar
+
+6. **Randomized BST**. Program RandomizedBST.java implements a randomized BST, including deletion. Expected O(log N) performance per operations. Expectation depends only on the randomness in the algorithm, it does not depend on the input distribution. Must store subtree count field in each node; generates O(log N) random numbers per insert.
+
+*Proposition*: Tree has same distribution as if the keys were inserted in random order.
+
+
+
 
 
 
