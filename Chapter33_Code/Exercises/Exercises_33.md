@@ -142,8 +142,37 @@ reverse the bit of the middle BST, and join them back together using a join oper
 *Proposition*: Tree has same distribution as if the keys were inserted in random order.
 
 
+7. **Join**. Write a function that takes two randomized BSTs as input and returns a third randomized BST which contains the union of the elements in the two BSTs. Assume no duplicates.
 
+8. **Splay BST**. Program SplayBST.java implements a splay tree.
 
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
+9. Randomized queue. Implement a RandomizedQueue.java so that all operations take logarithmic time in the worst case.
+
+10. **Red-black** BST with many updates. When performing a put() with a key that is already in a red-black BST, our RedBlackBST.java performs many unnecessary calls to isRed() and size(). Optimize the code so that these calls are skipped in such situations.
 
 
 
