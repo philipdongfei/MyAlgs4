@@ -27,3 +27,15 @@
 ## Chapter 2.5
 - [Kendall tau distance](https://en.wikipedia.org/wiki/Kendall_tau_distance)
 - [Bochner's theorem](https://en.wikipedia.org/wiki/Bochner%27s_theorem)
+
+## Chapter 3.1
+
+## Chapter 3.2
+
+- [The great tree-list recursion problem](http://cslibrary.stanford.edu/109/TreeListRecursion.html)
+-
+
+## Chapter 3.3
+
+- Randomed BST
+- Splay tree
