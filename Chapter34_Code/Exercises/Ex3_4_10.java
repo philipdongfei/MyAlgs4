@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.Queue;
 //import edu.princeton.cs.algs4.SequentialSearchST;
 import java.util.Arrays;
 
-public class Ex3_4_1 {
+public class Ex3_4_10 {
     public static class SeparateChainingHashST<Key, Value>
     {
         private int N;      // number of key-value pairs
@@ -23,7 +23,7 @@ public class Ex3_4_1 {
                 st[i] = new SequentialSearchST();
     
         }
-        private int hash(Key key)
+        public int hash(Key key)
         {
             return (key.hashCode() & 0x7fffffff) % M;
             //return (key.hashCode() % M);
@@ -49,14 +49,26 @@ public class Ex3_4_1 {
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
 
+        ///M = 16
+        StdOut.println("M = 16");
         SeparateChainingHashST<String, Integer> st = 
-            new SeparateChainingHashST<String, Integer>(5);
+            new SeparateChainingHashST<String, Integer>(16);
         for (int i = 0; i < a.length; i++)
         {
             st.put(a[i], i);
         }
         for (String key : st.keys())
-            StdOut.println(key + " " + st.get(key));
+            StdOut.println(key + " " + st.hash(key) + " " + st.get(key));
+        ///M = 10
+        StdOut.println("M = 10");
+        SeparateChainingHashST<String, Integer> st1 = 
+            new SeparateChainingHashST<String, Integer>(10);
+        for (int i = 0; i < a.length; i++)
+        {
+            st1.put(a[i], i);
+        }
+        for (String key : st1.keys())
+            StdOut.println(key + " " + st1.hash(key) + " " + st1.get(key));
     }
 
 }

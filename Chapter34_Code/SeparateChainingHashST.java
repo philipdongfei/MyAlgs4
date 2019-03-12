@@ -8,12 +8,13 @@ import java.util.Arrays;
 
 public class SeparateChainingHashST<Key, Value>
 {
+    private static final int INIT_CAPACITY = 4;
     private int N;      // number of key-value pairs
     private int M;      // hash table size
     private SequentialSearchST<Key, Value>[] st;  // array of ST objects
 
     public SeparateChainingHashST()
-    { this(997); }
+    { this(INIT_CAPACITY); }
     public SeparateChainingHashST(int M)
     {
         // Create M linked lists.
@@ -23,18 +24,65 @@ public class SeparateChainingHashST<Key, Value>
             st[i] = new SequentialSearchST();
 
     }
+    private void resize(int chains) {
+        SeparateChainingHashST<Key, Value> temp = new 
+            SeparateChainingHashST<Key, Value>(chains);
+        for (int i = 0; i < M; i++) {
+            for (Key key : st[i].keys()) {
+                temp.put(key, st[i].get(key));
+            }
+        }
+        this.M = temp.M;
+        this.N = temp.N;
+        this.st = temp.st;
+    }
     private int hash(Key key)
     {
         return (key.hashCode() & 0x7fffffff) % M;
     }
+    public int size() {
+        return N;
+    }
+    public boolean isEmpty(){
+        return size() == 0;
+    }
+    public boolean contains(Key key) {
+        if (key == null) throw new IllegalArgumentException(
+                "argument to contains() is null"
+                );
+        return get(key) != null;
+    }
+
     public Value get(Key key)
     {
-        return (Value) st[hash(key)].get(key);
+        if (key == null) throw new IllegalArgumentException(
+                "argument to get() is null"
+                );
+        int i = hash(key);
+        return (Value) st[i].get(key);
     }
     public void put(Key key, Value val)
     {
-        st[hash(key)].put(key, val);
+        if (key == null) throw new IllegalArgumentException("first argument to put() is null");
+        if (val == null) {
+            delete(key);
+            return;
+        }
+        if (N >= 10*M) resize(2*M);
+        int i = hash(key);
+        if (!st[i].contains(key)) N++;
+        st[i].put(key, val);
     }
+    public void delete(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to delete is null");
+        int i = hash(key);
+        if (st[i].contains(key)) N--;
+        st[i].delete(key);
+
+        // halve table size if average length of list <= 2
+        if (M > INIT_CAPACITY && N <= 2*M) resize(M/2);
+    }
+
     public Iterable<Key> keys()
     {
         Queue<Key> queue = new Queue<Key>();
@@ -43,5 +91,15 @@ public class SeparateChainingHashST<Key, Value>
                 queue.enqueue(key);
         }
         return queue;
+    }
+    public static void main(String[] args) {
+        SeparateChainingHashST<String, Integer> st = 
+            new SeparateChainingHashST<String, Integer>();
+        for (int i = 0; !StdIn.isEmpty(); i++) {
+            String key = StdIn.readString();
+            st.put(key, i);
+        }
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.get(s));
     }
 }

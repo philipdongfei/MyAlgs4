@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.Queue;
 //import edu.princeton.cs.algs4.SequentialSearchST;
 import java.util.Arrays;
 
-public class Ex3_4_1 {
+public class Ex3_4_3 {
     public static class SeparateChainingHashST<Key, Value>
     {
         private int N;      // number of key-value pairs
@@ -21,12 +21,19 @@ public class Ex3_4_1 {
             st = (SequentialSearchST<Key, Value>[])new SequentialSearchST[M];
             for (int i = 0; i < M; i++)
                 st[i] = new SequentialSearchST();
+            N = 0;
     
+        }
+        public int size() {
+            return N;
+        }
+        public boolean isEmpty() {
+            return size() == 0;
         }
         private int hash(Key key)
         {
             return (key.hashCode() & 0x7fffffff) % M;
-            //return (key.hashCode() % M);
+            //return (11 key) % M;
         }
         public Value get(Key key)
         {
@@ -34,7 +41,30 @@ public class Ex3_4_1 {
         }
         public void put(Key key, Value val)
         {
-            st[hash(key)].put(key, val);
+            int i = hash(key);
+            if (!st[i].contains(key))
+                N++;
+            st[i].put(key, val, N);
+        }
+        public void deleteNodes(int k) {
+            if (k < 0)
+                throw new IllegalArgumentException("K cannot be negative");
+            if (N == 0)
+                return;
+
+            for (Key key : keys())
+            {
+                if (st[hash(key)].greater(key, k))
+                {
+                    st[hash(key)].delete(key);
+                    N--;
+
+                }
+            }
+
+        }
+        public void delete(Key key) {
+
         }
         public Iterable<Key> keys()
         {
@@ -57,6 +87,15 @@ public class Ex3_4_1 {
         }
         for (String key : st.keys())
             StdOut.println(key + " " + st.get(key));
+        int[] kVal = {8,7,6,4,3,2,0};
+        for (int k : kVal) {
+            StdOut.println("delete k: " + k);
+            st.deleteNodes(k);
+            StdOut.println("size: " + st.size());
+            for (String key : st.keys())
+                StdOut.println(key + " " + st.get(key));
+            StdOut.println();
+        }
     }
 
 }
