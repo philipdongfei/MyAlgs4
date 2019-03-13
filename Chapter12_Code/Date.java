@@ -3,6 +3,7 @@ public class Date
     private final int month;
     private final int day;
     private final int year;
+    private final int R = 31;
 
     public Date(int m, int d, int y)
     {
@@ -30,6 +31,13 @@ public class Date
         if (this.month != that.month) return false;
         if (this.year != that.year)   return false;
         return true;
+    }
+    public int hashCode() {
+        int hash = 17;
+        hash = 31*hash + month;
+        hash = 31*hash + day;
+        hash = 31*hash + year;
+        return hash;
     }
 }
 
