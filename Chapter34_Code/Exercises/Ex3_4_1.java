@@ -25,7 +25,10 @@ public class Ex3_4_1 {
         }
         private int hash(Key key)
         {
-            return (key.hashCode() & 0x7fffffff) % M;
+            int hash = key.hashCode() & 0x7fffffff;
+            hash = (11 * hash) & 0x7fffffff; 
+            return hash % M;
+            //return (key.hashCode() & 0x7fffffff) % M;
             //return (key.hashCode() % M);
         }
         public Value get(Key key)

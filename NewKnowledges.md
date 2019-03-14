@@ -39,3 +39,8 @@
 
 - Randomed BST
 - Splay tree
+
+## chapter 3.4
+
+- [Chi-square statistic](https://en.wikipedia.org/wiki/Chi-squared_test)
+-
