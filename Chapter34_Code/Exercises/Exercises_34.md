@@ -132,6 +132,90 @@ Explain why you think the designers chose this implementation and then why you t
 
 
 
+## WEB EXERCISES
+
+1. Suppose we wish to repeatedly search a linked list of length N elements, each of which contains a very long string key. How might we take advantage of the hash value when searching the list for an element with a given key?
+
+*Solution*: precompute the hash value of each string in the list. When searching for a key t, compare its hash value to the hash value of a string s. Only compare the string s and t if their hash values are equal.
+
+2. Implement hashcode() and equals() for the following data type. Be careful since it is likely that many of the points will have small integers for x, y, and z.
+```
+public class Point2D {
+    private final int x, y;
+    ...
+}
+```
+*Answer*: one solution would to make the first 16 bits of the hash code be the xor of the first 16 bits of x and the last 16 bits of y, and make the last 16 bits of the hash code be the xor of the last 16 bits of x and the first 16 bits of y. Thus, if x and y are only 16 bits or less, the hashCode values will be different for different points.
+
+3. What is wrong with the following implementation of equals() for points?
+```
+public boolean equals(Point q){
+    return x == q.x && y == q.y;
+}
+```
+Wrong signature for equals(). It is an overloaded version of equals(), but it does not override the one inherited from Object. This will break any code that uses Point with HashSet. This is one of the more common gotchas (along with neglecting to override hashCode() when you override equals()).
+
+4. What will the following code fragment print?
+```
+import java.util.HashMap;
+import java.util.GregorianCalendar;
+
+HashMap st = new HashMap();
+GregorianCalendar x = new GregorianCalendar(1969, 21, 7);
+GregorianCalendar y = new GregorianCalendar(1969, 4, 12);
+GregorianCalendar z = new GregorianCalendar(1969, 21, 7);
+st.put(x, "human in space");
+x.set(1961, 4, 12);
+System.out.println(st.get(x));
+System.out.println(st.get(y));
+System.out.println(st.get(z));
+
+```
+It will print false, false, false. The date 7/21/1969 is inserted onto the hash table, but is subsequently changed to 4/12/1961 while the value is in the hash table. Thus, although the date 4/12/1961 is in the hash table, when searching for x or y, we will look in the wrong bucket and won't find it. We won't find z either since there the date 7/21/1969 is no longer a key in the hash table.
+This illustrates why it is good practice to use only immutable types for keys in hash tables. The Java designers probably should have made GregorianCalendar an immutable object to avoid the potential for problems like this.
+
+5. **Password checker**. Write a program that reads in a string from the command line and a dictionary of words from standard input, and checks whether is a "good" password. Here, assume "good" means that it (i) is at least 8 characters long, (ii) is not a word in the dictionary, (iii) is not a word in the dictionary followed by a digit 0-9(e.g., hello5), (iv) is not two words separated by a digit(e.g., hello2word).
+
+6. **Reverse password checker**. Modify the previous problem so that (ii)-(v) are also satisfied for reverses of words in the dictionary (e.g., olleh and olleh2world). Clever solution: insert each word and its reverse into the symbol table.
+
+7. **Mirroring a web site**. Use hashing to figure out which files need to be updated to mirror web site.
+
+*Solution*: check whether is the different of the file's hashcode.
+
+8. **Birthday paradox**. Suppose your music jukebox plays songs from your library of 4000 songs at random (with replacement). How long do you expect to wait until you hear a song played for the second time?
+
+
+9. **Bloom filter**. Support insert, exists. Use less space by allowing some false positives. Application: ISP caches web pages (especially large images, video); client requests URL; server needs to quickly determine wheter page is in the cache. 
+*Solution*: maintain one bit array of size N = 8M (M = #elements to insert). Choose k independent hash functions from 0 to N-1.
+
+10. **CRC-32**. Another application of hashing is computing checksums to verify the integerity of some data file. To compute the checksum of a strings,
+```
+import java.util.zip.CRC32;
+
+CRC32 checksum = new CRC32();
+checksum.update(s.getBytes());
+System.out.println(checksum.getValue());
+
+```
+
+11. **Perfect hashing**. See also GNU utility gperf.
+
+12. **Cryptographically secure hash functions**. SHA-1 and MD5. Can compute it by converting string to bytes, or when reading in bytes 1 at a time. Program OneWay.java illustrates how to use a java.secruity.MessageDigest Object.
+
+13. **Fingerprinting**. Hash Function (e.g., MD5 and SHA-1) are also useful for verifying the integrity of a file. Hash the file to a short string, transmit the string with the file, if the hash of the transmitted file differs from the hash value then the data was corrupted.
+
+14. **Cuckoo hashing**. Maximum load with uniform hashing is log n / log log n. Improve to log log n by choosing least loaded of two. (Only improves to log log n / log d if choose least loaded of d.) cuckoo hasing achieves constant average time insertion and constant worst-case search: each item has two possible slots. Put in either of two available slots if empty; if not, eject another item in one of the two slots and move to its other slot (and recur). "The name derives from the
+    behavior of some species of cuckoo, where the mother bird pushes eggs out of another bird's nest to lay her own." Rehash everything if you get into a relocation cycle.
+
+15. **Covariant equals**. CovariantPhoneNumber.java implements a covariant equals method.
+
+16. **Last come, first served linear probing**. Modify LinearProbingHashST.java so that each item is inserted where it arrives; if the cell is already occupied, then that item moves one entry to the right (where the rule is repeated).
+
+17. **Robin Hood linear probing**. Modify LinearProbingHashST.java so that when an item probes a cell that is already occupied, the item (of the two) with the larger current displacement gets the cell and the other item is moved one entry to the right (where the rule is repeated).
+
+18. **Indifference graph**. Given V points on the real line, its indifference graph is the graph formed by adding a vertex for each point and an edge between two vertices if and only if the distance between the two corresponding points is strictly less than one. Design an algorithm (under the uniform hashing assumption) to compute the indifference graph of a set of V points in time proportional to V + E.
+
+*Solution*. Round each real number down to the nearest integer and use a hash table to identify all points that round to the same integer. Now, for each point p, use the hash table to find all points that round to an integer within one of the rounded value of p and add an edge(p,q) for each pair of points whose distance is less than one. See this reference for an explanation as to why this takes linear time.
 
 
 
