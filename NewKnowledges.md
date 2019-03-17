@@ -44,4 +44,6 @@
 
 - [Chi-square statistic](https://en.wikipedia.org/wiki/Chi-squared_test)
 - [Birthday paradox](https://en.wikipedia.org/wiki/Birthday_paradox)
+- [Cuckoo hashing](https://en.wikipedia.org/wiki/Cuckoo_hashing)
+- [Indifference graph](https://en.wikipedia.org/wiki/Indifference_graph)
 -
