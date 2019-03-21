@@ -1,179 +1,214 @@
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.StdOut;
 
 
 public class Ex3_5_9 {
 
     public static class BinarySearchST<Key extends Comparable<Key>, Value>
     {
-        private static final int INIT_CAPACITY = 2;
-        private Key[] keys;
-        private Value[] vals;
-        private int N;
-        private int Compares_N = 0;
-    
-        public BinarySearchST(){
-            this(INIT_CAPACITY);
-        }
-    
-        public BinarySearchST(int capacity) 
-        {
-            // See Algorithm 1.1 for standard array-resizing code.
-            keys = (Key[]) new Comparable[capacity];
-            vals = (Value[]) new Object[capacity];
-            Compares_N  = 0;
-        }
-        public int getCompares(){
-            return Compares_N;
-        }
-    
-        public int size() 
-        { return N; }
-        public int size(Key lo, Key hi) {
-            if (lo.compareTo(hi) > 0) return 0;
-            if (contains(hi)) return rank(hi) - rank(lo) + 1;
-            else              return rank(hi) - rank(lo);
-        }
-        public boolean isEmpty()
-        { return N == 0; }
-    
-        public Value get(Key key)
-        {
-            if (isEmpty()) return null;
-            int i = rank(key);
-            Compares_N++;
-            if (i < N && keys[i].compareTo(key) == 0) return vals[i];
-            else                                      return null;
-        }
-        public int rank(Key key)
-        {
-            int lo = 0, hi = N-1;
-            while (lo <= hi) 
-            {
-                int mid = lo + (hi - lo)/2;
-                Compares_N++;
-                int cmp = key.compareTo(keys[mid]);
-                if (cmp < 0) hi = mid - 1;
-                else if(cmp > 0) lo = mid + 1;
-                else return mid;
+        private class Node {
+            private Key key;
+            private Value val;
+
+            private Node left;
+            private Node right;
+
+            private int Size;
+
+            public Node(Key key, Value val, int Size){
+                this.key = key;
+                this.val = val;
+                this.Size = Size;
             }
-            return lo;
         }
-        public void put(Key key, Value val)
-        { // Search for key. Update value if found; grow table if new.
-            int i = rank(key);
-            Compares_N++;
-            if (i < N && keys[i].compareTo(key) == 0)
-            {
-                vals[i] = val;
-                return;
-            }
-            if (N == keys.length) resize(2*keys.length);
-            for (int j = N; j > i; j--)
-            {
-                keys[j] = keys[j-1];
-                vals[j] = vals[j-1];
-            }
-            keys[i] = key; 
-            vals[i] = val;
-            N++;
+        private Node root;
+
+        public int size(){
+            return size(root);
         }
-        public Key delete(Key key)
-        {
-            int i = rank(key);
-            Compares_N++;
-            if (i < N && keys[i].compareTo(key) == 0)
-            { // the key is found.
-                Key k = keys[i];
-                for (int j = i; j < N-2; j++)
-                {
-                    keys[j] = keys[j+1];
-                    vals[j] = vals[j+1];
-                }
-                keys[N-1] = null;
-                vals[N-1] = null;
-                N--;
-                if (N > 0 && N == keys.length/4) resize(keys.length/2);
-                return k;
-            }
-            return null;
-    
+        private int size(Node n) {
+            if (n == null)
+                return 0;
+            return n.Size;
         }
-        public Key min()
-        {
-            if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
-            return keys[0]; 
+        public boolean isEmpty(){
+            return size(root) == 0;
         }
-        public Key max()
-        {
-            if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
-            return keys[N-1];
+
+        public Value get(Key key){
+            if (key == null)
+                return null;
+            return get(root, key);
         }
-        public Key select(int k)
-        {
-            return keys[k];
-        }
-        public Key ceiling(Key key)
-        {
-            int i = rank(key);
-            return keys[i];
-        }
-        public Key floor(Key key)
-        {
-            int i = rank(key);
-            Compares_N++;
-            if (i < N && keys[i].compareTo(key) == 0)
-                return keys[i];
+        private Value get(Node n, Key key){
+            if (n == null)
+                return null;
+            int compare = key.compareTo(n.key);
+            if (compare < 0)
+                return get(n.left, key);
+            else if (compare > 0)
+                return get(n.right, key);
             else
-                return keys[i-1];
-    
+                return n.val;
         }
-        public boolean contains(Key key) 
-        {
+        public boolean contains(Key key){
+            if (key == null)
+                throw new IllegalArgumentException("Argument key cannot be null");
             return get(key) != null;
         }
-        void deleteMin()
-        {
-            if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
-            delete(min());
-        }
-        void deleteMax()
-        {
-            if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
-            delete(max());
-        }
-        private void resize(int capacity) {
-            assert capacity >= N;
-            Key[] tempk = (Key[]) new Comparable[capacity];
-            Value[] tempv = (Value[]) new Object[capacity];
-            for (int i = 0; i < N; i++) {
-                tempk[i] = keys[i];
-                tempv[i] = vals[i];
+        public void put(Key key, Value val) {
+            if (key == null)
+                return ;
+            if (val == null){
+                delete(key);
+                return;
             }
-            //for (int j = N; j < capacity; j++)
-            //    tempk[j] = j;
-            vals = tempv;
-            keys = tempk;
+            root = put(root, key, val);
         }
-        public Iterable<Key> keys() {
+        private Node put(Node n, Key key, Value val){
+            if (n == null)
+                return new Node(key, val, 1);
+            int compare = key.compareTo(n.key);
+
+            if (compare <= 0)
+                n.left = put(n.left, key, val);
+            else 
+                n.right = put(n.right, key, val);
+            n.Size = size(n.left) + 1 + size(n.right);
+            return n;
+        }
+        public Key min(){
+            if (root == null)
+                throw new NoSuchElementException("Empty binary search tree");
+            return min(root).key;
+        }
+        private Node min(Node n){
+            if (n.left == null)
+                return n;
+            return min(n.left);
+        }
+        public Key max(){
+            if (root == null)
+                throw new NoSuchElementException("Empty binary search tree");
+            return max(root).key;
+        }
+        private Node max(Node n){
+            if (n.right == null)
+                return n;
+            return max(n.right);
+        }
+        public void deleteMin(){
+            if (root == null)
+                return;
+            Key minkey = min();
+            while (contains(minkey))
+                root = deleteMin(root);
+        }
+        private Node deleteMin(Node n){
+            if (n.left == null)
+                return n.right;
+            n.left = deleteMin(n.left);
+            n.Size = size(n.left) + 1 + size(n.right);
+            return n;
+        }
+        public void delete(Key key){
+            if (isEmpty())
+                return;
+            while(contains(key)){
+                root = delete(root, key);
+            }
+        }
+        private Node delete(Node n, Key key){
+            int compare = key.compareTo(n.key);
+            if (compare < 0)
+                n.left = delete(n.left, key);
+            else if (compare > 0)
+                n.right = delete(n.right, key);
+            else {
+                if (n.left == null)
+                    return n.right;
+                else if (n.right == null)
+                    return n.left;
+                else{
+                    Node aux = n;
+                    n = min(aux.right);
+                    n.right = deleteMin(aux.right);
+                    n.left = aux.left;
+                }
+            }
+            n.Size = size(n.left) + 1 + size(n.right);
+            return n;
+        }
+        public Iterable<Key> keys(){
             return keys(min(), max());
         }
-    
-        public Iterable<Key> keys(Key lo, Key hi)
-        {
-            if (lo == null) throw new IllegalArgumentException("first arguement to keys() is null");
-            if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
-            Queue<Key> q = new Queue<Key>();
-            if (lo.compareTo(hi) > 0) return q;
-            for (int i = rank(lo); i < rank(hi); i++)
-                q.enqueue(keys[i]);
-            if (contains(hi))
-                q.enqueue(keys[rank(hi)]);
-            return q;
+        public Iterable<Key> keys(Key lo, Key hi){
+            if (lo == null)
+                throw new IllegalArgumentException("lo cann't be null");
+            if (hi == null)
+                throw new IllegalArgumentException("hi cann't be null");
+            Queue<Key> queue = new Queue<Key>();
+            keys(root, queue, lo, hi);
+            return queue;
+        }
+        private void keys(Node n, Queue<Key> queue, Key lo, Key hi){
+            if (n == null)
+                return;
+            int comparelo = lo.compareTo(n.key);
+            int comparehi = hi.compareTo(n.key);
+            if (comparelo <= 0)
+                keys(n.left, queue, lo, hi);
+            if (comparelo <= 0 && comparehi >= 0)
+                queue.enqueue(n.key);
+            if (comparehi >= 0)
+                keys(n.right, queue, lo, hi);
         }
     
     }
     public static void main(String[] args){
+        BinarySearchST<Integer, Integer> st = 
+            new BinarySearchST<>();
+
+        st.put(0,0);
+        st.put(0,1);
+        st.put(0,2);
+        st.put(0,3);
+
+        st.put(5,7);
+        st.put(5,8);
+
+        st.put(8,9);
+        st.put(8,10);
+        st.put(20,11);
+        st.put(20,12);
+        st.put(20,13);
+        st.put(20,14);
+
+        st.put(22,15);
+        st.put(21,16);
+        st.put(23,17);
+        st.put(24,18);
+
+        StdOut.println("Keys():");
+        for (int k : st.keys())
+            StdOut.println(k + " " + st.get(k));
+
+        StdOut.println("size: " + st.size());
+        StdOut.println("min: " + st.min());
+        StdOut.println("max: " + st.max());
+
+        StdOut.println("delete min: ");
+        st.deleteMin();
+        for (int k : st.keys())
+            StdOut.println(k + " " + st.get(k));
+
+        StdOut.println("delete 20:");
+        st.delete(20);
+        for (int k : st.keys())
+            StdOut.println(k + " " + st.get(k));
+
+
 
     }
 }
