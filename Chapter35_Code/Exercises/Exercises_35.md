@@ -34,6 +34,14 @@
 
 3.5.16 Add a method sum() to SparseVector that takes a SparseVector as argument and returns a SparseVector that is the term-by-term sum of this vector and the argument vector. *Note*: You need delete() (and special attention to precision) to handle the case where an entry becomes 0.
 
+3.5.17 *Mathematical sets*. Your goal is to develop an implementation of the following API MathSET for processing (mutable) mathematical sets:
+
+Use a symbol table. *Extra credit*: Represent sets with arrays of boolean values.
+
+3.5.18 *Multisets*. After referring to EXERCISES 3.5.2 and 3.5.3 and the previous exercise, develop APIs MultiHashSET and MultiSET for multisets (sets that can have equal keys) and implementations SeparateChainingMultiSET and BinarySearchMultiSET for multisets and ordered multisets, respectively.
+
+
+
 
 
 
