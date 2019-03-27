@@ -3,18 +3,20 @@ import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdIn;
 
-public class doubleList<Item> implements Iterable<Item>
+public class DoubleList<Item> implements Iterable<Item>
 {
 
-    private DoubleNode first; // link to least recently added node
-    private DoubleNode last;  // link to most recently added node
+    private DoubleNode<Item> first; // link to least recently added node
+    private DoubleNode<Item> last;  // link to most recently added node
     private int N;      // number of items on the queue
 
+    /*
     private static class DoubleNode{
         Item item;
         DoubleNode prev;
         DoubleNode next;
     }
+    */
     private DoubleList<Item> list()
     {
         return this;
@@ -23,7 +25,7 @@ public class doubleList<Item> implements Iterable<Item>
     public boolean isEmpty() { return N == 0; } // Or: N == 0.
     public int size()   { return N;  }
 
-    public doubleList() {
+    public DoubleList() {
         last = null;
         first = null;
         N = 0;
@@ -47,7 +49,8 @@ public class doubleList<Item> implements Iterable<Item>
         N++;
     }
 
-    public static void insertFirst(Item item)
+
+    public DoubleNode insertFirstAndreturnNode(Item item)
     {
         DoubleNode x = new DoubleNode();
         x.item = item;
@@ -62,11 +65,32 @@ public class doubleList<Item> implements Iterable<Item>
             x.prev = null;
             x.next = first;
             first.prev = x;
-            first = item;
+            first = x;
+        }
+        N++;
+        return x;
+
+    }
+    public void insertFirst(Item item)
+    {
+        DoubleNode x = new DoubleNode();
+        x.item = item;
+
+        if (isEmpty())
+        {
+            first = x;
+            first.prev = first.next = null;
+            last = x;
+        }
+        else {
+            x.prev = null;
+            x.next = first;
+            first.prev = x;
+            first = x;
         }
         N++;
     }
-    public static void insertLast(Item item){
+    public void insertLast(Item item){
         DoubleNode x = new DoubleNode();
         x.item = item;
         if (isEmpty())
@@ -83,7 +107,7 @@ public class doubleList<Item> implements Iterable<Item>
         }
         N++;
     }
-    public static Item removeFirst() {
+    public Item removeFirst() {
         if (isEmpty()) {
             throw new RuntimeException("List is empty");
 
@@ -96,7 +120,7 @@ public class doubleList<Item> implements Iterable<Item>
         if (isEmpty()) last = null;
         return item;
     }
-    public static Item removeLast(){
+    public Item removeLast(){
         if (isEmpty()) throw new RuntimeException("List is empty");
         Item item = last.item;
         last = last.prev;
@@ -104,7 +128,7 @@ public class doubleList<Item> implements Iterable<Item>
         if (isEmpty()) first = null;
         return item;
     }
-    public static void insertBefore(DoubleNode node, Item item) {
+    public void insertBefore(DoubleNode node, Item item) {
         if (node == null) throw new RuntimeException("Node is empty");
         if (node == first)
             prepend(item);
@@ -117,7 +141,7 @@ public class doubleList<Item> implements Iterable<Item>
             N++;
         }
     }
-    public static void insertAfter(DoubleNode node, Item item) {
+    public void insertAfter(DoubleNode node, Item item) {
         if (node == null) throw new RuntimeException("Node is empty");
         if (node == last) {
             append(item);
@@ -131,12 +155,13 @@ public class doubleList<Item> implements Iterable<Item>
             N++;
         }
     }
-    public static void removeNode(DoubleNode node){
+    public void removeNode(DoubleNode node){
         if (node == null) throw new RuntimeException("Node is empty");
         if (node.prev == null && node.next == null)
             first = last = null;
         else
         {
+            StdOut.println("removeNode " + node.item);
             if (node.prev != null)
             {
                 node.prev.next = node.next;
@@ -145,6 +170,10 @@ public class doubleList<Item> implements Iterable<Item>
             {
                 node.next.prev = node.prev;
             }
+            if (node == last)
+                last = node.prev;
+            if (node == first)
+                first = node.next;
         }
         N--;
     }
@@ -163,7 +192,7 @@ public class doubleList<Item> implements Iterable<Item>
 
     private class DoubleListIterator implements Iterator<Item>
     {
-        private DoubleNode current = first;
+        private DoubleNode<Item> current = first;
 
         public boolean hasNext() { return current != null; }
         public void remove() { throw new UnsupportedOperationException();}
@@ -176,12 +205,6 @@ public class doubleList<Item> implements Iterable<Item>
             return item;
         }
     }
-
-    public static void main(String[] args) {
-
-    }
-
-
 
 
 }

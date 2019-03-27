@@ -31,6 +31,7 @@ public class SeparateChainingHashST<Key, Value>
         st = (SequentialSearchST<Key, Value>[])new SequentialSearchST[M];
         for (int i = 0; i < M; i++)
             st[i] = new SequentialSearchST();
+        avgList = 0.5;
 
     }
     public SeparateChainingHashST(int M, double avgList)
@@ -102,7 +103,7 @@ public class SeparateChainingHashST<Key, Value>
         //StdOut.println("put: " + N + "/" + M);
         // 
         if (getLoadFactor() >= avgList) {
-            StdOut.println("put resize 2*M");
+            //StdOut.println("put resize 2*M");
             resize(2*M);
             lgM++;
         }

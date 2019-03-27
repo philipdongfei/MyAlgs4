@@ -81,7 +81,7 @@ public class RandomQueue<Item> implements Iterable<Item> {
         q[last] = null;
         return temp;
     }
-    public Item smaple() {
+    public Item sample() {
         if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         int randomIndex = uniform(N);
         Item temp = q[randomIndex];

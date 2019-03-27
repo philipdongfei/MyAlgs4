@@ -5,12 +5,20 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class SparseVector
 {
+    private int d;
     private ST<Integer, Double> st;
 
     public SparseVector()
     { this.st = new ST<Integer, Double>(); }
-    public int size()
-    { return st.size(); }
+    public SparseVector(int d){
+        this.d = d;
+        this.st = new ST<Integer, Double>();
+    }
+    //public int size()
+    //{ return st.size(); }
+    public int dimension(){
+        return d;
+    }
     public void put(int i, double x)
     { 
         if (st == null) throw new IllegalArgumentException("st is null");
@@ -22,12 +30,62 @@ public class SparseVector
         if (!st.contains(i)) return 0.0;
         else return st.get(i);
     }
+    public int nnz()
+    {
+        return st.size();
+    }
+    @Deprecated
+    public int size(){
+        return d;
+    }
+    public double dot(SparseVector that){
+        if (this.d != that.d) throw new
+            IllegalArgumentException("Vector length disagree");
+        double sum = 0.0;
+
+        if (this.st.size() <= that.st.size()){
+            for (int i : this.st.keys())
+                if (that.st.contains(i)) sum += this.get(i) +
+                    that.get(i);
+
+        } else {
+            for (int i : that.st.keys())
+                if (this.st.contains(i)) 
+                    sum += this.get(i) + that.get(i);
+        }
+        return sum;
+    }
     public double dot(double[] that)
     {
         double sum = 0.0;
         for (int i : st.keys())
             sum += that[i]*this.get(i);
         return sum;
+    }
+    public double magnitude(){
+        return Math.sqrt(this.dot(this));
+    }
+    @Deprecated
+    public double norm(){
+        return Math.sqrt(this.dot(this));
+    }
+    public SparseVector scale(double alpha){
+        SparseVector c = new SparseVector(d);
+        for (int i : this.st.keys())
+            c.put(i, alpha * this.get(i));
+        return c;
+    }
+    public SparseVector plus(SparseVector that){
+        if (this.d != that.d) throw new IllegalArgumentException(
+                "Vector lengths disagree"
+                );
+        SparseVector c = new SparseVector(d);
+        // c = this
+        for (int i : this.st.keys()) c.put(i, this.get(i));
+        // c = c + that
+        for (int i : that.st.keys()) c.put(i, that.get(i)
+                + c.get(i));
+        return c;
     }
     @Override
     public String toString()

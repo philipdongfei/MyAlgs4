@@ -1,9 +1,9 @@
-import edu.princeton.cs.algs4.SequentialSearchST;
+//import edu.princeton.cs.algs4.SequentialSearchST;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
 import java.util.NoSuchElementException;
 
-public class Ex3_5_18 {
+public class Ex3_5_19 {
 /*
     public interface MultiHashSET<Key>{
         void add(Key key);
@@ -109,11 +109,11 @@ public class Ex3_5_18 {
     */
 
 
-    public static class SeparateChainingMultiSET<Key extends Comparable<Key>>  {
-        private SequentialSearchMultiSET<Key, Boolean> st;
+    public static class SeparateChainingMultiST<Key extends Comparable<Key>, Value>  {
+        private SequentialSearchMultiST<Key, Value> st;
 
-        private SeparateChainingMultiSET(){
-            st = new SequentialSearchMultiSET<>();
+        private SeparateChainingMultiST(){
+            st = new SequentialSearchMultiST<>();
         }
         public boolean isEmpty(){
             return st.isEmpty();
@@ -121,10 +121,18 @@ public class Ex3_5_18 {
         public int size(){
             return st.size();
         }
-        public void add(Key key) {
+        public void add(Key key, Value val) {
             if (key == null)
                 throw new IllegalArgumentException("argument key is null");
-            st.put(key, false);
+            st.put(key, val);
+        }
+        public Value get(Key key)
+        {
+            return st.get(key);
+        }
+        public Iterable<Value> getAll(Key key)
+        {
+            return st.getAll(key);
         }
         public void delete(Key key) {
             if (key == null)
@@ -193,11 +201,11 @@ public class Ex3_5_18 {
 
 
     }
-    public static class BinarySearchMultiSET<Key extends Comparable<Key>> {
-        private MultiSET<Key, Boolean> st;
+    public static class BinarySearchMultiST<Key extends Comparable<Key>, Value> {
+        private MultiST<Key, Value> st;
 
-        private BinarySearchMultiSET(){
-            st = new MultiSET<>();
+        private BinarySearchMultiST(){
+            st = new MultiST<>();
         }
         public boolean isEmpty(){
             return st.isEmpty();
@@ -205,10 +213,18 @@ public class Ex3_5_18 {
         public int size(){
             return st.size();
         }
-        public void add(Key key) {
+        public void add(Key key, Value val) {
             if (key == null)
                 throw new IllegalArgumentException("argument key is null");
-            st.put(key, false);
+            st.put(key, val);
+        }
+        public Value get(Key key)
+        {
+            return st.get(key);
+        }
+        public Iterable<Value> getAll(Key key)
+        {
+            return st.getAll(key);
         }
         public void delete(Key key) {
             if (key == null)
@@ -278,17 +294,22 @@ public class Ex3_5_18 {
     }
 
     public static void main(String[] args) {
-        //SeparateChainingMultiSET<String> st = new SeparateChainingMultiSET<String>();
-        BinarySearchMultiSET<String> st = new BinarySearchMultiSET<>();
-        st.add("c");
-        st.add("a");
-        st.add("b");
-        st.add("a");
+        //SeparateChainingMultiST<String,String> st = new SeparateChainingMultiST<String, String>();
+        BinarySearchMultiST<String, String> st = new BinarySearchMultiST<>();
+        st.add("c", "c");
+        st.add("a", "a");
+        st.add("b", "b");
+        st.add("a", "ab");
+        st.add("a", "ac");
         StdOut.println("st size: " + st.size());
         StdOut.println("st: " + st);
         StdOut.println("st min: " + st.min());
         StdOut.println("st max: " + st.max());
+        StdOut.println("st getall a's value:");
+        for (String val : st.getAll("a"))
+            StdOut.println("a " + val);
         StdOut.println("delete b");
+
         st.delete("b");
         StdOut.println("st size: " + st.size());
         StdOut.println("st: " + st);

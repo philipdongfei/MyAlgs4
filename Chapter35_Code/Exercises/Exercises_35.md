@@ -40,6 +40,52 @@ Use a symbol table. *Extra credit*: Represent sets with arrays of boolean values
 
 3.5.18 *Multisets*. After referring to EXERCISES 3.5.2 and 3.5.3 and the previous exercise, develop APIs MultiHashSET and MultiSET for multisets (sets that can have equal keys) and implementations SeparateChainingMultiSET and BinarySearchMultiSET for multisets and ordered multisets, respectively.
 
+3.5.19 *Equal keys in symbol tables*. Consider the API multiST (unordered or ordered) to be tha same as our symbol-table APIs defined on page 363 and page 366, but with equal keys allowed, so that the semantics of get() is to return any value associated with the given key, and we add a new method
+```
+Iterable<Value> getAll(Key key);
+```
+that returns all values associated with the given key. Using our code for SeparateChainingST and BinarySearchST as a starting point, develop implementations SeparateChainingMultiST and BinarySearchMultiST for these APIs.
+
+3.5.20 *Concordance.* Write an ST client Concordance that puts on standard output a concordance of the strings in the standard input stream (see page 498).
+
+3.5.21 *Inverted concordance*. Write a program InvertedConcordance that takes a concordance on standard input and puts the original string on standard output stream.Note: This computation is associated with a famous story having to do with the Dead Sea Scrolls. The team that discovered the original tablets enforced a secrecy rule that essentially resulted in their making public only a concordance. After a while, other researcher figured out how to invert the concordance, and the
+full text was eventually made public.
+
+3.5.22 *Fully indexed CSV.* Implement an ST client FullLookupCSV that builds an array of ST objects (one for each field), with a test client that allows the user to specify the key and value fields in each query.
+
+3.5.23 *Sparse matrices*. Develop an API and an implementation for sparse 2D matrices. Support matrix addition and matrix multiplication. Include constructors for row and column vectors.
+
+3.5.24 *Non-overlapping interval search*. Given a list of non-overlapping intervals of items, write a function that takes an item as argument and determines in which, if any, interval that item lies. For example, if the items are integers and the intervals are 1643-2033, 5532-7643,8999-10332,5666653-5669321, then the query point 9122 lies in the third interval and 8122 lies in no interval.
+
+3.5.25 *Registrar scheduling*. The registrar at a prominent northeastern University recently scheduled an instructor to tach two different classes at the same exact time. Help the registrar prevent future mistakes by describing a method to check for such conflicts. For simplicity, assume all classes run for 50 minutes starting at 9:00, 10:00, 11:00, 1:00,2:00,or 3:00.
+
+3.5.26 *LRU cache*. Create a data structure supports the following operatings: access and remove. Theaccess operation inserts the item onto the data structure if it's not already present. The remove operation deletes and returns the item that was least recently accessed. Hint: Maintain the items in order of access in a doubly linked list, along with pointers to the first and last nodes. Use a symbol table with keys = items, values = location in linked list. When you
+access an element, delete it from the linked list and reinsert it at the beginning. When you remove an element, delete it from the end and remove it from the symbol table.
+
+3.5.27 *List*. Develop an implementation of the following API:
+public class List<Item> implements Iterable<Item>
+
+*Hint*: Use two symbol tables, one to find the ith item in the list efficiently, and the other to efficiently search by item. (Java's java.util.List interface contains methods like these but does not supply any implementation that efficiently suports all operations.)
+
+TODO: Not test.
+
+3.5.28 *UniQueue*. Create a data type that is a queue, except that an element may only be inserted the queue once. Use an existence symbol table to keep track of all elements that have ever been inserted and ignore requests to re-insert such items.
+
+3.5.29 *Symbol table with random access*. Create a data type that supports inserting a key-value pair, searching for a key and returning the associated value, and deleting and returning a random key. *Hint*: Combine a symbol table and a randomized queue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
