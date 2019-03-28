@@ -73,6 +73,38 @@ TODO: Not test.
 
 3.5.29 *Symbol table with random access*. Create a data type that supports inserting a key-value pair, searching for a key and returning the associated value, and deleting and returning a random key. *Hint*: Combine a symbol table and a randomized queue.
 
+##Web Exercises
+
+1. Modify FrequencyCount to read in a text file (comprised of UNICODE characters) and print out the alphabet size (number of distinct characters) and a table of characters and their frequencies, sorted in descending order of frequency.
+
+2. **Set intersection and union.** Given two sets of strings, write a code fragment that computes a third set that contains those strings that appear in both sets (or either set). *Hint*: iterate over the elements in one set and check if they're in the other set.
+
+3. **Bidirectional symbol tables**. Support put(key, value) and getByKey(key) or getByValue(value). Use two symbol tables behind the scenes. Ex: DNS and reverse DNS.
+
+4. **Highlighting browser hyperlinks**. With each visited website, maintain the last time the site was visited so that you only hightlight those sites that have been visited within the past month.
+
+5. **Frequency symbol table.** Write an abstract data type FrequencyTable.java that supports the following operations: hit(Key), and count(Key). The hit operation increments the number of times the string appears by one. The count operation returns the number of times the given string appears, possibly 0. Applications: web counter, web log analyzer, musci jukebox that counts number of times each song has been played...
+
+6. **Non-overlapping interval search**. Given a list of non-overlapping intervals of integers(or dates), write a function that takes an integer argument and determines in which if any interval that values lies, e.g., if the intervals are 1643-2033, 5532-7643,8999-10332, 5666653-5669321,then the query point 9122 lies in the third interval and 8122 lies in no interval.
+
+same of book exercise 3.5.24
+
+7. **Registrar scheduling**. The Registrar at a prominent northeastern University recently scheduled an instructor to teach two different classes at the same exact time. Help the Registrar prevent future mistakes by secribing a method to check for such conflicts. For simiplicity, assume all classes run for 50 minutes starting at 9,10,11,1,2,or 3.
+
+same of book exercise 3.5.25
+
+8. **List**. Implement the following list operatiions: size(), addFront(item), addBack(item), delFront(item), delBack(item), contains(item), delete(item), add(i,item), delete(i),iterator(). All operations should be efficient (logarithmic). Hint: use two symbol tables, one to find the ith element in the list efficiently, and the other to efficiently search by item. Java's List interface contains these methods, but does not supply any implementation that supports all ops efficiently.
+
+same of book exercise 3.5.27
+
+9. **Indirect PQ**. Write a program IndirectPQ.java that implements an indirect PQ(priority queue).
+
+
+
+
+
+
+
 
 
 
