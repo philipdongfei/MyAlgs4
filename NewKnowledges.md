@@ -40,10 +40,14 @@
 - Randomed BST
 - Splay tree
 
-## chapter 3.4
+## Chapter 3.4
 
 - [Chi-square statistic](https://en.wikipedia.org/wiki/Chi-squared_test)
 - [Birthday paradox](https://en.wikipedia.org/wiki/Birthday_paradox)
 - [Cuckoo hashing](https://en.wikipedia.org/wiki/Cuckoo_hashing)
 - [Indifference graph](https://en.wikipedia.org/wiki/Indifference_graph)
 -
+
+## Chapter 3.5
+
+- [VMAs (virtual memory areas)](https://web.stanford.edu/~blp/papers/libavl-abstract.pdf)

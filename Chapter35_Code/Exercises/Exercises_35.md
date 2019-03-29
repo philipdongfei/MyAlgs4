@@ -99,6 +99,105 @@ same of book exercise 3.5.27
 
 9. **Indirect PQ**. Write a program IndirectPQ.java that implements an indirect PQ(priority queue).
 
+10. **LRU cache**. Create a data structure that supports the following operations: access and remove. The access operation inserts the item onto the data structure if it's not already present. The remove operation deletes and returns the item that was least recently accessed. Hint: maintain the items in order of access in a doubly linked list, along with pointers to the first and last nodes. Use a symbol table with keys = item, values = location in linked list. When you access
+    an element, delete it from the linked list and re-insert it at the beginning. When you remove an element, delete it from the end and remove it from the symbol table.
+
+the same of the book exercise 3.5.26
+
+11. **UniQueue**. Create a data type that is a queue, except that an element may only be inserted the queue once. Use an existence symbol table to keep track of all elements that have ever been inserted and ignore requests to re-insert such items.
+
+the same of the book exercise 3.5.28
+
+12. **Symbol table with random access**. Create a data type that supports inserting a key-value pair, searching for a key and returning the associated value, and deleting and returning a random value. Hint: combine a symbol table and a randomized queue.
+
+the same of the book exercise 3.5.29
+
+13. **Correcting misspellings**. Write a program that reads in text from standard input and replaces any commonly misspelled words with the suggested replacement, and prints the result to standard output. Use theis list of common misspellings adapted from Wikipedia.
+
+14. **Move-to-front**. Encoding: need rank query, delete, and insert. Decoding: need find ith, delete, and insert.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+15. **Mutable string**. Create a data type that supports the following operations on a string: get(int i), insert(int i, char c), and delete(int i), where get returns the ith character of the string, insert inserts the character c and makes it the ith character, and delete deletes the ith character. Use a binary search tree.
+
+16. **Power method and largest eigenvalue**. To compute the eigenvalue of largest magnitude (and corresponding eigenvector), use the power method. Under technical conditions (gap between largest two eigenvalues), it quickly converges to the right answer.
+- Make initial guess x_1
+- y_n = x_n/||x_n||
+- x_{n+1} = A y_n
+- $\lambda$ = x_{n+1}^{T}y_n
+- n = n + 1
+If A is sparse, then this algorithm exploits sparsity. Example: Google PageRank.
+
+17. **Outerproduct**. Add a method outer to Vector so that a.outer(b) returns the outer product of two length-N vectors a and b. The result is an N-by-N matrix.
+
+18. **Power law of web links**. (Michael Mitzenmacher) The indegrees and outdegrees of World Wide Web obey a power law. Can be modeled by preferred attachment process. Suppose that each web page has exactly one outgoing link. Each page is created one at a time, starting with a single page that points to itself. With probability p < 1, it links to one of the existing pages, chosen uniformly random. With probability 1-p it links to an existing page with probability proportional to the
+    number of incoming links of that page. This rule reflects the common tendency for new web pages to point to popular pages. Write a program to simulate this process and plot a histogram of the number of incoming links.
+
+19. **VMAs**. BST used in Unix kernels for managing a set of virtual memeory areas (VMAs). Each VMA represents a section of memory in a Unix process. VMAs vary in size from 4KB to 1GB. Also want to support range queries to determine which VMAs overlap a given range.
+
+20. **Internet peer cache**. Each IP packet sent by an Internet host is stamped with a 16-bit id that must be unique for that source-destination pair. Linux kernel uses an AVL tree indexed by IP address. Hashing would be faster, but want to avoid attacker sending IP packets with worst-case inputs.
+
+21. **File indexing variants**.
+- Remove stopwords, e.g., a , the, on, of. Implement using another set.
+- Support multi-word queries. This requires a set intersection operation. If you always intersect with the smallest set first, this takes time proportional to the size of the smallest set.
+- Implement OR or other boolean logic.
+- Record the position of word or number of occurrences of word in a document.
+
+22. **Arithmetic expression interpreter**. Write a program Interpreter.java to parse and evaluate expressions of the following form.
+
+```
+>> x := 34
+x := 34.0
+
+>> y := 23*x
+y := 782.0
+
+>> z := x^y
+z := Infinity
+
+>> z := y^2
+z := 611524.0
+
+>> x
+x := 34.0
+
+>> x := sqrt 2
+x := 1.4142135623730951
+
+```
+Variants.
+- Add more more complicated expression, e.g., z = 7 * (x+y*y), using conventional operator precedence.
+- Add more error-checking and recovery.
+
+
+
+
 
 
 
