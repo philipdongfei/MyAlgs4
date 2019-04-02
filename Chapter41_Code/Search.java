@@ -6,39 +6,29 @@ import edu.princeton.cs.algs4.Bag;
 
 public class Search {
 
+    private WeightedQuickUnionUF uf;
     private int source;
     private Graph G;
-    private Bag<Integer> BagV;
     public  Search(Graph G, int s)
     {
         this.G = G;
         this.source = s;
-        BagV = new Bag<>();
+        uf = new WeightedQuickUnionUF(G.V());
 
-        BagV = ConnV(G, s, source, BagV); 
-    }
-    // UF
-    Bag<Integer> ConnV(Graph G, int a, int s, Bag<Integer> bag)
-    {
-        for (int w : G.adj(a))
-        {
-            if (w != s){
-                bag.add(w);
-                bag = ConnV(G, w, s, bag);
-            }
+        for (int v = 0; v < G.V(); v++){
+            for (int adj : G.adj(v))
+                uf.union(v, adj);
         }
-        return bag;
+
     }
     public boolean marked(int v)
     {
-        for (int w : BagV)
-            if (v == w)
-                return true;
-        return false;
+        return uf.connected(source, v);
     }
     public int count()
     {
-        return BagV.size();
+        int v = uf.find(source);
+        return uf.getSizes(v);
     }
 
 }

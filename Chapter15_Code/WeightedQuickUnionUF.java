@@ -34,6 +34,9 @@ public class WeightedQuickUnionUF
         else                { id[j] = i; sz[i] += sz[j]; }
         count--;
     }
+    public int getSizes(int v){
+        return sz[v];
+    }
     public static void main(String[] args) {
         // Solve dynamic connectivity problem on StdIn
         int N = StdIn.readInt();    // Read number of sites.
