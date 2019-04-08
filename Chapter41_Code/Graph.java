@@ -71,9 +71,21 @@ public class Graph {
     public void addEdge(int v, int w){
         validateVertex(v);
         validateVertex(w);
+        if (v == w || hasEdge(v, w)){
+            throw new IllegalArgumentException("v " + v + " and w " + w + " is self-loop or parallel");
+
+        }
         E++;
         adj[v].add(w);
         adj[w].add(v);
+    }
+    public boolean hasEdge(int v, int w) {
+        validateVertex(v);
+        validateVertex(w);
+        for (int e : adj[v])
+            if (e == w)
+                return true;
+        return false;
     }
     public Iterable<Integer> adj(int v) {
         validateVertex(v);
@@ -100,5 +112,10 @@ public class Graph {
         In in = new In(args[0]);
         Graph G = new Graph(in);
         StdOut.println(G);
+        StdOut.println("has edge between 0 and 1: " + G.hasEdge(0, 1));
+        StdOut.println("has edge between 0 and 3: " + G.hasEdge(0, 3));
+        //G.addEdge(0,0);
+        G.addEdge(0,2);
+
     }
 } 
