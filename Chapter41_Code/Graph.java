@@ -44,6 +44,38 @@ public class Graph {
             throw new IllegalArgumentException("invalid input format in Graph constructor", e);
         }
     }
+    public Graph(In in, String sp) {
+        try {
+            this.V = in.readInt();
+            if (V < 0) throw new IllegalArgumentException("number of vertices in a Graph must be nonnegative");
+            adj = (Bag<Integer>[]) new Bag[V];
+            for (int v = 0; v < V; v++){
+                adj[v] = new Bag<Integer>();
+            }
+            int E = in.readInt();
+            if (E < 0) throw new IllegalArgumentException("number of edges in a Graph must be nonnegative");
+            in.readLine();
+            while (in.hasNextLine()) {
+                String[] vertices = in.readLine().split(sp);
+
+                StdOut.println(vertices[0]);
+                int s = Integer.parseInt(vertices[0]);
+                validateVertex(s);
+                for (int i = 1; i < vertices.length; i++)
+                {
+                    int a = Integer.parseInt(vertices[i]);
+                    validateVertex(a);
+                    addEdge(s, a);
+                }
+
+            }
+            if (this.E != E)
+                throw new IllegalArgumentException("input E error!");
+        }
+        catch (NoSuchElementException e){
+            throw new IllegalArgumentException("invalid input format in Graph constructor", e);
+        }
+    }
     public Graph(Graph G) {
         this(G.V());
         this.E = G.E();
@@ -110,12 +142,14 @@ public class Graph {
     }
     public static void main(String[] args){
         In in = new In(args[0]);
-        Graph G = new Graph(in);
+        Graph G = new Graph(in, " ");
         StdOut.println(G);
+        /*
         StdOut.println("has edge between 0 and 1: " + G.hasEdge(0, 1));
         StdOut.println("has edge between 0 and 3: " + G.hasEdge(0, 3));
         //G.addEdge(0,0);
         G.addEdge(0,2);
+        */
 
     }
 } 
