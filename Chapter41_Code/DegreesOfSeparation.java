@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import java.util.Calendar;
 
 
 public class DegreesOfSeparation
@@ -11,6 +12,10 @@ public class DegreesOfSeparation
         Graph G = sg.G();
 
         String source = args[2];
+        int yearOld = Integer.parseInt(args[3]);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        StdOut.println("currentYear: " + currentYear);
+
         if (!sg.contains(source))
         { StdOut.println(source + " not in database."); return; }
         int s = sg.index(source);
@@ -19,6 +24,13 @@ public class DegreesOfSeparation
         while (!StdIn.isEmpty())
         {
             String sink = StdIn.readLine();
+            int movieYear = Integer.parseInt(sink.substring(sink.length()-5, sink.length()-1));
+
+            StdOut.println("movieYear: " + movieYear);
+            if (currentYear - movieYear > yearOld){
+                StdOut.println("Ignoring old movie");
+                continue;
+            }
             if (sg.contains(sink))
             {
                 int t = sg.index(sink);

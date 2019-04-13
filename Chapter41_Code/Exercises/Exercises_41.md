@@ -63,6 +63,56 @@ int center();
 
 4.1.21 Run SymbolGraph with movies.txt to find the Kevin Bacon number of this year's Oscar nominees.
 
+4.1.22 Write a program BaconHistogram that prints a histogram of Kevin Bacon numbers, indicating how many performers from movies.txt have a Bacon number of 0,1,2,3,... Include a category for those who have an infinite number (not connected to Kevin Bacon).
+
+4.1.23 Compute the number of connected components in movies.txt, the size of the largest component, and the number of components of size less than 10. Find the eccentricity, diameter, radius, a center, and the girth of the largest component in the graph. Does it contain Kevin Bacon?
+
+4.1.24 Modify DegreeOfSeparation to take an int value y as a command-line argument and ignore movies that are more than y years old.
+
+4.1.25 Write a SymbolGraph client DegreesOfSeparationDFS.java that uses depth-first instead of breadth-first search to find paths connecting two performers.
+
+4.1.26 Determine the amount of memory used by Graph to represent a graph with v ertices and E edges, using the memory-cost model of Section 1.4.
+
+*Solution*. 56+40V+128E. MemoryOfGraph.java computes it empirically assuming that no Integer values are cached--Java typically caches the integers -128 to 127.
+
+4.1.27 Two graphs are *isomorphic* if there is a way to rename the vertices of one to make it identical to the other. Draw all the nonisomorphic graphs with two,three,four, and five vertices.
+
+4.1.28 Modify Cycle so that it works even if the graph contains self-loops and parallel edges.
+
+4.1.29 *Eulerian and Hamiltonian cycles*. Consider the graphs defined by the following four sets of edges:
+
+which of these graphs have Euler cycles (cycles that visit each edge exactly once)?
+which of them have Hamilton cycle (cycles that visit each vertex exactly once)?
+
+4.1.30 *Graph enumeration*. How many different undirected graphs are there with V vertices and E edges (and no parallel edges)?
+
+4.1.31 *Parallel edge detection*. Devise a linear-time algorithm to count the parallel edges in a graph.
+
+Hint: maintain a boolean array of the neighbors of a vertex, and reuse this array by only reinitializing the entries as needed.
+
+4.1.32 *Odd cycles*. Prove that a graph is two-colorable (bipartite) if and only if it contains no odd-length cycle.
+
+4.1.33 *Symbol graph*. Implement a one-pass SymbolGraph (it need not be a Graph client). Your implementation may pay an extra log V factor for graph operations, for symbol-table lookups.
+
+4.1.34 *Biconnectedness*. A graph is *biconnected* if every pair of vertices is connected by two disjoint paths. An *articulation point* in a connected graph is a vertex that would disconnect the graph if it (and its adjacent edges) were removed. Prove that any graph with no articulation points is biconnected. Hint: Given a pair of vertices s and t and a path connecting them, use the fact that none of the vertices on the path are articulation points to construct two disjoint
+paths connecting s and t.
+
+4.1.35 *Edge connectivity*. A *bridge* in a graph is an edge that, if removed, would separate a connected graph into two disjoint subgraphs. A graph that has no bridges is said to be edge connected. Develop a DFS-based data type for determing whether a given graph is edge connected.
+
+4.1.36 *Euclidean graphs*. Design and implement an API EuclideanGraph for graphs whose vertices are points in the plane that include coordinates. Include a method show() that uses StdDraw to draw the graph.
+
+4.1.37 *Image processing*. Implement the flood fill operation on the implicit graph defined by connecting adjacent points that have the same color in an image.
+
+
+##Web Exercises
+
+1. Find some interesting graphs. Are they directed or undirected? Sparse or dense?
+
+
+
+
+
+
 
 
 

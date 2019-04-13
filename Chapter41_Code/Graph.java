@@ -103,10 +103,13 @@ public class Graph {
     public void addEdge(int v, int w){
         validateVertex(v);
         validateVertex(w);
+        /*
+         * for Ex4.1.5
         if (v == w || hasEdge(v, w)){
             throw new IllegalArgumentException("v " + v + " and w " + w + " is self-loop or parallel");
 
         }
+        */
         E++;
         adj[v].add(w);
         adj[w].add(v);
@@ -140,10 +143,24 @@ public class Graph {
         }
         return s.toString();
     }
+    public boolean isEulerian() {
+        boolean Euler = true;
+        for (int v = 0; v < V; v++){
+            StdOut.println("v " + v + " degree: " + adj[v].size());
+            if ((adj[v].size()) % 2 != 0)
+            {
+                Euler = false;
+                break;
+            }
+
+        }
+        return Euler;
+    }
     public static void main(String[] args){
         In in = new In(args[0]);
         Graph G = new Graph(in, " ");
         StdOut.println(G);
+        StdOut.println("Eulerian cycle: " + G.isEulerian());
         /*
         StdOut.println("has edge between 0 and 1: " + G.hasEdge(0, 1));
         StdOut.println("has edge between 0 and 3: " + G.hasEdge(0, 3));
