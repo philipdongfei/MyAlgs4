@@ -38,16 +38,19 @@ public class DepthFirstPaths_NonRecur
 
         while (!stack.isEmpty()) {
             int currentVertex = stack.peek();
+            //StdOut.println("Stack peek: " + currentVertex);
 
             if (adjIter[currentVertex].hasNext()){
                 int adjV = adjIter[currentVertex].next();
                 if (!marked[adjV]) {
                     stack.push(adjV);
+                    edgeTo[adjV] = currentVertex; 
                     marked[adjV] = true;
                 }
-                else
-                    stack.pop();
             }
+            else 
+                stack.pop();
+            //StdOut.println("Stack size: " + stack.size());
         }
         /*
         for (int w : G.adj(v))
@@ -75,7 +78,7 @@ public class DepthFirstPaths_NonRecur
     {
         Graph G = new Graph(new In(args[0]));
         int s = Integer.parseInt(args[1]);
-        DepthFirstPaths dfp = new DepthFirstPaths(G, s);
+        DepthFirstPaths_NonRecur dfp = new DepthFirstPaths_NonRecur(G, s);
         for (int v = 0; v < G.V(); v++)
         {
             StdOut.print(s + " to " + v + ": ");

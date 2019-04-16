@@ -108,6 +108,60 @@ paths connecting s and t.
 
 1. Find some interesting graphs. Are they directed or undirected? Sparse or dense?
 
+2. **Degree**. The degree of a vertex is the number of incident edges. Add a method int degree(int v) to Graph that returns the degree of the vertex v.
+
+3. Suppose you use a stack instead of a queue when running breadth-first search. Does it staill compute shortest paths?
+
+*Answer*: No.
+
+4. **DFS with an explicit stack**. Given an example of possibility of stack overflow with DFS using the function call statck, e.g., line graph. Modify DepthFirstPaths.java so that it uses an explicit stack instead of the function call stack.
+
+5. **Perfect maze**. Generate a perfect maze like this one
+Write a prgram Maze.java that takes a command-line argument n, and generates a random n-by-n perfect maze. A maze is perfect if it has exactly one path between every pair of points in the maze. i.e., no inaccessible locations, no cycles, and no open spaces. Here's a nice algorithm to generate such mazes. Consider an n-by-n grid of cells, each of which initially has a wall between it and its four neighboring cells. For each cell(x,y), maintain a variable
+north[x][y] that is true if there is wall separating (x, y) and (x, y+1). We have analogous variables east[x][y], south[x][y], and west[x][y] for the corresponding walls. Note that if there is a wall to the north of (x,y) then north[x][y] = south[x][y+1] = true. Construct the maze by knocking down some of the walls as follows:
+a. Start at the lower level cell(1,1).
+b. Find a neighbor at random that you haven't yet been to.
+c. If you find one, move there, knocking down the wall. If you don't find one, go back to the previous cell.
+d. Repeat steps ii. and iii. until you've been to every cell in the grid.
+
+*Hint*: maintain an (n+2)-by-(n-2) grid of cells to avoid tedious special cases.
+
+Here is a Mincecraft maze created by Carl Eklof using this algorithm.
+
+6. **Getting out of the maze**. Given an n-by-n maze (like the one created in the previous exercise), write a program to find a path from the start cell(1,1) to the finish cell(n,n), if it exists. To find a solution to the maze, run the following algorithm, staring from (1,1) and stopping if we reach cell(n,n).
+
+```
+explore(x,y)
+-------------
+- Mark the current cell(x,y) as "visited."
+- If no wall to north and unvisited, then explore(x, y+1).
+- If no wall to east and unvisited, then explore(x+1, y).
+- If no wall to south and unvisited, then explore(x, y-1).
+- If no wall to west and unvisited, then explore(x-1, y).
+
+```
+
+7. **Maze game**. Develop a maze game like this one from gamesolo.com, where you traverse a maze, collecting prizes.
+
+8. **Actor graph**. An alternate (and perhaps more natural) way to compute Kevin Bacon numbers is to build a graph where each node is an actor. Two actors are connected by an edge if they appear in a movie together. Calculate Kevin Bacon numbers by running BFS on the actor graph. Compare the running time versus the algorithm described in the text. Explain why the approach in the text is preferable. 
+*Answer*. it avoids multiple parallel edges. As a result, it's faster and uses less memory. Moreover, it's more convenient since you don't have to label the edges with the movie names - all names get stored in the vertices.
+
+9. **Center of the Hollywood universe**. We can measure how good of a center that Kevin Bacon is by computing their Hollywood number. The Hollywood number of Kevin Bacon is the average Bacon number of all the actors. The Hollywood number of another actor is computed the same way, but we make them be the source instead of Kevin Bacon. Compute Kevin Bacon's Hollywood number and find an actor and actress with better Hollywood numbers.
+
+10. **Fringe of the Hollywood universe**. Find the actor (who is connected to Kevin Bacon) that has the highest Hollywood number.
+
+11. **Word ladders**. Write a program WordLadder.java that takes two 5 letter string from the command line, and reads in a list of 5 letter words from standard input, and  prints out a shortest word ladder connecting the two strings (if it exists). Two words can be connected in a word ladder chain if they differ in exactly one letter. As an example, the following word ladder connects green and brown.
+```
+green greet great groat grown brown
+```
+You can also try out your program on this list of 6 letter words.
+
+
+
+
+
+
+
 
 
 

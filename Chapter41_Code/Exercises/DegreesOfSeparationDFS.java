@@ -1,8 +1,8 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.SymbolGraph;
-import edu.princeton.cs.algs4.Graph;
+//import edu.princeton.cs.algs4.SymbolGraph;
+//import edu.princeton.cs.algs4.Graph;
 import edu.princeton.cs.algs4.DepthFirstPaths;
 
 
@@ -13,21 +13,22 @@ public class DegreesOfSeparationDFS {
         String source = args[2];
 
         SymbolGraph sg = new SymbolGraph(filename, delimiter);
-        Graph G = sg.graph();
+        Graph G = sg.G();
         if (!sg.contains(source)){
             StdOut.println(source + " not in database.");
             return;
         }
-        int s = sg.indexOf(source);
-        DepthFirstPaths bfs = new DepthFirstPaths(G, s);
+        int s = sg.index(source);
+        DepthFirstPaths_NonRecur bfs = new DepthFirstPaths_NonRecur(G, s);
 
+        StdOut.println("Query: ");
         while (!StdIn.isEmpty()){
             String sink = StdIn.readLine();
             if (sg.contains(sink)){
-                int t = sg.indexOf(sink);
+                int t = sg.index(sink);
                 if (bfs.hasPathTo(t)) {
                     for (int v : bfs.pathTo(t)){
-                        StdOut.println("  " + sg.nameOf(v));
+                        StdOut.println("  " + sg.name(v));
                     }
                 }
                 else{
