@@ -156,11 +156,135 @@ green greet great groat grown brown
 ```
 You can also try out your program on this list of 6 letter words.
 
+12. **Faster word ladders**. To speed things up (if the word list is very large), don't write a nested loop to try all pairs of words to see if they are adjacent. 
+
+13. Suppose you delete all of the bridges in an undirected graph. Are the connected components of the resulting graph the biconnected components? 
+*Answer*. no, two biconnected components can be connected through an articulation point.
+**Bridges and articulation points**. A bridge (or cut edge) is an edge whose removal disconnects the graph. An articulation point (or cut vertex) is a vertex whose removal (and removal of all incident edges) disconnects the remaining graph. Bridges and articulations points are important because they represent a single point of failure in a network. Brute force: delete edge (or vertex) and check connectivity. Takes O(E(V+E)) and O(V(V+E)) time, respectively. Can improve both to
+O(E+V) using clever extension to DFS.
+
+14. **Biconnected components**. An undirected graph is biconnected if for every pair of vertices v and w, there are two vertex-disjoint paths between v and w. (Or equivalently a simple cycle through any two vertices.) We define a cocyclicity equivalence relation on the edges: two edges e1 and e2 are are in same biconnected component if e1 = e2 or there exists a cycle containing both e1 and e2. Two biconnected components share at most one vertex in common. A vertex is an articulation
+    point if and only if it is common to more than one biconnected component. Program Biconnected.java identifies the bridges and articulation points.
 
 
+15. **Biconnected components**. Modify Biconnected to print out the edges that constitute each biconnected component. 
+*Hint*: each bridge is its own biconnected component; to compute the other biconnected components, mark each articulation point as visited, and then run DFS, keeping track of the edges discovered from each DFS start points.
 
+16. Perform numerical experiments on the number of connected components for random undirected graphs. Phase change around 1/2 ln V. (See Property 18.13 in Algs Java).
 
+17. **Rogue**. (Andrew Appel.) A monster and a player are each located at a distinct vertex in an undirected graph. In the role playing game Rogue, the player and the monster alternate turns. In each turn the player can move to an adjacent vertex or stays put. Determine all vertices that the player can reach before the monster. Assume the player gets the first move.
 
+**TODO**:
+
+18. **Rogue**. (Andrew Appel.) A monster and a player are each located at a distinct vertex in an undirected graph. The goal of the monster is to land on the same vertex as the player. Devise an optimal strategy for the monster.
+
+**TODO**:
+
+19. **Articulation point**. Let G be a connected, undirected graph. Consider a DFS tree for G. Prove that vertex v is an articulation point of G if and only if either (i) v is the root of the DFS tree and has more than one child or (ii) v is not the root of the DFS tree and for some child w of v there is no back edge between any descendant of w (include w) and proper ancestor of v. In other words, v is an articulation point if and only if (i) v is the root and has more than
+    one child or (ii) v has a child w such that low[w] >= pre[v].
+
+20. **Sierpinski gasket**. Nice example of an Eulerian graph.
+
+21. **Preferential attachment graphs**. Create a random graph on V vertices and E edges as follows: start with V vertices v1, ...,v_n in any order. Pick an element of sequence uniformly at random and add to end of sequence. Repeat 2E times (using growing list of vertices). Pair up the last 2E vertices to form the graph.
+Roughly speaking, it's equivalent to adding each edge one-by-one with probability proportional to the product of the degrees of the two endpoints. 
+
+22. **Wiener index**. The Wiener index of a vertex is the sum of the shortest path distances between v and all other vertices. The Wiener index of a graph G is the sum of the shortest path distances over all pairs of vertices. Used by mathematical chemists (vertices = atoms, edges = bonds).
+
+23. **Random walk**. Easy algorithm for getting out of a maze (or st connectivity in a graph): at each step, take a step in a random direction. With complete graph, takes V log V time (coupon collector); for line graph or cycle, takes V^2 time (gambler's ruin). In general the cover time is at most 2E(V-1), a classic result of Aleliunas, Karp, Lipton, Lovasz, and Rackoff.
+
+24. **Deletion order**. Given a connected graph, determine an order to delete the vertices such that each deletion leaves the (remaining) graph connected. Your algorithm should take time proportional to V + E in the worst case.
+
+25. **Center of a tree**. Given a graph that is a tree (connected and acyclic), find a vertex such that its maximum distance from any other vertex is minimized.
+Hint: find the diameter of the tree (the longest path between vertices) and return a vertex in the middle.
+
+26. **Diameter of a tree**. Given a graph that is a tree (connected and acyclic), find the longest path, i.e., a pair of vertices v and w that are as far apart as possible. Your algorithm should run in linear time.
+
+*Hint*: Pick any vertex v. Compute the shortest path from v to every other vertex. Let w be the vertex with the largest shortest path distance. Compute the shortest path from w to every other vertex. Let x be the vertex with the largest shortest path distance. The path from w to x gives the diameter.
+
+27. **Bridges with union-find**. Let T be a spanning tree of a connected graph G. Each non-tree edge e in G forms a fundamental cycle consisting of the edge e plus the unique path in the tree joining its endpoings. Show that an edge is a bridge if and only if it is not on some fundamental cycle. Thus, all bridges are edges of the spanning tree. Design an algorithm to find all of the bridges (and bridge components) using E + V time plus E + V union-find operations.
+
+28. **Nonrecursive depth-first search**. Write a program NonrecursiveDFS.java that implements depth-first search with an explicit stack instead of recursion.
+
+Here is an alternate implementation suggested by Bin Jiang in the eaerly 1990s. The only extra memory is for a stack of vertices but that stack must support arbitrary deletion (or at least the movement of an arbitrary item to the top of the stack).
+```
+private void dfs(Graph G, int s) {
+    SuperStack<Integer> stack = new SuperStack<Integer>();
+    stack.push(s);
+    while (!stack.isEmpty()) {
+        int v = stack.peek();
+        if (!marked[v]){
+            marked[v] = true;
+            for (int w : G.adj(v)) {
+            if (!marked[w]) {
+                if (stack.contains(w)) stack.delete(w);
+                stack.push(w);
+            }
+            }
+        }
+        else {
+        // v's adjacency list is exhausted
+            stack.pop();
+        }
+    }
+}
+```
+
+Here is yet another implementation. It is, perhaps, the simplest nonrecursive implementation, but it uses space proportional to E + V in the worst case (because more than one copy of a vertex can be on the stack) and it explores the vertices adjacent to v in the reverse order of the standard recursive DFS. Also, an edgeTo[v] entry may be updated more than once, so it may not be suitable for backtracking applications.
+
+```
+private void dfs(Graph G, int s) {
+    Stack<Integer> stack = new Stack<Integer>();
+    stack.push(s);
+    while(!stack.isEmpty()) {
+        int v = stack.pop();
+        if (!marked[v]) {
+            marked[v] = true;
+            for (int w : G.adj(v)) {
+            if (!marked[w]) {
+                edgeTo[w] = v;
+                stack.push(w);
+            }
+            }
+        }
+    }
+}
+```
+
+29. **Nonrecursive depth-first search**. Explain why the following nonrecursive method (analogous to BFS but using a stack instead of a queue) does not implement depth-first search.
+
+```
+private void dfs(Graph G, int s) {
+    Stack<Integer> stack = new Stack<Integer>();
+    stack.push(s);
+    marked[s] = true;
+    while (!stack.isEmpty()) {
+        int v = stack.pop();
+        for (int w : G.adj(v)) {
+        if (!marked[w]) {
+            stack.push(w);
+            marked[w] = true;
+            edgeTo[w] = v;
+        }
+        }
+    }
+}
+```
+*Solution*: Consider the graph consisting of the edges 0-1,0-2,1-2, and 2-1, with vertex 0 as the source.
+
+30. **Matlab connected components**. bwlabel() or bwlabeln() in Matlab label the connected components in a 2D or kD binary image. bwconncomp() is newer version.
+
+31. **Shortest path in complement graph**. Given a graph G, design an algorithm to find the shortest path (number of edges) between s and every other vertex in the complement graph G'. The complement graph contains the same vertices as G but includes an edge v-w if and only if the edge v-w is not in G. Can you do any better than explicitly computing the complement graph G' and running BFS in G'?
+
+32. **Delete a vertex without disconnecting a graph**. Given a connected graph, design a linear-time algorithm to find a vertex whose removal (deleting the vertex and all incident edges) does not disconnect the graph.
+
+*Hint 1(using DFS)*: run DFS from some vertex s and consider the first vertex in DFS that finishes.
+*Hint 2(using BFS)*: run BFS from some vertex s and consider any vertex with the highest distance.
+
+33. **Spanning tree**. Design an algorithm that computes a spanning tree of a connected graph is time proportional to V + E. 
+*Hint*: use either BFS or DFS.
+
+34. **All paths in a graph**. Write a program AllPaths.java that enumerates all simple paths in a graph between two specified vertices. 
+*Hint*: use BFS and backtracking. Warning: there many be exponentially many simple paths in a graph, so no algorithm can run efficiently for large graphs.
 
 
 

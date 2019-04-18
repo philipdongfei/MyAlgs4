@@ -51,3 +51,11 @@
 ## Chapter 3.5
 
 - [VMAs (virtual memory areas)](https://web.stanford.edu/~blp/papers/libavl-abstract.pdf)
+
+## Chapter 4.1
+
+- [Sierpinski triangle](https://en.wikipedia.org/wiki/Sierpinski_gasket)
+- [Wiener index] (https://en.wikipedia.org/wiki/Wiener_index)
+- [coupon collector](https://en.wikipedia.org/wiki/Coupon_collector%27s_problem)
+- [gambler's ruin](https://en.wikipedia.org/wiki/Gambler%27s_ruin)
+-

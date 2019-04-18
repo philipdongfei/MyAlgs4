@@ -44,7 +44,6 @@ public class BFP_Stack
                     distTo[w] = distTo[v] + 1;//adj(v) = v + 1
                     marked[w] = true;  // mark it because path is known,
                     //queue.enqueue(w);  // and add it to the queue.
-                    st.push(w);
                 }
             }
         }
