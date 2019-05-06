@@ -59,3 +59,9 @@
 - [coupon collector](https://en.wikipedia.org/wiki/Coupon_collector%27s_problem)
 - [gambler's ruin](https://en.wikipedia.org/wiki/Gambler%27s_ruin)
 -
+
+## Chapter 4.2
+
+- [Conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)
+- [2-SAT](https://en.wikipedia.org/wiki/2-satisfiability)
+-

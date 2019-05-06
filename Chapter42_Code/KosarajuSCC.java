@@ -64,5 +64,27 @@ public class KosarajuSCC
                 StdOut.print(v + " ");
             StdOut.println();
         }
+        
+        StdOut.println();
+        StdOut.println("G^R Digraph has the same strong components. ");
+        KosarajuSCC sccr = new KosarajuSCC(G.reverse());
+
+        // number of connected components
+        m = sccr.count();
+        StdOut.println(m + " strong components");
+
+        // compute list of vertices in each strong component
+        Queue<Integer>[] components_r = (Queue<Integer>[])new Queue[m];
+        for (int i = 0; i < m; i++){
+            components_r[i] = new Queue<Integer>();
+        }
+        for (int v = 0; v < G.V(); v++)
+            components_r[sccr.id(v)].enqueue(v);
+
+        for (int i = 0; i < m; i++){
+            for (int v : components_r[i])
+                StdOut.print(v + " ");
+            StdOut.println();
+        }
     }
 }
