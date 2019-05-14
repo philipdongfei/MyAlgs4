@@ -312,3 +312,18 @@ Theorem. If the kernel DAG of G has a single supernode with no leaving edges, th
 
 *Solution*. Create a new digraph G' with two vertices v and v' for each vertex v in G. For each edge v->w in G, include two edges: v->w' and w->v'. Now, any path from s to v' in G' corresponds to an odd-length path from s to v in G. Run either BFS or DFS to determine the vertices reachable from s.
 
+41. Find a topological order of a DAG that cannot be computed as the reverse postorder of a DFS, no matter in which order the DFS chooses starting vertices in the constructor. Show that every topological order of a DAG can be computed as the reverse postorder of a DFS, provided that the DFS can choose the order of the starting vertices in the constructor arbitrarily.
+
+42. **Nonrecursive DFS**. Write a program NonrecursiveDirectedDFS.java that implements depth-first search using an explicit stack instead of recursion. Write a program NonrecursiveDirectedCycle.java that find a directed cycle without using recursion.
+
+43. **Nonrecursive topological sort**. Extend the queue-based topological sort algorithm TopologicalX.java from Exercise 4.2.39 to find a directed cycle if the digraph has a directed cycle. Name your program DirectedCycle.java
+
+44. **Cartalk puzzle**. Find the longest word in a dictionary that has the property that you can remove one letter at a time (from either end or the middle) and the resulting string is also a word in the dictionary. For example, STRING is a 6-letter word with this property (STRING->STING->SING->SIN->IN->I)
+
+45. **Reverse postorder vs. preorder. True or false: The reverse postorder of a digraph is the same as the preorder of the digraph.
+
+46. **Reverse postorder vs. preorder in Kosaraju-Sharir**. Suppose that you use the preorder of the digraph instead of the reverse postorder in the Kosaraju-Sharir algorithm. Will it still produce the strong components?
+
+*Answer*: No, run KosarajuSharirPreorderSCC.java on tinyDG.txt
+
+
