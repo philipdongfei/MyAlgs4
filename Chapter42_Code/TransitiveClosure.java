@@ -12,7 +12,17 @@ public class TransitiveClosure {
             all[v] = new DirectedDFS(G, v);
     }
     public boolean reachable(int v, int w)
-    { return all[v].marked(w); }
+    { 
+        validateVertex(v);
+        validateVertex(w);
+        return all[v].marked(w); 
+    }
+    private void validateVertex(int v) {
+        int V = all.length;
+        if (v < 0 || v >= V)
+            throw new IllegalArgumentException("vertex " + 
+                    v + " is not between 0 and " + (V-1));
+    }
 
     public static void main(String[] args) {
         In in = new In(args[0]);
