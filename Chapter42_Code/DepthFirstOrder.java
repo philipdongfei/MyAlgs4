@@ -41,4 +41,19 @@ public class DepthFirstOrder
     { return post; }
     public Iterable<Integer> reversePost()
     { return reversePost; }
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        Digraph G = new Digraph(in);
+
+        DepthFirstOrder dfo = new DepthFirstOrder(G);
+        StdOut.println("pre: ");
+        for (int v : dfo.pre())
+            StdOut.print(v + " ");
+        StdOut.println();
+        StdOut.println("post: ");
+        for (int v : dfo.post())
+            StdOut.print(v + " ");
+        StdOut.println();
+
+    }
 }

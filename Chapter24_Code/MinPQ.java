@@ -13,6 +13,9 @@ public class MinPQ<Key extends Comparable<Key>>{
     public MinPQ(int maxN) {
         pq = (Key[]) new Comparable[maxN+1];
     }
+    public MinPQ(){
+        this(1);
+    }
     public boolean isEmpty(){
         return N == 0; 
     }
