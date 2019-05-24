@@ -117,9 +117,79 @@ public Iterable<Edge> edges()
 }
 ```
 
+##Creative Problems
+
+4.3.22 **Minimum spanning forest**. Develop versions of Prim's and Kruskal's algorithms that compute the minimum spanning forest of an edge-weighted graph that is not necessarily connected.
+
+*Solution*. PrimMST.java and KruskalMST.java accomplish this.
+
+4.3.23 *Vyssotsky's algorithm*. Develop an implementation that computes the MST by applying the cycle property (see EXERCISE 4.3.8) repeatedly: Add edges one at a time to a putative tree, deleting a maximum-weight edge on the cycle if one is formed. Note: This method has received less attention than the others that we consider because of the comparative difficulty of maintaining a data structure that supports efficient implementation of the "delete the maximum-weight
+edge on the cycle" operation.
+
+4.3.24 *Reverse-delete algorithm*. Develop an implementation that computes the MST as follows: Start with a graph containing all of the edges. Then repeatedly go through the edges in decreasing order of weight. For each edge, check if deleting that edge will disconnect the graph; if not, delete it. Prove that this algorithm computes the MST. What is the order of growth of the number of edge-weight compares performed by your implementation?
+
+4.3.25 *Worst-case generator*. Develop a reasonable generator for edge-weighted graphs with V vertices and E edges such that the running time of the lazy version of Prim's algorithm is nonlinear. Answer the same question for the eager version.
+
+
+4.3.26 *Critical edges*. An MST edge whose deletion from the graph would cause the MST weight to increase is called a *critical edge*. Show how to find all critical edges in a graph in time proportional to E log E. Note: This question assumes that edge weights are not necessarily distinct (otherwise all edges in the MST are critical).
+
+4.3.27 *Animations*. Write a client program that does dynamic graphical animations of MST algorithms. Run your program for mediumEWG.txt to produce images like the figures on page 621 and page 624.
+
+
+4.3.28 *Space-efficient data structures*. Develop an implementation of the lazy version of Prim's algorithm that saves space by using lower-level data structures for EdgeWeightedGraph and for MinPQ instead of Bag and Edge. Estimate the amount of memory saved as a function of V and E, using the memory-cost model of SECTION 1.4.
+
+4.3.29 *Dense graphs*. Develop an implementation of Prim's algorithm that uses an eager approach (but not a priority queue) and computes the MST using V^2 edge-weight comparisons.
+
+**TODO**.
+
+4.3.30 *Euclidean weighted graphs*. Modify your solution to EXERCISE 4.1.37 to create an API EuclideanEdgeWeightedGraph for graphs whose vertices are points in the plane, so that you can work with graphical representations.
+
+4.3.31 *MST weights*. Develop implementations of weight() for LazyPrimMST, PrimMST, and KruskalMST, using a lazy strategy that iterates through the MST edges when the client calls weight(). Then develop alternate implementations that use an eager strategy that maintains a running total as the MST is computed.
+
+4.3.32 *Specified set*. Given a connected edge-weighted graph G and a specified set of edges S (having no cycles), describe a way to find a minimum-weight spanning tree of G that contains all the edges in S.
+
+4.3.33 *Certification*. write a method check() that uses the following cut optimality conditions to verify that a proposed set of edges is in fact an MST: A set of edges is an MST if it is a spanning tree and every edge is a minimum-weight edge in the cut defined by removing that edge from the tree. What is the order of growth of the running time of your method?
+
+##Experiments
+
+4.3.43 **Boruvka's algorithm**. Develop an implementation BoruvkaMST.java of Boruvka's algorithm: Build an MST by adding edge to a growing forest of trees, as in Kruskal's algorithm, but in stages. At each stage, find the minimum-weight edge that connects each tree to a different one, then add all such edges to the MST. Assume that the edge weights are all different, to avoid cycles. Hint: Maintain in a vertex-indexed array to identify the edge that connects each component to its nearest
+neighbor, and use the union-find data structure.
+
+*Remark*. There are a most log V phases since number of trees decreases by at least a factor of 2 in each phase. Attractive because it is efficient and can be run in parallel.
+
+
+##Web Exercises
+
+1. **Minimum bottleneck spanning tree**. A minimum bottleneck spanning tree of an edge-weighted graph G is a spanning tree of G such that minimizes the maximum weight of any edge in the spanning tree. Design an algorithm to find a mimimum bottleneck spanning tree.
+
+*Solution*. Every MST is a minimum bottleneck spanning tree (but not necessarily the converse). This can be proved using the cut property.
+
+2. **Minimum median spanning tree**. A minimum median spanning tree of an edge-weighted graph G is a spanning tree of G such that minimizes the median of its weights. Design an efficient algorithm to find a minimum median spanning tree.
+*Solution*. Every MST is a minimum median spanning tree (but not necessarily the converse).
+
+2. **Minimum median spanning tree**. A minimum median spanning tree of an edge-weighted graph G is a spanning tree of G such that minimizes the median of its weights. Design an efficient algorithm to find a minimum median spanning tree.
+*Solution*. Every MST is a minimum median spanning tree (but not necessarily the converse).
+
+3. **Maze generation**. Create a maze using a randomized version of Kruskal or Prim's algorithm.
+
+
+4. **Unique MST**. Design an algorithm to determine if the MST is unique for a given graph G.
+
+5. **Random spanning tree**. Given a graph G, generate a spanning tree of G, uniformly at random. Using the following remarkable theorem of Aldous and Broder: Start at an arbitrary vertex s and take a random walk until every vertex has been visited(choosing an outgoing edge uniformly at random among all incident edges). If a vertex has never been visited before, add the edge to that vertex to the spanning tree T. Then T is a uniformly random spanning tree of G. The expected running time is bounded by the cover time of G, which is at most proportional to EV.
+
+6. **Minimum-weight feedback edge set**. a feedback edge set of a graph is a subset of edges that contains at least one edge from every cycle in the graph. If the edges of a feedback edge set are removed, the resulting graph will be acyclic. Design an efficient algorithm to find a feedback edge set of Minimum weight in an edge-weighted graph with positive edge weights.
+
+7. **Distribution of edge weights in two MSTs**. Suppose than an edge-weighted digraph has two MSTs T1 and T2. Prove that if T1 has k edges of weight w, then T2 has k edges of weight w.
+
+8. **USA Computing Olympiad problem**. In a city there are N house, each of which is in need of a water supply. It costs w[i] dollars to build a well at house i, and it costs c[i][j] to build a pipe in between houses i and j. A house can receive water if either there is a well built there or there is some path of pipes to a house with a well. Design an algorithm to find the Minimum amount of money needed to supply every house with water.-->
+
+*Solution*.: Create an edge-weighted graph with N+1 vertices (one for each hourse plus a source vertex x). Include an edge between every pair of vertices i and j with cost[i][j] (to represent the potential pipes). Include an edge between the source s and every house i with cost w[i] (to represent the potential open wells). Find an MST in this edge-weighted graph.
 
 
 
+9. **Spanning tree with exactly k orange edges**. Given a graph with edges colored either orange or black, design a linearithmic algorithm to find a spanning tree that contains exactly k orange edges (or report that no such spanning tree exists).
+
+10. **Minimum variance spanning tree**. Given a connected edge weighted graph, find a minimum spanning tree that minimizes the variance of its edge weights.
 
 
 
