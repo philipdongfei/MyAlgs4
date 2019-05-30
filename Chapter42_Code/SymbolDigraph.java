@@ -38,7 +38,11 @@ public class SymbolDigraph
     public boolean contains(String s) { return st.contains(s); }
     public int index(String s)   { return st.get(s); }
     public String name(int v)  { return keys[v]; }
+    @Deprecated
     public Digraph G()    { return G; }
+    public Digraph digraph(){
+        return G;
+    }
 
     public static void main(String[] args)
     {

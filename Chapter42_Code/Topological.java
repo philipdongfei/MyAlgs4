@@ -15,6 +15,13 @@ public class Topological
             order = dfs.reversePost();
         }
     }
+    public Topological(EdgeWeightedDigraph G){
+        EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G);
+        if (!finder.hasCycle()){
+            DepthFirstOrder dfs = new DepthFirstOrder(G);
+            order = dfs.reversePost();
+        }
+    }
     public Iterable<Integer> order()
     { return order;  }
     public boolean isDAG()
@@ -25,12 +32,8 @@ public class Topological
         String separator = args[1];
         SymbolDigraph sg = new SymbolDigraph(filename, separator);
 
-        Topological top = new Topological(sg.G());
-        if (top.isDAG()) {
-            for (int v : top.order())
-                StdOut.println(sg.name(v));
-        }
-        else
-            StdOut.println("isDAG: " + top.isDAG());
+        Topological top = new Topological(sg.digraph());
+        for (int v : top.order())
+            StdOut.println(sg.name(v));
     }
 }
