@@ -7,14 +7,14 @@ import edu.princeton.cs.algs4.Stack;
 public class EdgeWeightedDirectedCycle
 {
     private boolean[] marked;
-    private int[] edgeTo;
-    private Stack<Integer> cycle;    // vertices on a cycle (if one exists)
+    private DirectedEdge[] edgeTo;
+    private Stack<DirectedEdge> cycle;    // vertices on a cycle (if one exists)
     private boolean[] onStack;    // vertices on recursive call stack
 
     public EdgeWeightedDirectedCycle(EdgeWeightedDigraph G)
     {
         onStack = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
         marked = new boolean[G.V()];
         for (int v = 0; v < G.V(); v++)
             if (!marked[v]) dfs(G, v);
@@ -30,16 +30,19 @@ public class EdgeWeightedDirectedCycle
             if (this.hasCycle()) return;
             else if (!marked[w])
             {
-                edgeTo[w] = v;
+                edgeTo[w] = e;
                 dfs(G, w);
             }
             else if (onStack[w])
             {
-                cycle = new Stack<Integer>();
-                for (int x = v; x != w; x = edgeTo[x])
-                    cycle.push(x);
-                cycle.push(w);
-                cycle.push(v);
+                cycle = new Stack<DirectedEdge>();
+                DirectedEdge f = e;
+                while (f.from() != w){
+                    cycle.push(f);
+                    f = edgeTo[f.from()];
+                }
+                cycle.push(f);
+                return;
             }
 
         }
@@ -49,7 +52,7 @@ public class EdgeWeightedDirectedCycle
     {
         return cycle != null;
     }
-    public Iterable<Integer> cycle()
+    public Iterable<DirectedEdge> cycle()
     { 
         return cycle;
     }
@@ -57,12 +60,18 @@ public class EdgeWeightedDirectedCycle
     private boolean check() {
         if (hasCycle()) {
             // verify cycle
-            int first = -1, last = -1;
-            for (int v : cycle()) {
-                if (first == -1) first = v;
-                last = v;
+            DirectedEdge first = null, last = null;
+            for (DirectedEdge e : cycle()) {
+                if (first == null) first = e;
+                if (last != null){
+                    if (last.to() != e.from()){
+                        System.err.printf("cycle edges %s and %s not incident\n", last, e);
+                        return false;
+                    }
+                }
+                last = e;
             }
-            if (first != last) {
+            if (first.from() != last.to()) {
                 System.err.printf("cycle begins with %d and ends with %d\n", first, last);
                 return false;
             }
@@ -70,14 +79,15 @@ public class EdgeWeightedDirectedCycle
         return true;
     }
     public static void main(String[] args) {
+        
         In in = new In(args[0]);
         EdgeWeightedDigraph G = new EdgeWeightedDigraph(in);
 
         EdgeWeightedDirectedCycle finder = new EdgeWeightedDirectedCycle(G);
         if (finder.hasCycle()){
             StdOut.print("Directed cycle: ");
-            for (int v : finder.cycle())
-                StdOut.print(v + " ");
+            for (DirectedEdge e : finder.cycle())
+                StdOut.print(e + " ");
             StdOut.println();
         }
         else
