@@ -48,6 +48,12 @@ public class CPM
         for (int i = 0; i < N; i++)
             StdOut.printf("%4d: %5.1f\n", i, lp.distTo(i));
         StdOut.printf("Finish time: %5.1f\n", lp.distTo(t));
+        StdOut.println(s + " to " + t);
+        if (lp.hasPathTo(t))
+            for (DirectedEdge e : lp.pathTo(t))
+                if (e.)
+                StdOut.print(e + "  ");
+        StdOut.println();
     }
 
 }

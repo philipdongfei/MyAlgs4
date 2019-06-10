@@ -29,8 +29,21 @@ public class EdgeWeightedDigraph
             DirectedEdge e = new DirectedEdge(v, w, weight);
             addEdge(e);
         }
-
     }
+    public EdgeWeightedDigraph(In in, double smallest)
+    {
+        this(in.readInt());
+        int E = in.readInt();
+        if (E < 0) throw new IllegalArgumentException("Number of edges must be nonnegative");
+        for (int i = 0; i < E; i++) {
+            int v = in.readInt();
+            int w = in.readInt();
+            double weight = in.readDouble() + smallest;
+            DirectedEdge e = new DirectedEdge(v, w, weight);
+            addEdge(e);
+        }
+    }
+
     public int V() { return V; }
     public int E() { return E; }
     public void addEdge(DirectedEdge e)
