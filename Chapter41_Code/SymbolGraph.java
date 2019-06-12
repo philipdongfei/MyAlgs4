@@ -45,13 +45,22 @@ public class SymbolGraph
         String filename = args[0];
         String delim = args[1];
         SymbolGraph sg = new SymbolGraph(filename, delim);
+        StdOut.println("sg done");
         Graph G = sg.G();
+        StdOut.println("G done");
 
         while (StdIn.hasNextLine())
         {
             String source = StdIn.readLine();
-            for (int w : G.adj(sg.index(source)))
-                StdOut.println("   " + sg.name(w));
+            if (sg.contains(source)) {
+                StdOut.println("source: " + source);
+                for (int w : G.adj(sg.index(source)))
+                    StdOut.println("   " + sg.name(w));
+
+            }
+            else {
+                StdOut.println("input not contain '" + source + "'");
+            }
         }
     }
 }

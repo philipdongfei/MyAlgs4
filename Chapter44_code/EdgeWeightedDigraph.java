@@ -1,4 +1,6 @@
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Bag;
 
 public class EdgeWeightedDigraph
@@ -11,6 +13,7 @@ public class EdgeWeightedDigraph
     
     public EdgeWeightedDigraph(int V)
     {
+        StdOut.println("Init V = " + V);
         this.V = V;
         this.E = 0;
         adj = (Bag<DirectedEdge>[]) new Bag[V];
@@ -20,6 +23,19 @@ public class EdgeWeightedDigraph
     public EdgeWeightedDigraph(In in)
     {
         this(in.readInt());
+        int E = in.readInt();
+        if (E < 0) throw new IllegalArgumentException("Number of edges must be nonnegative");
+        for (int i = 0; i < E; i++) {
+            int v = in.readInt();
+            int w = in.readInt();
+            double weight = in.readDouble();
+            DirectedEdge e = new DirectedEdge(v, w, weight);
+            addEdge(e);
+        }
+    }
+    public EdgeWeightedDigraph(In in, int dummyV)
+    {
+        this(in.readInt()+dummyV);
         int E = in.readInt();
         if (E < 0) throw new IllegalArgumentException("Number of edges must be nonnegative");
         for (int i = 0; i < E; i++) {

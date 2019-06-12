@@ -71,6 +71,18 @@ It would continuously enqueue and dequeue the vertices that are part of the nega
 
 4.4.21 Show, in the style of the trace in the text, the process of computing the SPT with the Bellman-Ford algorithm for the edge-weighted digraph of EXERCISE 4.4.5.
 
+4.4.22 *Vertex weights*. Show that shortest-paths computations in edge-weighted digraphs with nonnegative weights on vertices (where the weight of a path is defined to be the sum of the weights of the vertices) can be handled by building an edge-weighted digraph that has weights on only the edges.
+
+4.4.23 *Source-sink shortest paths*. Develop an API and implementation that use a version of Dijkstra's algorithm to solve the *source-sink* shortest path problem on edgeweighted digraphs.
+
+4.4.24 *Multisource shortest paths*. Develop an API and implementation that uses Dijkstra's algorithm to solve the *multisource* shortest-paths problem on edge-weighted digraphs with positive edge weights: given a set of sources, find a shortest-paths forest that enables implementation of a method that returns to clients the shortest path from any source to each vertex. Hint: Add a dummy vertex with a zero-weight edge to each source, or initialize the priority queue with all sources,
+with their distTo[] entries set to 0.
+
+
+4.4.25 *Shortest path between two subsets*. Given a digraph with positive edge weights, and two distinguished subsets of vertices S and T, find a shortest path from any vertex in S to any vertex in T. Your algorithm should run in time proportional to ElogV, in the worst case.
+
+
+
 
 
 
