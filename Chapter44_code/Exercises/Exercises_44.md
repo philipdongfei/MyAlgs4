@@ -81,6 +81,16 @@ with their distTo[] entries set to 0.
 
 4.4.25 *Shortest path between two subsets*. Given a digraph with positive edge weights, and two distinguished subsets of vertices S and T, find a shortest path from any vertex in S to any vertex in T. Your algorithm should run in time proportional to ElogV, in the worst case.
 
+4.4.26 *Single-source shortest paths in dense graphs*. Develop a version of Dijkstra's algorithm that can find the SPT from a given vertex in a dense edge-weighted digraph in time proportional to V^2. Use an ajdacency-matrix representation (See EXERCISE 4.4.3 and EXERCISE 4.3.29)
+
+4.4.27 *Shortest paths in Euclidean graphs*. Adapt our APIs to speed up Dijkstra's algorithm in the case where it is known that vertices are points in the plane.
+
+*Solution*: [reference](http://www.informit.com/articles/article.aspx?p=169575&seqNum=6)
+
+4.4.28 *Longest paths in DAGs*. Develop an implementation AcyclicLP that can solve the longest-paths problem in edge-weighted DAGs, as described in PROPOSITION T.
+
+
+
 
 
 

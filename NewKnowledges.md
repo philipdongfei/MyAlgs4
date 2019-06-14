@@ -65,3 +65,8 @@
 - [Conjunctive normal form](https://en.wikipedia.org/wiki/Conjunctive_normal_form)
 - [2-SAT](https://en.wikipedia.org/wiki/2-satisfiability)
 -
+## Chapter 4.3
+
+## Chapter 4.4
+
+
