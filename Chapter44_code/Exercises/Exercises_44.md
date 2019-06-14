@@ -86,6 +86,9 @@ with their distTo[] entries set to 0.
 4.4.27 *Shortest paths in Euclidean graphs*. Adapt our APIs to speed up Dijkstra's algorithm in the case where it is known that vertices are points in the plane.
 
 *Solution*: [reference](http://www.informit.com/articles/article.aspx?p=169575&seqNum=6)
+Ex27_*.java, not find util.DrawUtilities & EdgeWeightedDigraphInterface
+
+
 
 4.4.28 *Longest paths in DAGs*. Develop an implementation AcyclicLP that can solve the longest-paths problem in edge-weighted DAGs, as described in PROPOSITION T.
 
