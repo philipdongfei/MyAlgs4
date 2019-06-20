@@ -68,5 +68,6 @@
 ## Chapter 4.3
 
 ## Chapter 4.4
-
+-[Kempe Tree](https://bababadalgharaghtakamminarronnkonnbro.blogspot.com/2012/06/kempe-tree-data-structure-for.html)
+-
 

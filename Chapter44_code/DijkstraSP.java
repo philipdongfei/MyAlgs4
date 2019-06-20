@@ -53,6 +53,9 @@ public class DijkstraSP {
             path.push(e);
         return path;
     }
+    public DirectedEdge edgeTo(int v){
+        return edgeTo[v];
+    }
     public static void main(String[] args){
         EdgeWeightedDigraph G;
         G = new EdgeWeightedDigraph(new In(args[0]));

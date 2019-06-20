@@ -63,6 +63,9 @@ public class BellmanFordSP
             path.push(e);
         return path;
     }
+    public DirectedEdge edgeTo(int v){
+        return edgeTo[v];
+    }
     private void findNegativeCycle()
     {
         int V = edgeTo.length;

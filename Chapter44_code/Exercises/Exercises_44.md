@@ -92,11 +92,35 @@ Ex27_*.java, not find util.DrawUtilities & EdgeWeightedDigraphInterface
 
 4.4.28 *Longest paths in DAGs*. Develop an implementation AcyclicLP that can solve the longest-paths problem in edge-weighted DAGs, as described in PROPOSITION T.
 
+4.4.29 *General optimality*. Complete the proof of PROPOSITION W by showing that if there exists a directed path from s to v and no vertex on any path from s to v is on a negative cycle, then there exists a shortest path from s to v (Hint: see PROPOSITION P.)
 
 
+4.4.30 *All-pairs shortest path in graphs with negative cycles*. Articulate an API like the one implemented on page 656 for the all-pairs shortest-paths problem in graphs with no negative cycles. Develop an implementation that runs a version of Bellman-Ford to identify weights pi[v] such that for any edge v->w, the edge weight plus the difference between pi[v] and pi[w] is nonnegative. Then use these weights to reweight the graph, so that Dijkstra's algorithm is
+effective for finding all shortest paths in the reweighted graph.
 
 
+4.4.31 *All-pairs shortest path on a line*. Given a weighted line graph (undirected connected graph, all vertices of degree 2, except two endpoints which have degree 1), devise an algorithm that preprocesses the graph in linear time and can return the distance of the shortest path between any two vertices in constant time.
 
+*Partial solution*. Find a vertex s of degree 1 and run breadth-first (or depth-first) search to find the order in which the remaining vertices appear. Then, compute the length of the shortest path from s to v  each vertex v, say dist[v]. The shortest path between v and w is |dist[v] - dist[w]|
+
+
+4.4.32 *Parent-checking heuristic*. Modify Bellman-Ford to visit a vertex v only if its SPT parent edgeTo[v] is not currently on the queue. This heuristic has been reported by Cherkassky, Goldberg, and Radzik to be useful in practice. Prove that it correctly computes shortest paths and that the worst-case running time is proportional to EV.
+
+
+4.4.33 *Shortest path in a grid*. Given an N-by-N matrix of positive integers, find the shortest path from the (0,0) entry to the (N-1, N-1) entry, where the length of the path is the sum of the integers in the path. Repeat the problem but assume you can only move right and down.
+
+4.4.34 *Monotonic shortest path*. Given a weighted digraph, find a monotonic shortest path from s to every other vertex. A path is monotonic if the weight of every edge on the path is either strictly increasing or strictly decreasing. The path should be simple (no repeated vertices). Hint: Relaxedges in ascending order and find a best path; then relax edges in descending order and find a best path.
+
+4.4.35 *Bitonic shortest path*. Given a digraph, find a bitonic shortest path from s to every other vertex (if one exists). A path is bitonic if there is an intermediate vertex v such that the edges on the path from s to v are strictly increasing and the edges on the path from v to t are strictly decreasing. The path should be simple (no repeated vertices).
+
+4.4.36 *Neighbors*. Develop an SP client that finds all vertices within a given distance d of a given vertex in a given edge-weighted disgraph. The running time of your method should be proportional to the size of the subgraph induced by those vertices and the vertices incident on them, or V (to initialize data structures), whichever is larger.
+
+4.4.37 *Critical edges*. Develop an algorithm for finding an edge whose removal causes maximal increase in the shortest-paths length from one given vertex to another given vertex in a given edge-weighted digraph.
+
+*Solution*:
+[reference](https://bababadalgharaghtakamminarronnkonnbro.blogspot.com/2012/06/interviewstreet-going-office.html)
+
+4.4.38 
 
 
 

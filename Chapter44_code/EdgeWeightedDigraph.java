@@ -10,12 +10,14 @@ public class EdgeWeightedDigraph
     private final int V;    // number of vertices
     private int E;      // number of edges
     private Bag<DirectedEdge>[] adj;    // adjacency lists
+    private int[] indegree;
     
     public EdgeWeightedDigraph(int V)
     {
         StdOut.println("Init V = " + V);
         this.V = V;
         this.E = 0;
+        this.indegree = new int[V];
         adj = (Bag<DirectedEdge>[]) new Bag[V];
         for (int v = 0; v < V; v++)
             adj[v] = new Bag<DirectedEdge>();
@@ -65,6 +67,7 @@ public class EdgeWeightedDigraph
     public void addEdge(DirectedEdge e)
     {
         adj[e.from()].add(e);
+        indegree[e.to()]++;
         E++;
     }
     public Iterable<DirectedEdge> adj(int v)
@@ -88,5 +91,11 @@ public class EdgeWeightedDigraph
             s.append(NEWLINE);
         }
         return s.toString();
+    }
+    public int outdegree(int v){
+        return adj[v].size();
+    }
+    public int indegree(int v){
+        return indegree[v];
     }
 }
