@@ -120,7 +120,42 @@ effective for finding all shortest paths in the reweighted graph.
 *Solution*:
 [reference](https://bababadalgharaghtakamminarronnkonnbro.blogspot.com/2012/06/interviewstreet-going-office.html)
 
-4.4.38 
+4.4.38 *Sensitivity*. Develop an SP client that performs a Sensitivity analysis on the edge-weighted digraph's edges with respect to a given pair of vertices s and t: Compute a V-by-V boolean matrix such that, for every v and w, the entry in row v and column w is true if v->w is an edge in the edge-weighted digraphs whose weight can be increased without the shortest-path length from v to w being increased and is false otherwise.
+
+4.4.39 *Lazy implementation of Dijkstra's algorithm*. Develop an implementation LazyDijkstraSP.java of the lazy version of Dijkstra's algorithm that is described in the text.
+
+4.4.40 *Bottleneck SPT*. Show that an MST of an undirected graph is equivalent to a bottleneck SPT of the graph: For every pair of vertices v and w, it gives the path connecting them whose longest edge is as short as possible.
+
+4.4.41 *Bidirectional search*. Develop a class for the source-sink shortest-paths problem that is based on code like ALGORITHM 4.9 but that initializes the prority queue with both the source and the sink. Doing so leads to the growth of an SPT from each vertex; your main task is to decide precisely what to do when the two SPTs collide.
+
+4.4.42 *Worst case(Dijkstra)*. Describe a family of graphs with V vertices and E edges for which the worst-case running time of Dijkstra's algorithm is achieved.
+
+4.4.43 *Negative cycle detection*. Suppose that we add a constructor to ALGORITHM 4.11 that differs from the constructor given only in that it omits the second argument and that it initializes all distTo[] entries to 0. Show that, if a client uses that constructor, a client call to hasNegativeCycle() returns true if and only if the graph has a negative cycle (and negativeCycle() return that cycle).
+
+*Answer*: Consider a digraph formed from the original by adding a new source with an edge of weight 0 to all the other vertices. After one pass, all distTo[] entries are 0, and finding a negative cycle reachable from that source is the same as finding a negative cycle anywhere in the original graph.
+
+4.4.44 *Worst case (Bellman-Ford)*. Describe a family of graphs for which ALGORITHM 4.11 take time proportional to VE.
+
+4.4.45 *Fast Bellman-Ford*. Develop an algorithm that breaks the linearithmic running time barrier for the single-source shortest-paths problem in general edge-weighted digraphs for the special case where the weights are integers known to be bounded in absolute value by a constant.
+
+4.4.46 *Animate*. Write a client program that does dynamic graphical animations of Dijkstra's algorithm.
+
+4.4.47 *Bellman-Ford queue never empties*. Show that if there is a negative cycle reachable from the source in the queue-based implementation of the Bellman-Bellman algorithm, then the queue never empties.
+
+*Solution*: Consider a negative cycle and suppose that distTo[w] <= distTo[v] + length(v, w) for all edges on cycle W. Summing up this inequality for all edges on the cycle implies that the length of the cycle is nonnegative.
+
+4.4.48 *Bellman-Ford negative cycle detection*. Show that if any edge is relaxed during the Vth pass of the generic Bellman-Ford algorithm, then the edgeTo[] array has a directed cycle and any such cycle is a negative cycle.
+
+*Solution*: todo.
+
+
+
+
+
+
+
+
+
 
 
 
