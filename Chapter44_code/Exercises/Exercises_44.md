@@ -188,6 +188,22 @@ effective for finding all shortest paths in the reweighted graph.
 [reference](https://en.wikipedia.org/wiki/Suurballe%27s_algorithm).
 
 
+Suurballe's algorithm performs the following steps:
+
+1. Find the shortest path tree T rooted at node s by running Dijkstra's algorithm (figure C). This tree contains for every vertex u, a shortest path from s to u. Let P1 be the shortest cost path from s to t (figure B). The edges in T are called tree edges and the remaining edges (the edges missing from figure C) are called non-tree edges.
+
+
+2. Modify the cost of each edge in the graph by replacing the cost w(u,v) of every edge (u,v) by w′(u,v) = w(u,v) − d(s,v) + d(s,u). According to the resulting modified cost function, all tree edges have a cost of 0, and non-tree edges have a non-negative cost. For example: 
+If u=B, v=E, then w′(u,v) = w(B,E) − d(A,E) + d(A,B) = 2 − 3 + 1 = 0 
+If u=E, v=B, then w′(u,v) = w(E,B) − d(A,B) + d(A,E) = 2 − 1 + 3 = 4
+
+3. Create a residual graph Gt formed from G by removing the edges of G on path P1 that are directed into s and then reverse the direction of the zero length edges along path P1 (figure D).
+
+4. Find the shortest path P2 in the residual graph Gt by running Dijkstra's algorithm (figure E).
+
+5. Discard the reversed edges of P2 from both paths. The remaining edges of P1 and P2 form a subgraph with two outgoing edges at s, two incoming edges at t, and one incoming and one outgoing edge at each remaining vertex. Therefore, this subgraph consists of two edge-disjoint paths from s to t and possibly some additional (zero-length) cycles. Return the two disjoint paths from the subgraph.
+
+
 
 
 
