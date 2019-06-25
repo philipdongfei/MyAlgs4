@@ -148,6 +148,51 @@ effective for finding all shortest paths in the reweighted graph.
 
 *Solution*: todo.
 
+##Web Exercise
+
+1. **Optimal substructure property**. Prove that every subpath on a shortest path from v to w is also a shortest path between the two endpoints.
+
+2. **Unique shortest path tree**. Suppose that there is a unique shortest path from s to every other vertex. Prove that the SPT is unique.
+
+3. **No negative cycles**. Prove that if the generic algorithm terminates, then there are no negative cycles reachable from s. Hint: upon termination, all edges reachable from s satisfy distTo[w] <= distTo[v] + e.weight(). Add up this inequality for all edges along a cycle.
+
+4. **Predecessor graph**. True or false. During execution of Bellman-Ford in an edge-weighted digraph with no negative cycles, following the edgeTo[] array always yields a path back to s. Repeat the question for Dijkstra's algorithm.
+
+5. **Yen's improvement to Bellman-Ford**. Partition the edges into two DAGs A and B: A consists of edges that go from a lower indexed vertex to a higher indexed vertex; B consists of edges that go from a higher indexed vertex to a lower indexed vertex. When iterating through all the edges in a phase of Bellman-from, first iterate through the edges in A in ascending order of vertex number (a topological order of A), then iterate through the edges in B in descending order of vertex number (a topological order of B). When iterating through the edges in A, any path in the SPT that starts at a vertex with the correct distTo[] value and uses only edges in A results in the correct distTo[] value; similarly for B. The number of passes needed is the maximum number of A-B alternations on a path, which is at most (V+1)/2. Thus, the number of passes is at most(V+1)/2 instead of V.
+
+
+6. **Replacement paths**. Given an edge-weighted digraph with nonnegative weights and source s and sink t, design an algorithm to find the shortest path from s to t that does not use edge e for edge e. The order of growth of your algorithm should be E V log V.
+
+
+7. **Road network data sets**.
+- From the DIMACS challenge. Here are all the roads in each state.
+- rome99.txt is a large portioin of the directed road network of Rome from the DIMACS challenge. The graph contains 3353 vertices and 8870 edges. Vertices correspond to intersections between  roads and edges correspond to roads or road segments. The edge weights are distances in meters.
+- NYC.txt is the undirected road network of New York City. The graph contains 264346 vertices and 733846 edges.It is connected, contains parallel edges, but no self-loops. The edge weights are travel times and are strictly positive.
+
+
+8. **Internet routing**. OSPF(Open shortest Path First) is a widely used protocol for Internet routing that uses Dijkstra's algorithm. RIP(Routing Information Protocol) is another routing protocol based on the Bellman-Ford algorithm.
+
+9. **Shortest path with the ability to skip one edge**.Given an edge-weighted digraph with nonnegative weights, Design an E log V algorithm for finding the shortest path from s to t where you have the option to change the weight of any one edge to 0.
+
+*Solution*. Compute the shortest path from s to every other vertex; compute the shortest path from every vertex to t. For each edge e = (v, w), compute the sum of the length of the shortest path from s to v and the length of the shortest path from w to t. The smallest such sum provides the shortest such path.
+
+10. **Shortest paths in undirected graphs**. Write a program DijkstraUndirectedSP.java that solves the single-source shortest path problems in undirected graphs with nonnegative weights using Dijkstra's algorithm.
+
+11. **Floyd-Warshall algorithm**. FloydWarshall.java implements the Floyd-Warshall algorithm for the all-pairs shortest path problem. It takes time proportional to V^3 and space proportional to V^2. It uses AdjMatrixEdgeWeightedDigraph.java
+
+12. **Randomized Bellman-Ford**. Suppose that we choose the vertex order in Yen's algorithm uniformly at randomly (where A contains all the edges that go from a lower vertex in the permutation to a higher vertex). Prove that the expected number of passes is at most (V+1)/3.
+
+13. **Suurball's algorithm**. Given a digraph with non-negative edge weights and two distinguished vertices s and t, find two edge-disjoint paths from s to t such that the sum of the weights of the two paths is minimized.
+
+*Solution*. This can be done with a clever application of Dijkstra's algorithm, known as Suurball's algorithm.
+[reference](https://en.wikipedia.org/wiki/Suurballe%27s_algorithm).
+
+
+
+
+
+
+
 
 
 
