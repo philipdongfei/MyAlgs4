@@ -19,6 +19,11 @@ public class DoublingTest
     }
     public static void main(String[] args)
     {// Print table of runnint times.
+        /*
+        String a = "GCCTGGCGTCTGTAC";
+        String codon = a.substring(6, 9);
+        StdOut.println("codon: " + codon);
+        */
         for (int N = 250; true; N += N)
         { // Print time for problem size N.
             double time = timeTrial(N);
