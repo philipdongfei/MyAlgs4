@@ -10,8 +10,10 @@ public class MSD {
     private static final int CUTOFF = 15;
     
     private static int R = 256; // radix
-    private static final int M = 15; // cutoff for small subarrays
+    private static final int M = 10; // cutoff for small subarrays
     private static String[] aux; // auxiliary array for distribution
+
+    private MSD(){}
 
     private static int charAt(String s, int d){
         if (d < s.length()) 
@@ -25,26 +27,68 @@ public class MSD {
         aux = new String[N];
         sort(a, 0, N-1, 0);
     }
+
     private static void sort(String[] a, int lo, int hi, int d){
         // Sort from a[lo] to a[hi], starting at the dth character.
         if (hi <= lo + M)
         {
+            StdOut.println("insertion: " + lo + ", " + hi);
             //Insertion.sort(a, lo, hi); 
             insertion(a, lo, hi, d);
             return;
         }
+        StdOut.println("sort(a, " + lo + ", " + hi + ")");
         int[] count = new int[R+2]; // Compute frequency counts
+        
         for (int i = lo; i <= hi; i++)
-            count[charAt(a[i], d)+2]++;
+        {
+            int c = charAt(a[i], d);
+            count[c+2]++;
+         //   StdOut.println("c = " + c + ", " + count[c+2]);
+        } 
+        /*
+        for (int i = 0; i < (R+2); i++)
+            StdOut.println("i = " + i + "," + count[i]);
+        StdOut.println("Transform counts: ");
+        */
         for (int r = 0; r < R+1; r++) //Transform counts to indices
-            count[r+1] = count[r];
+        {
+            count[r+1] += count[r];
+            /*
+            if (count[r+1] > 0)
+                StdOut.println("count[" + (r+1) + "] = " + count[r+1]);
+            */
+
+        }
+        
+        //StdOut.println("Distribute: ");
         for (int i = lo; i <= hi; i++) // Distribute.
-            aux[count[charAt(a[i], d) + 1]++] = a[i];
+        {
+            int c = charAt(a[i], d);
+         //   StdOut.println("aux[" + count[c+1]+1 + "]=" + a[i]);
+            aux[count[c + 1]++] = a[i];
+
+        }
+        StdOut.println("Copy back: ");
         for (int i = lo; i <= hi; i++) // Copy back
+        {
             a[i] = aux[i-lo];
+            
+            //StdOut.println("i = " + i + ", aux[" + (i-lo) + "] = " + aux[i-lo]);
+
+        }
+        //StdOut.println("Recursively sort");
         // Recursively sort for each character value.
         for (int r = 0; r < R; r++)
+        {
+            int l = lo + count[r];
+            int h = lo + count[r+1] - 1;
+            
+            //StdOut.println("r = " + r + ":  sort(a, " + l + ", " + h + ", " + (d+1) +  ")");
             sort(a, lo+count[r], lo+count[r+1]-1, d+1);
+
+        }
+        //StdOut.println();
 
     }
     // insertion sort a[lo..hi], starting at dth character
@@ -122,19 +166,23 @@ public class MSD {
     
 
     public static void main(String[] args){
-        /*
         StdOut.println("String sort: ");
         String[] a = StdIn.readAllStrings();
         int N = a.length;
+        for (int i = 0; i < N; i++)
+            StdOut.println(a[i]);
+        StdOut.println();
+
         sort(a);
         for (int i = 0; i < N; i++)
             StdOut.println(a[i]);
-        */
+        /*
         StdOut.println("int sort: ");
         int[] b = StdIn.readAllInts();
         int N = b.length;
         sort(b);
         for (int i = 0; i < N; i++)
             StdOut.println(b[i]);
+            */
     }
 }
