@@ -15,6 +15,28 @@ no is th ti fo al go pe to co to th ai of th pa
 5.1.4 Give a trace of 3-way string quicksort for the keys
 no is th ti fo al go pe to co to th ai of th pa
 
+5.1.5 Give a trace for MSD string sort for the keys
+
+now is the time for all good peaple to come to the aid of
+
+5.1.6 Give a trace of 3-way string quicksort for the keys
+
+now is the time for all good peaple to come to the aid of
+
+5.1.7 Develop an implementation of key-indexed counting that makes use of an array of Queue objects.
+
+5.1.8 Give the number of characters examined by MSD string sort and 3-way string quicksort for a file of N keys a, aa, aaa, aaaa, aaaaa,...
+
+5.1.9 Develop an implementation of LSD string sort that works for variable-length strings.
+
+5.1.10 What is the total number of characters examined by 3-way string quicksort when sorting N fixed-length strings (all of length W), in the worst case?
+
+N*W
+
+
+
+
+
 
 
 

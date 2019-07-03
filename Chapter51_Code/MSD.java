@@ -32,7 +32,7 @@ public class MSD {
         // Sort from a[lo] to a[hi], starting at the dth character.
         if (hi <= lo + M)
         {
-            StdOut.println("insertion: " + lo + ", " + hi);
+            //StdOut.println("insertion: " + lo + ", " + hi);
             //Insertion.sort(a, lo, hi); 
             insertion(a, lo, hi, d);
             return;
@@ -69,7 +69,7 @@ public class MSD {
             aux[count[c + 1]++] = a[i];
 
         }
-        StdOut.println("Copy back: ");
+        //StdOut.println("Copy back: ");
         for (int i = lo; i <= hi; i++) // Copy back
         {
             a[i] = aux[i-lo];
