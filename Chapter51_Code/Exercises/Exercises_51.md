@@ -33,6 +33,29 @@ now is the time for all good peaple to come to the aid of
 
 N*W
 
+5.1.11 *Queue sort*. Implement MSD string sorting using queues, as follows: Keep one queue for each bin. On a first pass through the items to be sorted, insert each item into the appropriate queue, according to its leading character value. Then, sort the sublists and stitch together all the queues to make a sorted whole. Note that this method does not involve keeping the count[] arrays within the recursive method.
+
+5.1.12 *Alphabet*. Develop an implementation of the Alphabet API that is given on page 698 and use it to develop LSD and MSD sorts for general alphabets.
+
+5.1.13 *Hybrid sort*. Investigate the idea of using standard MSD string sort for large arrays, in order to get the advantage of multiway partitioning, and 3-way string quicksort for smaller arrays, in order to avoid the negative effects of large numbers of empty bins.
+
+5.1.14 *Array sort*. Develop a method that uses 3-way string quicksort for keys that are arrays of int values.
+
+5.1.15 *Sublinear sort*. Develop a sort implementation for int values that makes two passes through the array to do an LSD sort on the leading 16 bits of the keys, then does an insertion sort.
+
+5.1.16 *Linked-list sort*. Develop a sort implementation that takes a linked list of nodes with String key values as argument and rearranges the nodes so that they appear in sorted order (returning a link to the node with the smallest key). Use 3-way string quicksort.
+
+5.1.17 *In-place key-indexed counting*. Develop a version of key-indexed counting that uses only a constant amount of extra space. Prove that your version is stable or provide a counterexample.
+
+##Exercises(web)
+1. **Frequency counts**. 
+
+
+
+
+
+
+
 
 
 
