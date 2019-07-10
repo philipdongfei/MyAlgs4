@@ -70,7 +70,7 @@ public class Ex22_Timings {
         totalTimeSpent3WayStringQuicksort = 0;
 
         // Key generator: Random CA license plates
-        randomStringType = "CA license plates";
+        randomStringType = "Fixed length words";
 
         for (int experiment = 0; experiment < experiments; experiment++){
             String[] randomStringsLSD = Ex20_RandomFixedLengthWords.randomFixedLengthWords(numberOfStrings, numberOfCharacters);
@@ -93,7 +93,7 @@ public class Ex22_Timings {
         totalTimeSpent3WayStringQuicksort = 0;
 
         // Key generator: Random CA license plates
-        randomStringType = "CA license plates";
+        randomStringType = "Variable length items";
 
         for (int experiment = 0; experiment < experiments; experiment++){
             String[] randomStringsLSD = Ex21_RandomItems.randomItems(numberOfStrings, randomItemsGivenValues);
@@ -117,7 +117,9 @@ public class Ex22_Timings {
         Stopwatch watch = new Stopwatch();
 
         if (sortAlgorithmType == LSD_SORT_ID){
-           LSD.sort(randomStrings, stringsLength);
+            Ex5_1_9.LSDVariableLength lsd = new Ex5_1_9().new LSDVariableLength();
+            lsd.lsdSort(randomStrings);
+           //LSD.sort(randomStrings, stringsLength);
 
         } else if (sortAlgorithmType == MSD_SORT_ID){
             MSD.sort(randomStrings);

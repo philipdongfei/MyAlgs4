@@ -16,23 +16,24 @@ public class Quick3string {
     }
     private static void sort(String[] a, int lo, int hi, int d){
         if (hi <= lo) return;
-        StdOut.println("sort: lo=" + lo + ", hi=" + hi);
+        //StdOut.println("sort: lo=" + lo + ", hi=" + hi);
         int lt = lo, gt = hi;
         int v = charAt(a[lo], d);
         int i = lo + 1;
         while (i <= gt)
         {
-            StdOut.println("i="+i+",gt="+gt);
-            StdOut.println("a[i]="+a[i]+",v="+v);
+            //StdOut.println("i="+i+",gt="+gt);
+            //StdOut.println("a[i]="+a[i]+",v="+v);
             int t = charAt(a[i], d);
             if (t < v) exch(a, lt++, i++);
             else if (t > v) exch(a, i, gt--);
             else    i++;
         }
-        StdOut.println("--------------------");
+        /*StdOut.println("--------------------");
         for (int j = lo; j < hi; j++)
             StdOut.print(a[j] + " ");
         StdOut.println("\n--------------------");
+        */
         // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]
         sort(a, lo, lt-1, d);
         if (v >= 0) sort(a, lt, gt, d+1);

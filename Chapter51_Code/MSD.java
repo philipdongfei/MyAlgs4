@@ -37,7 +37,7 @@ public class MSD {
             insertion(a, lo, hi, d);
             return;
         }
-        StdOut.println("sort(a, " + lo + ", " + hi + ")");
+        //StdOut.println("sort(a, " + lo + ", " + hi + ")");
         int[] count = new int[R+2]; // Compute frequency counts
         
         for (int i = lo; i <= hi; i++)

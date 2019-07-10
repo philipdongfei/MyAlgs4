@@ -18,7 +18,19 @@ public class LSD {
             // compute frequency counts
             int[] count = new int[R+1];
             for (int i = 0; i < N; i++)
+            {
+                if (d >= 256){
+                   StdOut.println("d=" + d); 
+                    throw new IllegalArgumentException("d too big ascii" ); 
+                }
+                int index = a[i].charAt(d) + 1;
+                if (index >= count.length){
+                   StdOut.println("index=" + index + ",count.length=" + count.length); 
+                    throw new IllegalArgumentException("index too big count.length " ); 
+                }
                 count[a[i].charAt(d)+1]++;
+
+            }
 
             // compute cumulates
             for (int r = 0; r < R; r++)
