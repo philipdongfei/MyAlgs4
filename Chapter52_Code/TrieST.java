@@ -8,11 +8,15 @@ public class TrieST<Value>
 {
     private static int R = 256; // radix
     private Node root;
+    private int n;
 
     private static class Node
     {
         private Object val;
         private Node[] next = new Node[R];
+    }
+    public TrieST(){
+        n = 0;
     }
     public Value get(String key)
     {
@@ -35,7 +39,11 @@ public class TrieST<Value>
     {
         // Change value associated with key if in subtrie rooted at x.
         if (x == null) x = new Node();
-        if (d == key.length()) { x.val = val; return x; }
+        if (d == key.length()) { 
+            if (x.val == null) n++;
+            x.val = val; 
+            return x; 
+        }
         char c = key.charAt(d); // Use dth key char to identify subtrie.
         x.next[c] = put(x.next[c], key, val, d+1);
         return x;
@@ -109,8 +117,11 @@ public class TrieST<Value>
     private Node delete(Node x, String key, int d)
     {
         if (x == null) return null;
-        if (d == key.length())
+        if (d == key.length()) {
+            if (x.val != null) n--;
             x.val = null;
+
+        }
         else
         {
             char c = key.charAt(d);
@@ -130,6 +141,7 @@ public class TrieST<Value>
         }
         // print results
         if (st.size() < 100){
+            StdOut.println("size: " + st.size());
             StdOut.println("keys(\"\"):");
             for (String key : st.keys()){
                 StdOut.println(key + " " + st.get(key));
@@ -138,6 +150,7 @@ public class TrieST<Value>
         }
         StdOut.println("delete(\"shells\"): ");
         st.delete("shells");
+        StdOut.println("size: " + st.size());
         for (String key : st.keys())
             StdOut.println(key + " " + st.get(key));
         StdOut.println();

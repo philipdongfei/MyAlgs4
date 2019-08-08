@@ -146,7 +146,20 @@ public class Ex5_2_6 {
             }
             return "{" + keys.toString() + "}";
         }
+        public boolean containsPrefix(String prefix){
+            return containsPrefix(root, prefix, 0);
+        }
+        private boolean containsPrefix(Node node, String prefix, int digit){
+            if (node == null)
+                return false;
+            if (digit == prefix.length())
+                return true;
+            char nextChar = prefix.charAt(digit);
+            Node next = node.next.get(nextChar);
+            return containsPrefix(next, prefix, digit+1);
+        }
     }
+
 
     public static void main(String[] args){
         StringSET st = new Ex5_2_6().new StringSET();

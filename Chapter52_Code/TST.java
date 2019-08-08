@@ -43,6 +43,117 @@ public class TST<Value>
         else x.val = val;
         return x;
     }
+    public String longestPrefixOf(String query){
+        if (query == null){
+            throw new IllegalArgumentException("calls longestPrefixOf() with null argument");
+        }
+        if (query.length() == 0) return null;
+        int length = 0;
+        Node<Value> x = root;
+        int i = 0;
+        while (x != null && i < query.length()){
+            char c = query.charAt(i);
+            if (c < x.c) x = x.left;
+            else if (c > x.c) x = x.right;
+            else {
+                i++;
+                if (x.val != null) length = i;
+                x = x.mid;
+            }
+        }
+        return query.substring(0, length);
+    }
+    public Iterable<String> keysWithPrefix(String prefix){
+        if (prefix == null){
+            throw new IllegalArgumentException("calls keysWithPrefix() with null argument");
+        }
+        Queue<String> queue = new Queue<String>();
+        Node<Value> x = get(root, prefix, 0);
+        if (x == null) return queue;
+        if (x.val != null) queue.enqueue(prefix);
+        collect(x.mid, new StringBuilder(prefix), queue);
+        return queue;
+    }
+    public Iterable<String> keysThatMatch(String pattern){
+        Queue<String> queue = new Queue<String>();
+        collect(root, new StringBuilder(), 0, pattern, queue);
+        return queue;
+    }
+    private void collect(Node<Value> x, StringBuilder prefix, int i, String pattern, Queue<String> queue){
+        if (x == null) return;
+        char c = pattern.charAt(i);
+        if (c == '.' || c < x.c) collect(x.left, prefix, i, pattern, queue);
+        if (c == '.' || c == x.c){
+            if (i == pattern.length() - 1 && x.val != null) 
+                queue.enqueue(prefix.toString() + x.c);
+            if (i < pattern.length() - 1){
+                collect(x.mid, prefix.append(x.c), i+1, pattern, queue);
+                prefix.deleteCharAt(prefix.length() - 1);
+            }
+        }
+        if (c == '.' || c > x.c) collect(x.right, prefix, i, pattern, queue);
+    }
+
+    
+    public void delete(String key){
+        if (key == null){
+            throw new IllegalArgumentException("key cannot be null");
+        }
+        if (contains(key))
+            return;
+        root = delete(root, key, 0);
+    }
+    private Node delete(Node node, String key, int digit){
+        if (node == null)
+            return null;
+        if (digit == key.length() - 1){
+            //node.size = node.size - 1;
+            node.val = null;
+        } else {
+            char nextChar = key.charAt(digit);
+            if (nextChar < node.c){
+                node.left = delete(node.left, key, digit);
+
+            } else if (nextChar > node.c){
+                node.right = delete(node.right, key, digit);
+            } else {
+                //node.size = node.size - 1;
+                node.mid = delete(node.mid, key, digit+1);
+            }
+        }
+        if (size(node) == 0) {
+            if (node.left == null && node.right == null){
+                return null;
+            } else if (node.left == null){
+                return node.right;
+            } else if (node.right == null){
+                return node.left;
+            } else {
+                Node aux = node;
+                node = min(aux.right);
+                node.right = deleteMin(aux.right);
+                node.left = aux.left;
+            }
+        }
+        return node;
+    }
+    private Node min(Node node){
+        if (node.left == null)
+            return node;
+        return min(node.left);
+    }
+    private Node deleteMin(Node node){
+        if (node.left == null){
+            return node.right;
+        }
+        node.left = deleteMin(node.left);
+        return node;
+    }
+    public boolean contains(String key){
+        if (key == null)
+            throw new IllegalArgumentException("key cannot be null");
+        return get(key) != null;
+    }
     public int size()
     {
         return size(root);
@@ -93,6 +204,7 @@ public class TST<Value>
         /*
         StdOut.println("delete(\"shells\"): ");
         st.delete("shells");
+        */
         for (String key : st.keys())
             StdOut.println(key + " " + st.get(key));
         StdOut.println();
@@ -115,7 +227,6 @@ public class TST<Value>
         for (String s : st.keysWithPrefix("shor"))
             StdOut.println(s);
         StdOut.println();
-        */
     }
 
 }
