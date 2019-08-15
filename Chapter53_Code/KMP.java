@@ -39,7 +39,7 @@ public class KMP
         String pat = args[0];
         String txt = args[1];
         KMP kmp = new KMP(pat);
-        StdOut.println("text: " + txt);
+        StdOut.println("text:    " + txt);
         int offset = kmp.search(txt);
         StdOut.print("pattern: ");
         for (int i = 0; i < offset; i++)
