@@ -1,17 +1,20 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Queue;
+import java.util.Iterator;
 import java.math.BigInteger;
 import java.util.Random;
 
 
 public class RabinKarp {
-    private String pat;    // pattern (only needed for Las Vegas)
-    private long patHash;  // pattern hash value
-    private int M;      // pattern length
-    private long Q;     // a large prime
-    private int R = 256;    // alphabet size
-    private long RM;    // R^(M-1) % Q
+    protected String pat;    // pattern (only needed for Las Vegas)
+    protected long patHash;  // pattern hash value
+    protected int M;      // pattern length
+    protected long Q;     // a large prime
+    protected int R = 256;    // alphabet size
+    protected long RM;    // R^(M-1) % Q
+    private boolean isMonteCarloVersion;
 
     public RabinKarp(String pat)
     {
@@ -19,6 +22,18 @@ public class RabinKarp {
         this.M = pat.length();
         Q = longRandomPrime();  // See Exercise 5.3.33
         RM = 1;
+        isMonteCarloVersion = true;
+        for (int i = 1; i <= M-1; i++) // Compute R^(M-1)%Q for use
+            RM = (R * RM) % Q;      // in removing leading digit.
+        patHash = hash(pat, M);
+    }
+    public RabinKarp(String pat, boolean isMonteCarloVersion)
+    {
+        this.pat = pat; // save pattern (only needed for Las Vegas)
+        this.M = pat.length();
+        Q = longRandomPrime();  // See Exercise 5.3.33
+        RM = 1;
+        this.isMonteCarloVersion = isMonteCarloVersion;
         for (int i = 1; i <= M-1; i++) // Compute R^(M-1)%Q for use
             RM = (R * RM) % Q;      // in removing leading digit.
         patHash = hash(pat, M);
@@ -26,7 +41,22 @@ public class RabinKarp {
 
     public boolean check(int i) // Monte Carlo
     { return true;  }  // For Las Vegas, check pat vs txt
-    private long hash(String key, int M)
+    protected boolean check(String text, int textIndex){
+        if (isMonteCarloVersion)
+            return true;
+
+        // Las Vegas version
+        for (int patternIndex = 0; patternIndex < M;
+                patternIndex++)
+        {
+            if (pat.charAt(patternIndex) != text.charAt(textIndex + patternIndex)){
+                return false;
+            }
+        }
+        return true;
+
+    }
+    protected long hash(String key, int M)
     { // compute hash for key[0..M-1].
         long h = 0;
         for (int j = 0; j < M; j++)
@@ -34,7 +64,7 @@ public class RabinKarp {
         return h;
 
     }
-    private int search(String txt)
+    protected int search(String txt)
     {  // Search for hash match in text.
         int N = txt.length();
         long txtHash = hash(txt, M);
@@ -48,9 +78,68 @@ public class RabinKarp {
         }
         return N;
     }
-    private static long longRandomPrime(){
+    protected static long longRandomPrime(){
         BigInteger prime = BigInteger.probablePrime(31, new Random());
         return prime.longValue();
+    }
+    public int count(String text){
+        int count = 0;
+        int occurrenceIndex = searchFromIndex(text, 0);
+
+        while (occurrenceIndex != text.length()){
+            count++;
+            if (occurrenceIndex + 1 >= text.length()){
+                break;
+            }
+            occurrenceIndex = searchFromIndex(text, occurrenceIndex+1);
+        }
+        return count;
+    }
+
+    public Iterable<Integer> searchAll(String text){
+        Queue<Integer> offsets = new Queue<>();
+
+        int occurrenceIndex = searchFromIndex(text, 0);
+
+        while (occurrenceIndex != text.length()){
+            offsets.enqueue(occurrenceIndex);
+
+            if (occurrenceIndex + 1 >= text.length()){
+                break;
+            }
+            occurrenceIndex = searchFromIndex(text, occurrenceIndex+1);
+        }
+        return offsets;
+    }
+    protected int searchFromIndex(String text, int textStartIndex){
+        String eligibleText = text.substring(textStartIndex);
+
+        int textLength = eligibleText.length();
+        //int patternLength = M;
+        //long patternHash = patHash; 
+        //long largePrimeNumber = Q;
+
+        if(textLength < M){
+            return textStartIndex + textLength; // no match
+        }
+
+        long textHash = hash(eligibleText, M);
+
+        if (patHash == textHash && check(eligibleText, 0))
+            return textStartIndex; // match
+        for (int textIndex = M; textIndex < textLength; textIndex++)
+        {
+            // Remove leading character, add trailing character, check for match
+            textHash = (textHash + Q - RM * eligibleText.charAt(textIndex - M) % Q) % Q;
+            textHash = (textHash * R + eligibleText.charAt(textIndex)) % Q;
+
+            int offset = textIndex - M + 1;
+
+            if (patHash == textHash && check(eligibleText, offset)){
+                return textStartIndex + offset;
+            }
+        }
+        return textStartIndex + textLength; // no match
     }
     public static void main(String[] args){
         String pat = args[0];
@@ -67,5 +156,16 @@ public class RabinKarp {
         for (int i = 0; i < offset; i++)
             StdOut.print(" ");
         StdOut.println(pat);
+        StdOut.println("count: " + searcher.count(txt));
+        Iterable<Integer> indexes = searcher.searchAll(txt);
+        for (int index : indexes)
+            StdOut.print(index + ", ");
+        StdOut.println();
+        StdOut.println(txt);
+        for (int index : indexes){
+            for (int i = 0; i < index; i++)
+                StdOut.print(" ");
+            StdOut.println(pat);
+        }
     }
 }

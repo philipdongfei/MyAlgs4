@@ -18,6 +18,23 @@
 
 5.3.8 Add to KMP a count() method to count occurrences and a searchAll() method to print all occurrences.
 
+5.3.9 Add to BoyerMoore a count() method to count occurrences and a searchAll() method to print all occurrence.
+
+5.3.10 Add to RabinKarp a count() method to count occurrences and a searchAll() method to print all occurrence.
+
+5.3.11 Construct a worst-case example for the Boyer-Moore implementation in ALGORITHM5.7 (which demonstrates that it is not linear-time).
+
+Solution: 
+pattern: BAA
+text: AAAAAAAAA
+time: ~ N * M.
+
+5.3.12 Add the code to check() in RabinKarp (ALGORITHM 5.8) that turns it into a Las Vegas algorithm (check that the pattern matches the text at the position given as argument).
+
+5.3.13 In the Boyer-Moore implementation in ALGORITHM 5.7, show that you can set right[c] to the penultimate occurrence of c when c is the last character in the pattern.
+
+
+
 
 
 
