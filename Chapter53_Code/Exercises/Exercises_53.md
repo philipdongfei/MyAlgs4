@@ -33,6 +33,22 @@ time: ~ N * M.
 
 5.3.13 In the Boyer-Moore implementation in ALGORITHM 5.7, show that you can set right[c] to the penultimate occurrence of c when c is the last character in the pattern.
 
+5.3.14 Develop versions of the substring search implementations in this section that use char[] instead of String to represent the pattern and the text.
+
+5.3.15 Design a brute-force substring search algorithm that scans the pattern from right to left.
+
+5.3.16 Show the trace of the brute-force algorithm in the style of the figures in the text for the following pattern and text strings.
+
+5.3.17 Draw the KMP DFA for the the following pattern strings.
+a. AAAAAAB
+b. AACAAAB
+c. ABABABAB
+d. ABAABAABAAAB
+e. ABAABCABAABCB
+
+
+
+
 
 
 
