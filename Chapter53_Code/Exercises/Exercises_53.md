@@ -46,6 +46,33 @@ c. ABABABAB
 d. ABAABAABAAAB
 e. ABAABCABAABCB
 
+5.3.18 Suppose that the pattern and text are random strings over an alphabet of size R (which is at least 2). Show that the expected number of character compares for the brute-force method is (N-M+1)(1-R^{-M})/(1-R^{-1}) <= 2(N-M+1).
+
+
+5.3.19 Construct an example where the Boyer-Moore algorithm (with only the mismatched character heuristic) performs poorly.
+
+**Solution**: BAA
+**Text**: AAAAAAAAAA
+**time**: ~N*M.
+
+5.3.20 How would you modify the Rabin-Karp algorithm to determine whether any of a subset of k patterns (say, all of the same length) is in the text?
+
+_Solution_: Compute the hashes of the k patterns and store the hashes in a **StringSET**.
+
+5.3.21 How would you modify the Rabin-Karp algorithm to search for a given pattern with the additional proviso that the middle character is a "wildcard" (any text character at all can match it).
+
+**Solution**: We would compute the hash of the pattern skipping the middle character(character at index M/2 of the pattern, where M is the pattern length).
+We would then compute the text hashes skipping the middle character as well. the rest of the algorithm would be the same.
+
+
+5.3.22 How would you modify the Rabin-Karp algorithm to search for an H-by-V pattern in an N-by-N text?
+
+5.3.23 Write a program that reads characters one at a time and reports at each instant if the current string is a palindrome. Hint: Use the Rabin-Karp hashing idea.
+
+5.3.24 _Find all occurrences_. Add a method findAll() to each of the four substring search algorithms given in the textthat returns an Iterable<Integer> that allows clients to iterate through all offsets of the pattern in the text.
+
+
+
 
 
 
