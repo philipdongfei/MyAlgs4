@@ -56,6 +56,67 @@ public class RabinKarp {
         return true;
 
     }
+    public int search(In inputStream) {
+        // Uses only local variables, with no extra instance variables
+        int textIndex;
+
+        // Maintains a circular queue as a buffer of the last patternLength characters to use when removing the leading digit in the rolling hash computation.
+        char[] buffer = new char[M];
+
+        // compute hash and initialize buffer
+        long textHash = hash(inputStream, buffer);
+
+        int endBufferIndex = buffer.length - 1;
+
+        if (patHash == textHash){
+            return 0; // match
+        }
+        for (textIndex = M; inputStream.hasNextChar(); textIndex++){
+            // Remove leading character, add trailing character, check for match.
+            int leadingDigitIndex;
+
+            if (endBufferIndex + 1 - M < 0){
+                leadingDigitIndex = M - (endBufferIndex + 1);
+                leadingDigitIndex = M - leadingDigitIndex;
+            } else {
+                leadingDigitIndex = endBufferIndex + 1 - M;
+            }
+
+            char leadingDigit = buffer[leadingDigitIndex];
+            char nextChar = inputStream.readChar();
+
+            textHash = (textHash + Q - RM * leadingDigit % Q) % Q;
+            textHash = (textHash * R + nextChar) % Q;
+
+
+            if (patHash == textHash){
+                return (textIndex - M + 1); // match
+            }
+            if (endBufferIndex + 1 == buffer.length){
+                endBufferIndex = 0;
+            } else {
+                endBufferIndex++;
+            }
+            buffer[endBufferIndex] = nextChar;
+        }
+        return textIndex; // no match
+    }
+
+    // Horner's method applied to modular hashing
+    protected long hash(In inputStream, char[] buffer){
+        // Compute hash for the first patternLength characters in inputStream
+        long hash = 0;
+
+        for (int patternIndex = 0; inputStream.hasNextChar() && patternIndex < M; patternIndex++)
+        {
+            char nextChar = inputStream.readChar();
+            buffer[patternIndex] = nextChar;
+
+            hash = (hash * R + nextChar) % Q;
+        }
+
+        return hash;
+    }
     protected long hash(String key, int M)
     { // compute hash for key[0..M-1].
         long h = 0;
@@ -144,6 +205,7 @@ public class RabinKarp {
     public static void main(String[] args){
         String pat = args[0];
         String txt = args[1];
+        String file = args[2];
 
         RabinKarp searcher = new RabinKarp(pat);
         int offset = searcher.search(txt);
@@ -167,5 +229,9 @@ public class RabinKarp {
                 StdOut.print(" ");
             StdOut.println(pat);
         }
+        StdOut.println("InputStream ");
+        In inputStream = new In(file);
+        StdOut.println("Index: " + searcher.search(inputStream));
+        inputStream.close();
     }
 }

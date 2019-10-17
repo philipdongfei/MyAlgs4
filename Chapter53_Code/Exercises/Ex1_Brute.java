@@ -15,6 +15,73 @@ public class Ex1_Brute{
         patternLength = pattern.length();
     }
 
+    public int search(In inputStream) {
+        int textIndex;
+
+        // circular queue.
+        char[] buffer = new char[patternLength];
+
+        int startBufferIndex = 0;
+        int endBufferIndex = -1;
+        int totalTextIndex = 0;
+
+        for (textIndex = 0; inputStream.hasNextChar(); textIndex++)
+        {
+
+            // Make sure the buffer has the required characters
+            while (textIndex + patternLength - 1 >= totalTextIndex)
+            {
+                if (inputStream.hasNextChar()) {
+                    if (endBufferIndex + 1 == buffer.length){
+                        endBufferIndex = 0;
+                    } else {
+                        endBufferIndex = endBufferIndex + 1;
+                    }
+
+                    buffer[endBufferIndex] = inputStream.readChar();
+                    totalTextIndex++;
+                } else {
+                   // StdOut.println("return 0");
+                    return totalTextIndex; // not found
+                }
+            }
+            int patternIndex;
+            //StdOut.println("buffer: " + buffer);
+            //StdOut.println("pattern: "  + pattern);
+
+            for (patternIndex = 0; patternIndex < patternLength; patternIndex++)
+            {
+                int bufferIndex;
+                if (startBufferIndex + patternIndex >= buffer.length){
+                    bufferIndex = patternIndex - (buffer.length - startBufferIndex);
+                } else {
+                    bufferIndex = startBufferIndex + patternIndex;
+                }
+                //StdOut.print(buffer[bufferIndex]);
+                if (buffer[bufferIndex] != pattern.charAt(patternIndex))
+                {
+                    break;
+                }
+            }
+            if (startBufferIndex + 1 == buffer.length){
+                startBufferIndex = 0;
+            } else {
+                startBufferIndex = startBufferIndex + 1;
+            }
+            if (patternIndex == patternLength){
+                StdOut.println();
+                return textIndex; // found
+            }
+
+        }
+        // No need to clear the buffer since it is a local variable and will be collected by the garbage collector
+        // once the method returns.
+        StdOut.println();
+        return totalTextIndex; // not found
+
+
+    }
+
     // Search for pattern in text.
     // Return the index of the first occurrence of the pattern string
     // in the text string or textLength if no such match.
@@ -100,6 +167,16 @@ public class Ex1_Brute{
         int index2 = ex2.search(text);
         StdOut.println("Index 2: " + index2 + " Expected: 8");
 
+        String pattern = args[0];
+        String file = args[1];
+        In inputStream = new In(file);
+        Ex1_Brute ex3 = new Ex1_Brute(pattern);
+        int index3 = ex3.search(inputStream);
+        for (int i = 0; i < index3; i++)
+            StdOut.print(" ");
+        StdOut.println(pattern);
+        StdOut.println("Index 3: " + index3 + " Expected: 8");
+        inputStream.close();
 
     }
 }

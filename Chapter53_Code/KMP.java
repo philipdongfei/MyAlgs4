@@ -28,6 +28,23 @@ public class KMP
         }
     }
 
+    public int search(In inputStream){
+        // Uses only local variables, with no extra instance variables
+        int patternIndex = 0;
+        int textIndex = 0;
+
+        while (inputStream.hasNextChar() && patternIndex < pat.length())
+        {
+            patternIndex = dfa[inputStream.readChar()][patternIndex];
+            textIndex++;
+        }
+        if (patternIndex == pat.length()){
+            return textIndex - pat.length();
+        } else {
+            return textIndex;
+        }
+    }
+
     public int search(String txt)
     { // Simulate operation of DFA on txt.
         int i, j, N = txt.length(), M = pat.length();
@@ -82,6 +99,7 @@ public class KMP
     {
         String pat = args[0];
         String txt = args[1];
+        String file = args[2];
         KMP kmp = new KMP(pat);
         StdOut.println("text:    " + txt);
         int offset = kmp.search(txt);
@@ -100,6 +118,13 @@ public class KMP
                 StdOut.print(" ");
             StdOut.println(pat);
         }
+        // Instream
+        StdOut.println("search Instream");
+        In inputStream = new In(file);
+        //StdOut.println(inputStream);
+        StdOut.println("Index: " + kmp.search(inputStream));
+        inputStream.close();
+
 
     }
 }
