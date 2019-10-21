@@ -1,6 +1,6 @@
-#EXERCISES
+#EXERCISES#
 
-##Book Exercises
+##Book Exercises##
 
 5.3.1 Develop a brute-force substring search implementation Brute, using the same API as ALGORITHM 5.6.
 
@@ -101,19 +101,237 @@ is quite effective for this problem, since the chances of a random pattern of le
 
 5.3.35 _Boyer-Moore in binary strings_.
 
+##Web Exercises##
+
+1.
+2.
+3.
+4.
+5.
+6.
+7. How would you modify Rabin-Karp to determine whether any of a subset of k patterns (say, all of the same length) is in the text?
+_Solution_. Compute the hashes of the k patterns and store the hashes in a SET.
+
+8. 
+9.
+10. 
+11. **Tandem repeats**. A tandem repeat of a base string b with within a string s is a substring of s consisting of at least one consecutive copy of the base string b. Given b and s, design an algorithm to find a tandem repeat of b within s of maimum length. The running time should be proportional to M + N, where M is the length of b and N is the length of s.
+
+_Solution_. This problem is a generalization of substring search (is there at least one consecutive copy of b within s?) so we need an algorithm that generalize substring search. Create the Knuth-Morris-Pratt DFA for k concatenated copies of b, where k = n/m. Now, simulate DFA on input s and record the largest state that it reaches. From this, we can identify the longest tandem repeat.
+
+12. 
+13.
+14.
+15. **Longest palindromic substring**. Given a string s, find the longest substring that is a palindrome (or a Watson-crick palindrome). 
+_Solution_: can be solved in linear time using suffix trees or Manacher's algorithm. Here's a simpler solution that typically runs in linearthmic time. First, we describe how to find all palindromic substrings of length exactly L in linear time: use Karp-Rabin to iteratively form the hashes of each substring of length L (and its reverse), and compare. Since you don't know L, repeatedly double your guess of L until you know the optimal length is between L and 2L. Then use binary search
+to find the exactly length.
+
+_Solution_: Manacher.java is an implementation of Manacher's algorithm.
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
 
 
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
 
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+
+16. 
+17. 
+18. 
+19. 
+20. Suppose that x and y are two strings. Design a linear-time algorithm to determine whether x^m = y^n for some integers m and n (where x^m means the concatenation of m copies of x).
+
+_Solution_. Suffices to check where xy = yx (this fact is nontrivial - it follows from the Lyndon-Schutzenberger theorem).
+
+21.
+
+22.
+
+23. **Anagram substring search**. Given a text string txt[] of length N and a pattern string pat[] of length M, determine whether pat[] or any of its anagrams (any of its M! permutations) appears in the text.
+
+_Hint_: maintain a histogram of the letter frequencies for a given substring of length M in the text.
 
 
 
