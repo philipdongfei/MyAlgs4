@@ -69,5 +69,14 @@
 
 ## Chapter 4.4
 -[Kempe Tree](https://bababadalgharaghtakamminarronnkonnbro.blogspot.com/2012/06/kempe-tree-data-structure-for.html)
--
+
+## Chapter 5.1
+
+## Chapter 5.2
+
+## Chapter 5.3
+
+-[the Lyndon-Schutzenberger theorem](https://en.wikipedia.org/wiki/Lyndon_word)
+
+
 
