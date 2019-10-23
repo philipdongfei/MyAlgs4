@@ -77,6 +77,6 @@
 ## Chapter 5.3
 
 -[the Lyndon-Schutzenberger theorem](https://en.wikipedia.org/wiki/Lyndon_word)
-
+-[Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html)
 
 
