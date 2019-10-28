@@ -23,5 +23,80 @@ d. .*A.*A.*A.*A.*
 
 5.4.4. Draw the NFA corresponding to the pattern (((A|B)* | CD* | EFG)*)*. 
 
+5.4.5. Draw the digraph of $\varepsilon$-transitions for the NFA from EXERCISE 5.5.4.
+
+5.4.6. Given the sets of states reachable by your NFA from EXERCISE 5.4.4 after each character match and susbsequent $\varepsilon$-transitions for input A B B A C E F G E F G C A A B.
+
+5.4.7. Modify the GREP client on page 804 to be a client GREPmatch the encloses the pattern in parentheses but does not add .* before and after the pattern, so that it prints out only those lines that are strings in the language described by the given RE. Given the result of typing each of the following commands:
+
+a. % java GREPmatch "(A|B)(C|D)" < tinyL.txt
+b. % java GREPmatch "A(B|C)*D" < tinyL.txt
+c. % java GREPmatch "(A*B|AC)D" < tinyL.txt
+
+5.4.8. Write a regular expression for each of the following sets of binary strings:
+a. Contains at least three consecutive 1s : (0|1)*(111)+(0|1)*
+b. Contains the substring 110 : (0|1)*110(0|1)*
+c. Contains the substring 1101100 : (0|1)*1101100(0|1)*
+d. Does not contain the substring 110 : (0|10)*1*
+
+5.4.9. Write a regular expression for binary strings with at least two 0s but not consecutive 0s.
+ 
+_Solution_: 1*011*0(10?)* 
+or
+1*01+0(10?)*
+
+An explanation of it should be: First skip al the ones that start your expression with the 1* subpattern, so you get to the first 0, then skip at least one 1, and all the 1s following it (with subpattern 1+) up to the second 0, so we have just matched the minimum length string that matches you regular language. Once here, all the rest is optional, we need to repeat any number of times the pattern 1 with an optional trailing 0 (as in 10?), or there should be two consecutive 0s.
+You can check it in this demo, that contains all the possible strings from 1 to 8 characters, and the matching or not of them.
+
+
+5.4.10. Write a regular expression for each of the following sets of binary strings:
+
+a. Has at least 3 characters, and the third character is 0
+b. Number of 0s is a multiple of 3
+c. Starts and ends with the same character
+d. Odd length
+e. Starts with 0 and has odd length, or starts with 1 and has even length 
+f. Length is at least 1 and at most 3
+
+_Solution_:
+a. (0|1)(0|1)0(0|1)*
+b. 1*|(1*01*01*01*)*
+c. 1(0|1)*1 | 0(0|1)*0 | 0 | 1
+d. (0|1)((0|1)(0|1))*
+e. 0((0|1)(0|1))* | 1(0|1)((0|1)(0|1))*
+f. (0|1) | (0|1)(0|1) | (0|1)(0|1)(0|1)
+
+5.4.11. For each of the following regular expressions, indicate how many bitstrings of length exactly 1000 match:
+a. 0(0|1)*1
+b. 0*101*
+c. (1|01)*
+
+_Solution_: 
+a. 2^998
+b. 999
+c. 501
+
+
+5.4.12. Write a Java regular expression for each of the following:
+a. Phone numbers, such as (609) 555-1234
+b. Social Security numbers, such as 123-45-6789
+c. Dates, such as December 31, 1999
+d. IP addresses of the form a.b.c.d where each letter can represent one , two or three digits, such as 196.266.155.241
+e. License plates that start with four digits and end with two uppercase letters.
+
+_Solution_:
+a. \([0-9]{3}\) [0-9]{3}-[0-9]{4}
+b. [0-9]{3}-[0-9]{2}-[0-9]{4}
+c. (January|February|March|April|May|June|July|August|September|October|November|December) ([1-9]|(1|2)[0-9]|3(0|1)), [0-9]{4}
+d. ([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])(\.([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])){3}
+e. [0-9]{4}*[A-Z]{2}
+
+
+
+
+
+
+
+
 
 

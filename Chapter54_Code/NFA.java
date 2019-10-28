@@ -19,6 +19,12 @@ public class NFA {
         M = re.length;
         G = new Digraph(M+1);
 
+        /*
+        for (int j = 0; j < re.length; j++)
+            StdOut.printf("%d: %c ", j, re[j]);
+        StdOut.println();
+        */
+
         for (int i = 0; i < M; i++)
         {
             int lp = i;
@@ -44,6 +50,7 @@ public class NFA {
                 G.addEdge(i, i+1);
 
         }
+        
     }
 
     public boolean recognizes(String txt)
@@ -54,6 +61,14 @@ public class NFA {
         for (int v = 0; v < G.V(); v++)
             if (dfs.marked(v)) pc.add(v);
 
+        ////debug print init states
+        /*
+        StdOut.println("init pc: ");
+        for (int v : pc)
+            StdOut.printf("%d ", v);
+        StdOut.println("");
+        */
+        //////
         for (int i = 0; i < txt.length(); i++)
         {// Compute possible NFA states for txt[i+1].
             Bag<Integer> match = new Bag<Integer>();
@@ -65,6 +80,14 @@ public class NFA {
             dfs = new DirectedDFS(G, match);
             for (int v = 0; v < G.V(); v++)
                 if (dfs.marked(v)) pc.add(v);
+            /////print state 
+            /*
+            StdOut.printf("%d %c state: \n", i, txt.charAt(i) );
+            for (int v : pc)
+                StdOut.printf("%d ", v);
+            StdOut.println("");
+            */
+            /////
         }
         for(int v : pc) if (v == M) return true;
         return false;
