@@ -8,9 +8,9 @@ import edu.princeton.cs.algs4.DirectedDFS;
 
 
 public class NFA {
-    private char[] re;  // match transitions
-    private Digraph G; // epsilon transitons
-    private int M;      // number of states
+    protected char[] re;  // match transitions
+    protected Digraph G; // epsilon transitons
+    protected int M;      // number of states
 
     public NFA(String regexp) 
     { // Create the NFA for the given regular expression.

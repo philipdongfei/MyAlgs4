@@ -91,6 +91,46 @@ c. (January|February|March|April|May|June|July|August|September|October|November
 d. ([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])(\.([01]?[0-9][0-9]?|2[0-4][0-9]|25[0-5])){3}
 e. [0-9]{4}*[A-Z]{2}
 
+5.4.13 _Challenging REs_. Construct an RE that describes each of the following sets of strings over the binary alphabet:
+a. All strings except 11 or 111
+b. Strings with 1 in every odd-number bit position
+c. Strings with at least two 0s and at most one 1
+d. Strings with no two consecutive 1s
+
+5.4.14. _Binary divisibility_. Construct an RE that describes all binary strings that when interpreted as binary number are
+a. Divisible by 2
+b. Divisible by 3
+c. Divisible by 123
+
+_Solution_: 
+a. (0|1)*0
+b. (0|1(01*0)*1)*
+c. 
+
+5.4.15. _One-level REs_. Construct a Java RE that describes the set of strings that are legal REs over the binary alphabet, but with no occurrence of parentheses within parentheses. For example, (0.*1)* or (1.*0)* is in this language, but (1(0 or 1)1)* is not.
+
+5.4.16. _Multiway or_. Add multiway or to NFA. Your code should produce the machine drawn below for the pattern (.*AB((C|D|E)F)*G).
+
+5.4.17. _Wildcard_(\.). Add to NFA the capability to handle wildcards.
+
+5.4.18 _One or more_. Add to NFA the capability to handle the + closure operator.
+
+5.4.19. _Specified set_. Add to NFA the capability to handle specified-set descriptors.
+
+5.4.20. _Range_. Add to NFA the capability to handle range descriptors.
+
+5.4.21. _Complement_. Add to NFA the capability to handle complement descriptors.
+
+5.4.22. _Proof_. Develop a version of NFA that prints a proof that a given string is in the language recognized by the NFA (a sequence of state transitions that ends in the accept state).
+
+
+
+
+
+
+
+
+
 
 
 
