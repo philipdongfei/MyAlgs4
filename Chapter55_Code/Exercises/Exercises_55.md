@@ -73,4 +73,35 @@ _Answer_: If the character A occurs 1 million times and the character B occurs o
 5.5.24. In the style of the figures in the text, show the encoding trie and the compression and expansion processes when LZW is used for the string
 **it was the best of times it was the worst of times**
 
+5.5.25. _Fixed length width code_. Implement a class RLE that uses fixed-length encoding, to compress ASCII bytestreams using relatively few different characters, including the code as part of the encoded bitstream. Add code to compress() to make a string alpha with all the distinct characters in the message and use it to make an Alphabet for use in compress(), prepend alpha (8-bit encoding plus its length) to the compressed bitstream, then add code to expand() to
+read the alphabet before expansion.
+
+5.5.26. _Rebuilding the LZW dictionary_. Modify LZW to empty the dictionary and start over when it is full. This approach is recommended in some applications because it better adapts to changes in the general character of the input.
+
+5.5.27. _Long repeats_. Estimate the compression ratio achieved by run-length, Huffman, and LZW encoding for a string of length 2N formed by concatenating _two copies_ of a random ASCII string of length N (see EXERCISES 5.5.9), under any assumptions that you think are reasonable.
+
+##Web Exercises
+
+
+
+1. 
+
+2. Given an example of a uniquely-decodable code that is not prefix free.
+_Solution_: Any suffix-free code is uniquely decodable, e.g., {0, 01}.
+
+3. Given an example of a uniquely-decodable code that is not prefix free or suffix free.
+
+_Solution_: {0011, 011, 11, 1110} or {01, 10, 011, 110}.
+
+4.
+
+5. **Test for uniquely decodability**. Implement the Sardinas-Patterson algorithm for testing whether a set of codewords is uniquely decodable:
+Add all of the codewords to a set. Examine all pairs of codewords to see if any one is a prefix of another, if so, extract the dangling suffix(i.e., the part of the longer string that is not a prefix of the shorter one). If the dangling suffix is a codeword, then the code is not uniquely decodable; otherwise, add the dangling suffix to the list (provided it is not already there). Repeat this process with the larger list until there are no remaining new dangling suffix.
+
+The algorithm is finite because all dangling suffixes added to the list are suffixes of a finite set of codewords, and a dangling suffix can be added at most once.
+- {0, 01, 11}. The  codeword 0 is a prefix of 01, so add the dangling suffix 1. {0, 01, 11, 1}. The codeword 0 is a prefix of 01, but the dangling suffix 1 is already in the list; the codeword 1 is a prefix of 11, but the dangling suffix 1 is already in the list. There are no other dangling suffixes, so conclude that the set is uniquely decodable.
+- {0, 01, 10}. The codeword 0 is a prefix of 01, so add the dangling suffix 1 to the list. {0, 01, 10, 1}. The codeword 1 is a prefix of 10, but the dangling suffix 0 is a codewords. So, conclude that the code is not uniquely decodable.
+
+6. **Kraft-McMillian inequality**. 
+
 
