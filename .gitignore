@@ -1,7 +1,17 @@
+# Text file
+*.txt
+*.xml
+
+# Compiled class file
 *.class
 *.drjava
-*.txt
-.idea
-out/
+*.idea
 *.iml
+
+# Log file
 *.log
+
+# Fold
+out/
+algs4-data/
+

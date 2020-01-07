@@ -1,0 +1,2 @@
+Another application of hashing is computing checksums to verify the integrity of some data file
+

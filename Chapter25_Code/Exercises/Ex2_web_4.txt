@@ -1,0 +1,12 @@
+10
+Student
+a
+A
+code
+CODE
+ignore
+casE
+number
+NUMber
+And
+

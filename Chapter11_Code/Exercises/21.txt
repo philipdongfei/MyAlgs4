@@ -1,0 +1,4 @@
+John    5   10
+Peter   3   10
+Tom     4   10
+

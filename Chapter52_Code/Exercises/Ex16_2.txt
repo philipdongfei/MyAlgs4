@@ -1,0 +1,5 @@
+this is a combination of words that mention a few sorting algorithms
+such as bubblesort and quicksort algorithms
+one of them is a fast sorting algorithm
+one of them is not
+
